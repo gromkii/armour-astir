@@ -1,0 +1,117 @@
+/* ! Important note, all classes are prefixed with 'sheet-' */
+
+/* GLOBAL STYLES */
+.sheet-main {
+  background-color: white;
+}
+
+.sheet-page-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+}
+
+.sheet-page-header .sheet-header {
+  flex: 1;
+}
+
+.sheet-page-header input[type=text] {
+  width: 100%;
+  margin: 10px 5px; /* Use REM */
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.sheet-section {
+  border: 1px solid black;
+  margin: 1em;
+}
+
+.sheet-section-content {
+  padding: 1em;
+}
+
+
+/* Inputs */
+input[type=text] {
+  background-color: transparent;
+  border-style: none none solid none;
+  border-color: black;
+}
+
+.sheet-header input[type=text] {
+  color: white;
+  border-style: none;
+  flex: 1
+  /* Set font weight and etc. */
+}
+
+.sheet-character-playbook {
+  text-align: right;
+}
+
+input[type=text] .sheet-input-full {
+  width: 100%;
+}
+
+/* Headers */
+h3 {
+  background-color: black;
+  color: white;
+  padding: 0 5px;
+}
+
+.sheet-top-section {
+  width: 100%;
+}
+
+.sheet-page-header {
+  display: flex;
+}
+
+.sheet-header {
+  flex: 1;
+}
+
+/* Navigation */
+.sheet-navigation {
+  margin: 1em;
+}
+
+/* ----- CHARACTER PAGE -----*/
+/* Layout */
+.sheet-character-upper-section {
+  display: flex;
+}
+
+.sheet-character-descriptors {
+  flex: 1;
+}
+
+.sheet-character-info {
+  flex: 2;
+}
+
+
+/* Descriptors */
+.sheet-character-descriptors {
+
+}
+
+.sheet-descriptor {
+
+}
+
+/* Dangers */
+.sheet-character-dangers {
+  /* display: flex;
+  flex-direction: row; */
+}
+
+.sheet-danger {
+  display: flex;
+  flex-direction: row;
+}
+
+/* ----- ASTIR PAGE ----- */
