@@ -5,14 +5,14 @@
         <input type="text" placeholder="Character Name"/>
       </div>
       <div class="header">
-        <input type="text" class="attr_playbook" placeholder="Playbook"/>
+        <input type="text" name="attr_playbook" placeholder="Playbook"/>
         <!-- TODO: Make this an attr_ and create sheet script. -->
       </div>
     </div>
 
     <div class="navigation">
       <!-- On button press, change "attr_page" to button value. -->
-      <button>
+      <button class="selected">
         Character
       </button>
       <button>
@@ -64,11 +64,15 @@
               <div class="traits">
                 <div class="trait">
                   <div class="trait-top">
-                    <input type="number" value="1" class="attr_defy">
+                    <input type="number" value="1" name="attr_defy">
                   </div>
                   <div class="trait-bottom">  
-                    <button>ROLL</button>
-                    <label>DEFY</label>
+                    <button 
+                      name="roll_defy" 
+                      type="roll" 
+                      value="&{template:default} {{name=DEFY}} {{Result=[[2d6] + (@{defy})]}}">
+                    </button>
+                    <span>DEFY</span>
                   </div>
                 </div>
               </div>
@@ -78,31 +82,45 @@
             <h3>
               Dangers
             </h3>
-            <div class="danger">
-              <div class="character-danger-type">
-                <input type="checkbox" /> Risk
-                <input type="checkbox" /> Peril
+            <div class="section-content">
+              <div class="danger">
+                <div class="character-danger-type">
+                  <div class="danger-group">
+                    <input type="checkbox" /><span class="danger-type">Risk</span>
+                  </div>
+                  <div class="danger-group">
+                    <input type="checkbox" /><span class="danger-type">Peril</span>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" />
+                </div>
               </div>
-              <div class="character-danger-input">
-                <input type="text" />
+              <div class="danger">
+                <div class="character-danger-type">
+                  <div class="danger-group">
+                    <input type="checkbox" /><span class="danger-type">Risk</span>
+                  </div>
+                  <div class="danger-group">
+                    <input type="checkbox" /><span class="danger-type">Peril</span>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" />
+                </div>
               </div>
-            </div>
-            <div class="danger">
-              <div class="character-danger-type">
-                <input type="checkbox" /> Risk
-                <input type="checkbox" /> Peril
-              </div>
-              <div class="character-danger-input">
-                <input type="text" />
-              </div>
-            </div>
-            <div class="danger">
-              <div class="character-danger-type">
-                <input type="checkbox" /> Risk
-                <input type="checkbox" /> Peril
-              </div>
-              <div class="character-danger-input">
-                <input type="text" />
+              <div class="danger">
+                <div class="character-danger-type">
+                  <div class="danger-group">
+                    <input type="checkbox" /><span class="danger-type">Risk</span>
+                  </div>
+                  <div class="danger-group">
+                    <input type="checkbox" /><span class="danger-type">Peril</span>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" />
+                </div>
               </div>
             </div>
           </div>
@@ -110,7 +128,32 @@
       </div>
 
       <div class="character-lower-section">
-        div.
+        <div class="character-moves section">
+          <h3>Moves</h3>
+          <div class="section-content">
+            <!-- Repeating section for moves. -->
+            <!-- Script Runner, based off attr_playbook -->
+          </div>
+        </div>
+        
+        <div class="character-lower-info">
+          <div class="character-ideals section">
+            <!-- Repeating input section. -->
+            <h3>Ideals</h3>
+            <div class="section-content">
+              <div class="ideal">
+                <!-- Ideal... -->
+              </div>
+            </div>
+          </div>
+          <div class="character-gear section">
+            <h3>Gear</h3>
+            <div class="section-content">
+              <!-- Repeating input section, name + tags. -->
+              <!-- TODO: Autofill with attr_playbook -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -86,6 +86,16 @@ h3 {
   margin: 1em;
 }
 
+.sheet-navigation button {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+}
+
+.sheet-navigation .sheet-selected {
+  background-color: black;
+  color: white;
+}
 /* ----- CHARACTER PAGE -----*/
 /* Layout */
 .sheet-character-upper-section {
@@ -116,15 +126,55 @@ h3 {
   right: 1em;
 }
 
-/* Dangers */
-.sheet-character-dangers {
-  /* display: flex;
-  flex-direction: row; */
+.sheet-trait {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
+.sheet-trait-top {
+  margin-bottom: .75em;
+}
+
+/* Dangers */
 .sheet-danger {
   display: flex;
   flex-direction: row;
+}
+
+.sheet-character-danger-type {
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.sheet-danger-group input {
+  margin-right: 1em;
+}
+
+.sheet-character-danger-input {
+  flex: 3;
+}
+
+.sheet-danger-type {
+  font-style: italic;
+}
+
+/* Character Lower Section */
+
+.sheet-character-lower-section {
+  display: flex;
+}
+
+.sheet-character-moves {
+  flex: 2;
+}
+
+.sheet-character-lower-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ----- ASTIR PAGE ----- */
