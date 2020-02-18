@@ -1,6 +1,7 @@
 /* ! Important note, all classes are prefixed with 'sheet-' */
 
-/* GLOBAL STYLES */
+/* ----- GLOBAL STYLES ----- */
+
 .sheet-main {
   background-color: white;
 }
@@ -40,6 +41,12 @@ input[type=text] {
   border-color: black;
 }
 
+input[type=number] {
+  background-color: transparent;
+  border-style: none none solid none;
+  border-color: black;
+}
+
 .sheet-header input[type=text] {
   color: white;
   border-style: none;
@@ -51,7 +58,7 @@ input[type=text] {
   text-align: right;
 }
 
-input[type=text] .sheet-input-full {
+.sheet-input-full {
   width: 100%;
 }
 
@@ -101,6 +108,12 @@ h3 {
 
 .sheet-descriptor {
 
+}
+
+/* Traits */
+.sheet-character-support {
+  position: absolute;
+  right: 1em;
 }
 
 /* Dangers */
