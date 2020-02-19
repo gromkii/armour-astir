@@ -1,8 +1,10 @@
+
+
 <div class="main">
   <div class="top-section">
     <div class="page-header">
       <div class="header">
-        <input type="text" placeholder="Character Name" name="attr_characterName" />
+        <input type="text" placeholder="Character Name" name="attr_character_name" />
       </div>
       <div class="header">
         <input type="text" name="attr_playbook" placeholder="Playbook"/>
@@ -11,17 +13,12 @@
     </div>
 
     <div class="navigation">
-      <!-- On button press, change "attr_page" to button value. -->
-      <button class="selected">
-        Character
-      </button>
-      <button>
-        Astir
-      </button>
-      <button>
-        Misc
-      </button>
+      <button type="action" name="act_character">Character</button>
+      <button type="action" name="act_astir">Astir</button>
+      <button type="action" name="act_misc">Misc</button>
     </div>
+
+    <input type="hidden" class="tabstoggle" name="attr_sheet_tab" value="character"/>
 
     <div class="character-page">
       <div class="character-upper-section">
@@ -235,14 +232,25 @@
     </div>
 
     <div class="astir-page">
-      
+      Astir page. :)
     </div>
 
     <div class="misc-page">
-
+      Misc page. :D
     </div>
 
   </div>
 
   
 </div>
+
+<script type="text/worker">
+  const buttonlist = ['character', 'astir', 'misc'];
+  buttonlist.forEach(button => {
+      on(`clicked:${button}`, function() {
+          setAttrs({
+              sheet_tab: button
+          });
+      });
+  });
+</script>

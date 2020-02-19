@@ -216,3 +216,17 @@ button [type='action'] {
   border-right              : 0.02em solid hsl(0, 0%, 20%);
   border-style              : outset;
 }
+
+/* ---- Tabs ---- */
+.sheet-character-page,
+.sheet-astir-page,
+.sheet-misc-page {
+	display: none;
+}
+
+/* show the selected tab */
+.sheet-tabstoggle[value="character"] ~ div.sheet-character-page,
+.sheet-tabstoggle[value="astir"] ~ div.sheet-astir-page,
+.sheet-tabstoggle[value="misc"] ~ div.sheet-misc-page {
+	display: block;
+}
