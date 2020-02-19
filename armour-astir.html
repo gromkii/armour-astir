@@ -51,11 +51,11 @@
           </div>
           <div class="character-traits section">
             <h3> 
-              Traits
-            <span class="character-support">
-              <input name="attr_support" type="checkbox" />
+              <div>Traits</div>
+            <div class="character-support">
+              <input name="attr_support" class="support-toggle" type="checkbox" />
               Support
-            </span>
+            </div>
             </h3>
             <div class="section-content">
               <div class="traits">
@@ -130,7 +130,8 @@
                 </div>
                  
                 <!-- Will be hidden when support box is checked. -->
-                <div class="trait">
+                <input type="hidden" class="channel_hidden" name="attr_channel_hidden" value="false" />
+                <div class="trait trait-channel">
                   <div class="trait-top">
                     <input type="number" value="1" name="attr_channel">
                   </div>
@@ -253,4 +254,19 @@
           });
       });
   });
+
+  // Show/Hide 'CHANNEL' Trait.
+  on(`change:support`, (event) => {
+    setAttrs({
+      channel_hidden: event.newValue == 'on',
+    });
+  })
 </script>
+
+<!-- 
+  TODO:
+    - Radio buttons for dangers section.
+    - Moves keep bugging out, fix it.
+    - Figure out equipment name with tags formatting/interpolation.
+
+-->

@@ -120,18 +120,20 @@ h3 {
 
 
 /* Descriptors */
-.sheet-character-descriptors {
-
-}
-
-.sheet-descriptor {
+.sheet-descriptor label {
+  font-size: .9em;
 
 }
 
 /* Traits */
+.sheet-character-traits > h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
 .sheet-character-support {
-  position: absolute;
-  right: 1em;
+  display: flex;
+  align-items: center;
 }
 
 .sheet-traits {
@@ -143,6 +145,14 @@ h3 {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.sheet-trait-channel {
+  display: none;
+}
+
+.sheet-channel_hidden[value="false"] ~ .sheet-trait-channel {
+  display: flex;
 }
 
 .sheet-trait-top {
@@ -198,10 +208,8 @@ button {
 	background-image: none;
 	font-size       : 0.8em;
 	text-shadow     : none;
-
-
-
 }
+
 button:before {display: none;}
 button:hover, button:focus, button:active { font-weight : bold; }
 button [type='roll'],
