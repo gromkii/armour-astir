@@ -2,7 +2,7 @@
   <div class="top-section">
     <div class="page-header">
       <div class="header">
-        <input type="text" placeholder="Character Name"/>
+        <input type="text" placeholder="Character Name" name="attr_characterName" />
       </div>
       <div class="header">
         <input type="text" name="attr_playbook" placeholder="Playbook"/>
@@ -56,7 +56,7 @@
             <h3> 
               Traits
             <span class="character-support">
-              <input class="attr_support" type="checkbox" />
+              <input name="attr_support" type="checkbox" />
               Support
             </span>
             </h3>
@@ -70,11 +70,83 @@
                     <button 
                       name="roll_defy" 
                       type="roll" 
-                      value="&{template:default} {{name=DEFY}} {{Result=[[2d6] + (@{defy})]}}">
+                      value="&{template:default} {{name=DEFY}} {{result=[[2d6 + @{defy}]]}}">
+                      <span>DEFY</span>
                     </button>
-                    <span>DEFY</span>
                   </div>
                 </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_sense">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_sense" 
+                      type="roll" 
+                      value="&{template:default} {{name=SENSE}} {{result=[[2d6 + @{sense}]]}}">
+                      <span>SENSE</span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_clash">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_clash" 
+                      type="roll" 
+                      value="&{template:default} {{name=CLASH}} {{result=[[2d6 + @{clash}]]}}">
+                      <span>CLASH</span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_talk">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_talk" 
+                      type="roll" 
+                      value="&{template:default} {{name=TALK}} {{result=[[2d6 + @{talk}]]}}">
+                      <span>TALK</span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_know">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_know" 
+                      type="roll" 
+                      value="&{template:default} {{name=KNOW}} {{result=[[2d6 + @{know}]]}}">
+                      <span>KNOW</span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <!-- Will be hidden when support box is checked. -->
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_channel">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_channel" 
+                      type="roll" 
+                      value="&{template:default} {{name=CHANNEL}} {{result=[[2d6 + @{channel}]]}}">
+                      <span>CHANNEL</span>
+                    </button>
+                  </div>
+                </div>
+                 
               </div>
             </div>
           </div>
@@ -131,8 +203,11 @@
         <div class="character-moves section">
           <h3>Moves</h3>
           <div class="section-content">
-            <!-- Repeating section for moves. -->
-            <!-- Script Runner, based off attr_playbook -->
+            <fieldset class="repeating_moves">
+              <input placeholder="Move name.." name="attr_move-name"/>
+              <textarea placeholder="Description..." name="attr_move-description">
+              </textarea>
+            </fieldset>
           </div>
         </div>
         
@@ -141,16 +216,18 @@
             <!-- Repeating input section. -->
             <h3>Ideals</h3>
             <div class="section-content">
-              <div class="ideal">
-                <!-- Ideal... -->
-              </div>
+              <fieldset class="repeating_ideals">
+                <input type="text" />
+              </fieldset>
             </div>
           </div>
           <div class="character-gear section">
             <h3>Gear</h3>
             <div class="section-content">
-              <!-- Repeating input section, name + tags. -->
-              <!-- TODO: Autofill with attr_playbook -->
+              <fieldset class="repeating_gear">
+                <input placeholder="Item.." name="attr_gear-name"/>
+                <input placeholder="Tags.." name="attr_gear-tags"/>
+              </fieldset>
             </div>
           </div>
         </div>
