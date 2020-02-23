@@ -1,3 +1,40 @@
+/*
+    Important note: this file isn't being used in the character sheet directly, but rather is an
+    easier way to keep a consistent source of truth for the data as the sheet is being developed.
+
+    If you would like to contribute, please feel free to do so following these formatting conventions.
+
+    MOVES -----
+    moveName: {               // ! Style note here, use camel case for these names.
+        book:     string,     // Playbook for move.
+        fullName: string,     // Full name for move.
+        trigger:  string,     // How the roll is activated.
+        roll:     string,     // If a move has a single trait, use this property.
+        rolls:    string[],   // If a move can call for different traits, use an array of applicable traits.
+        success:  string,     // 10+ roll message
+        partial:  string,     // 7-9 roll message
+        miss:     string,     // 6 or less roll message.
+        details:  string,     // Body for context. Formatting for text TBD, but for now try to use \n and • or &bull;
+    }
+
+    GEAR -----
+    playbook: {                     // Name of playbook, lowercase. ie: arcanist
+        startingGear: [             // Array of gear using the following schema.
+            {                       // List of staring gear for playbook.
+                quantity: string,   // Not required.
+                name:     string,   // Required, name of equipment.
+                tier:     string,   // Format note, please use roman numerals for consistency.
+                tags:     string[]  // Array of strings, formatting TBD.
+            }, ... { },
+        ],
+        classGear: [                // Using the same schema as above.
+            {
+                ...
+            }
+        ]
+    }
+*/
+
 var aaMoves = {
     weatherTheStormDefy: {
         book: 'basic',
@@ -22,7 +59,7 @@ var aaMoves = {
         roll: 'SENSE', // ! Single roll, automatically does it, or prompt for bonus?
         success: 'Hold 3',
         partial: 'Hold 1',
-        failure: 'On a failure, you may ask one of the below questions, but the answer creates a problem or puts you in danger.',
+        miss: 'On a failure, you may ask one of the below questions, but the answer creates a problem or puts you in danger.',
         details: 'Spend your hold 1-for-1 to ask the following questions. Your hold lasts until you leave the current situation or it changes significantly. \n\n • Who has the upper hand here?\n • What is being overlooked here?\n • How does x really feel?\n • What are x\'s real intentions?\n • How is x at risk or in peril? \n\n Roll with Advantage when you act on the answers to what you\'ve asked',
     },
     dispelUncertainties: {
@@ -100,7 +137,6 @@ var aaMoves = {
 
 const playbook = {
     arcanist: {
-        descriptor: 'Your magic is like...',
         generalGear: [
             {
                 name: 'Astir',
@@ -120,7 +156,7 @@ const playbook = {
                 name: 'CLothing appropriate for your look.'
             }
         ],
-        classGear: [ // ! Not sure if roll20 allows us to enforce maxes.
+        classGear: [
             {
                 name: 'Telescoping Staff',
                 tier: 'I',

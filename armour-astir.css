@@ -2,6 +2,10 @@
 
 /* ----- GLOBAL STYLES ----- */
 
+label {
+  font-size: 0.9em;
+}
+
 .sheet-main {
   background-color: white;
 }
@@ -39,6 +43,35 @@
 
 .sheet-italics {
   font-style: italic;
+}
+
+.sheet-expander {
+	opacity: 0;
+	width: 16px;
+	height: 16px;
+	position: relative;
+	top: -2px;
+	left: 4px;
+	margin: -10px;
+	cursor: pointer;
+	z-index: 1;
+}
+
+
+.sheet-gear-exansion + span::before {
+	position: relative;
+	top: -3px;
+	margin-left: -6px;
+	border: solid 1px black;
+	border-radius: 2px;
+	color: white;
+	background-color: rgb(35, 31, 32);
+	width: 15px;
+	height: 14px;
+	display: inline-block;
+	line-height: 14px;
+	text-align: center;
+	content: "◂";
 }
 
 /* Inputs */
@@ -233,6 +266,26 @@ h3 {
 }
 
 /* ----- GEAR ----- */
+.sheet-gear-display {
+  font-size:.8em;
+}
+
+input.sheet-gear-expandtoggle {
+  position: absolute;
+  right: 0;
+}
+
+.sheet-gear-expansion {
+  display: none;
+}
+
+input.sheet-gear-expandtoggle:checked ~ .sheet-gear-expansion {
+  display: block;
+}
+
+.sheet-gear-edit {
+  /* edit styling for gear stuff. */
+}
 
 
 /* ----- ASTIR PAGE ----- */
