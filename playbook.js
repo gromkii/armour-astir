@@ -96,4 +96,48 @@ var aaMoves = {
         miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? Have hat you lost? Who and what is changed by your defeat?',
         details: 'If you survive, you are changed by your defeat. As well as the above, choose one: \n\n • Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher lower than +/- 3)\n • Choose a new playbook. Keep what moves you and the Director agree are truly part of your character, and discard the others. Replace them with the starting moves for your new playbook. You do not gain its starting equipment.',
     }
+};
+
+const playbook = {
+    arcanist: {
+        descriptor: 'Your magic is like...',
+        generalGear: [
+            {
+                name: 'Astir',
+                tier: 'III',
+                quantity: 1
+            },
+            {
+                name: 'Touch Spells',
+                tier: 'I',
+                tags: ['melee', 'bane'],
+            },
+            {
+                name: 'Arcanist Gear',
+                quantity: 2
+            },
+            {
+                name: 'CLothing appropriate for your look.'
+            }
+        ],
+        classGear: [ // ! Not sure if roll20 allows us to enforce maxes.
+            {
+                name: 'Telescoping Staff',
+                tier: 'I',
+                tags: [
+                    'ranged'
+                ],
+                checked: false
+            },
+            {
+                name: 'Reagent Knife',
+                tier: 'I',
+                tags: [
+                    'melee',
+                    '<b>mundane</b>' // ! Maybe add span with special class.
+                ]
+            }
+        ]
+    },
+
 }

@@ -37,6 +37,10 @@
   padding: 0 1em;
 }
 
+.sheet-italics {
+  font-style: italic;
+}
+
 /* Inputs */
 input[type=text] {
   background-color: transparent;
@@ -90,6 +94,7 @@ h3 {
 
 .sheet-page-header {
   display: flex;
+  margin: 0 1em;
 }
 
 .sheet-header {
@@ -111,6 +116,7 @@ h3 {
   background-color: black;
   color: white;
 }
+
 /* ----- CHARACTER PAGE -----*/
 /* Layout */
 .sheet-character-upper-section {
@@ -126,11 +132,30 @@ h3 {
 }
 
 
-/* Descriptors */
+/* ---- DESCRIPTORS ---- */
 .sheet-descriptor label {
   font-size: .9em;
 
 }
+
+.sheet-channeler,
+.sheet-scout,
+.sheet-captain,
+.sheet-support {
+  display: none;
+}
+
+.sheet-descriptors-toggle[value="0"] ~ .sheet-channeler, 
+.sheet-descriptors-toggle[value="1"] ~ .sheet-channeler, 
+.sheet-descriptors-toggle[value="2"] ~ .sheet-channeler, 
+.sheet-descriptors-toggle[value="3"] ~ .sheet-channeler, 
+.sheet-descriptors-toggle[value="4"] ~ .sheet-scout, 
+.sheet-descriptors-toggle[value="5"] ~ .sheet-captain, 
+.sheet-descriptors-toggle[value="6"] ~ .sheet-support, 
+.sheet-descriptors-toggle[value="7"] ~ .sheet-support {
+  display: block;
+}
+
 
 /* Traits */
 .sheet-character-traits > h3 {
@@ -206,6 +231,9 @@ h3 {
   display: flex;
   flex-direction: column;
 }
+
+/* ----- GEAR ----- */
+
 
 /* ----- ASTIR PAGE ----- */
 

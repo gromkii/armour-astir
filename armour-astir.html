@@ -27,6 +27,7 @@
             Character Info
           </h3>
           <div class="section-content">
+          <input type="hidden" name="attr_playbook_descriptors" class="descriptors-toggle"/>
             <div class="descriptor">
               <input type="text" />
               <label>Pronouns...</label>
@@ -38,6 +39,35 @@
             <div class="descriptor">
               <input type="text" />
               <label>You wear...</label>
+            </div>
+            
+            <!-- attr_playbook 0-3 -->
+            <div class="descriptor channeler">
+              <input type="text" />
+              <label>Your magic is like...</label>
+            </div>
+
+            <!-- <div class="descriptor channeler">
+              <textarea></textarea>
+              <label>When You Launch Your Astir, You Say...</label>
+            </div> -->
+            
+            <!-- attr_playbook 4 -->
+            <div class="descriptor scout">
+              <input type="text" />
+              <label>You fight with...</label>
+            </div>
+            
+            <!-- attr_playbook 5 -->
+            <div class="descriptor captain">
+              <input type="text" />
+              <label>You lead with...</label>
+            </div>
+            
+            <!-- attr_playbook 6-7 -->
+            <div class="descriptor support">
+              <input type="text" />
+              <label>Your handiwork looks...</label>
             </div>
             
           </div>
@@ -52,10 +82,10 @@
           <div class="character-traits section">
             <h3> 
               <div>Traits</div>
-            <div class="character-support">
+            <!-- <div class="character-support">
               <input name="attr_support" class="support-toggle" type="checkbox" />
               Support
-            </div>
+            </div> -->
             </h3>
             <div class="section-content">
               <div class="traits">
@@ -129,7 +159,7 @@
                   </div>
                 </div>
                  
-                <!-- Will be hidden when support box is checked. -->
+                <!-- Hidden based on playbook. -->
                 <input type="hidden" class="channel_hidden" name="attr_channel_hidden" value="false" />
                 <div class="trait trait-channel">
                   <div class="trait-top">
@@ -141,6 +171,27 @@
                       type="roll" 
                       value="&{template:default} {{name=CHANNEL}} {{result=[[2d6 + @{channel}]]}}">
                       <span>CHANNEL</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- TODO: Remove this. Example for roll queries. -->
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_test" 
+                      type="roll" 
+                      value="?{Choose a Trait| 
+                        +KNOW,
+                        &{template:default&#125 {{name=KNOW&#125&#125 {{result=[[2d6 + @{know}]]&#125&#125
+                        |
+                        +TALK,
+                        &{template:default&#125 {{name=TALK&#125&#125 {{result=[[2d6 + @{talk}]]&#125&#125}"
+                      >
+                      <span>Test</span>
                     </button>
                   </div>
                 </div>
@@ -202,9 +253,11 @@
           <h3>Moves</h3>
           <div class="section-content">
             <fieldset class="repeating_moves">
-              <input placeholder="Move name.." name="attr_move-name"/>
-              <textarea placeholder="Description..." name="attr_move-description">
-              </textarea>
+              <div class="move-main">
+                <input placeholder="Move name.." name="attr_move_name"/>
+                <textarea placeholder="Description..." name="attr_move_description">
+                </textarea>
+              </div>
             </fieldset>
           </div>
         </div>
@@ -222,9 +275,33 @@
           <div class="character-gear section">
             <h3>Gear</h3>
             <div class="section-content">
-              <fieldset class="repeating_gear">
-                <input placeholder="Item.." name="attr_gear-name"/>
-                <input placeholder="Tags.." name="attr_gear-tags"/>
+              <fieldset class="repeating_gearlist">
+                <!-- 
+                  {Quantity} {Name} - {Tier} ({tags} / {tags})
+                 -->
+                 <span name="attr_quantity" value="@{quantity}"></span>
+                 <span name="attr_name" value="@{name}"></span>
+                 <span name="attr_tier" value="@{tier}"></span>
+                 <span name="attr_tags" value="@{tags}" class="italics"></span>
+              </fieldset>
+
+              <fieldset class="repeating_gearcheck">
+                <div class="gear-main">
+                  <div class="gear-display">
+                    <input type="checkbox" class="gear-equip" />
+                    <span name="attr_gear_name" value="@{gear_name}"></span>
+                    <span name="attr_gear_tier" value="@{gear_tier}"></span>
+                    <span name="attr_gear_tags" value="@{gear_tags}"></span>
+                  </div>
+                  <!-- <input type="checkbox" class="expander expand-gear"> -->
+                  <div class="gear-expansion">
+                    <!-- name -->
+                    <!-- tier -->
+                    <!-- tags -->
+                  </div>
+
+                </div>
+                
               </fieldset>
             </div>
           </div>
@@ -246,6 +323,186 @@
 </div>
 
 <script type="text/worker">
+
+  const bookName = {
+    0: 'arcanist',
+    1: 'impostor',
+    2: 'paradigm',
+    3: 'witch',
+    4: 'scout',
+    5: 'captain',
+    6: 'artificer',
+    7: 'diplomat'
+  };
+
+  const playbookMoves = {
+    weatherTheStormDefy: {
+        book: 'basic',
+        fullName: 'Weather The Storm (DEFY)',
+        trigger: 'When you <b>weather the storm</b> to do something safely under pressure.',
+        roll: 'DEFY',
+        success: 'You mange to make it to safety.',
+        partial: 'You succed, but at some cost - your Director will ask you to settle for less, take a <i>risk</i>, or make a difficult choice.',
+    },
+    weatherTheStormKnow: {
+        book: 'basic',
+        fullName: 'Weather The Storm (DEFY)',
+        trigger: 'When you <b>weather the storm</b> to do something safely under pressure.',
+        roll: 'KNOW',
+        success: 'You mange to make it to safety.',
+        partial: 'You succed, but at some cost - your Director will ask you to settle for less, take a <i>risk</i>, or make a difficult choice.',
+    },
+    readTheRoom: {
+    weatherTheStorm: {
+        book: 'basic',
+        fullName: 'Weather The Storm (DEFY)',
+        trigger: 'When you <b>weather the storm</b> to do something safely under pressure.',
+        rolls: ['DEFY', 'KNOW'],
+        success: 'You mange to make it to safety.',
+        partial: 'You succed, but at some cost - your Director will ask you to settle for less, take a <i>risk</i>, or make a difficult choice.',
+    },
+    readTheRoom: {
+        book: 'basic',
+        fullName: 'Read The Room',
+        trigger: 'When you <b>read the room</b> to get insight on your situation.',
+        roll: 'SENSE', // ! Single roll, automatically does it, or prompt for bonus?
+        success: 'Hold 3',
+        partial: 'Hold 1',
+        failure: 'On a failure, you may ask one of the below questions, but the answer creates a problem or puts you in danger.',
+        details: 'Spend your hold 1-for-1 to ask the following questions. Your hold lasts until you leave the current situation or it changes significantly. \n\n • Who has the upper hand here?\n • What is being overlooked here?\n • How does x really feel?\n • What are x\'s real intentions?\n • How is x at risk or in peril? \n\n Roll with Advantage when you act on the answers to what you\'ve asked',
+    },
+    dispelUncertainties: {
+        book: 'basic',
+        fullName: 'Dispel Uncertainties',
+        trigger: 'When you <b>dispel uncertainties</b> by clarifying something unknown or answering a question.',
+        roll: 'KNOW',
+        success: 'The Director will tell you something directly useful you know about the situation or subject at hand.',
+        partial: 'The Director will tell you something potentially useful, but it is up to you to discern how. The Director might ask you to explain how you know that information, or where you learned it.',
+    },
+    helpOrHinder: {
+        book: 'basic',
+        fullName: 'Help or Hinder',
+        trigger: 'When you <b>help or hinder</b> someome to influence their attemps to do something.',
+        roll: 'GRAVITY', // ! This one might be tricky to handle.
+        succcess: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
+        partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.'
+    },
+    weaveMagic: {
+        book: 'basic',
+        fullName: 'Weave Magic',
+        trigger: 'When you <b>weave magic</b> to do something taxing with your power.',
+        roll: 'CHANNEL',
+        success: 'You manage to channel power the way you desired without ill effect.',
+        partial: 'You succeed, but your invocation is twisted in an unexpected and dangerous way.'
+    },
+    coolOff: {
+        book: 'basic',
+        trigger: 'When you take a moment in safety to <b>cool off</b> or help someone else do the same, you declare a <i>risk</i> you want to get rid of.',
+        roll: 'SELECT', // ! Another tricky one. If we can pass in an array of values to a popup, might work. Trait -> Bonus -> Result
+        success: 'You/they erase a <i>risk</i> or untick \'overheating\' from an Astir.',
+        partial: 'As above, but your moment of safety is interrupted.'
+    },
+    exchangeBlowsClash: {
+        book: 'basic',
+        fullName: 'Exchange Blows (CLASH)',
+        trigger: 'When you <b>exchange blows</b> with foes capable of defending themselves, and advance a GRAVITY clock if you have one.',
+        success: 'Either your opponent takes a <i>risk</i>, or you take a <i>risk</i> and put your opponent in <i>peril.</i>',
+        partial: 'Both you and your target are forced to take a <i>risk</i>',
+    },
+    exchangeBlowsTalk: {
+        book: 'basic',
+        fullName: 'Exchange Blows (TALK)',
+        trigger: 'When you <b>exchange blows</b> with foes capable of defending themselves, and advance a GRAVITY clock if you have one.',
+        success: 'Either your opponent takes a <i>risk</i>, or you take a <i>risk</i> and put your opponent in <i>peril.</i>',
+        partial: 'Both you and your target are forced to take a <i>risk</i>',
+    },
+    strikeDecisivelyClash: {
+        book: 'basic',
+        fullName: 'Strike Decisively (CLASH)',
+        trigger: 'When you <b>strike decisively</b> against someone wwho is defenseless.',
+        success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
+        partial: 'You succeed as above, but choose 1.',
+        details: '• You overreach or underestimate - take a <i>risk</i>. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
+    },
+    strikeDecisivelyTalk: {
+        book: 'basic',
+        fullName: 'Strike Decisively (TALK)',
+        trigger: 'When you <b>strike decisively</b> against someone wwho is defenseless.',
+        success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
+        partial: 'You succeed as above, but choose 1.',
+        details: '• You overreach or underestimate - take a <i>risk</i>. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
+    },
+    biteTheDust: {
+        book: 'basic',
+        fullName: 'Bite the Dust',
+        trigger: 'When you\'re defenseless or risk harm so sever you might <b>bite the dust</b>.',
+        roll: 'DEFY',
+        success: 'They miss, hesitate, or you\'re saved by sheer luck - you rally, and clear a <i>risk</i> if you have one.',
+        partial: 'Retreat from the Sortie safely, or be put in <i>peril.</i>',
+        miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? Have hat you lost? Who and what is changed by your defeat?',
+        details: 'If you survive, you are changed by your defeat. As well as the above, choose one: \n\n • Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher lower than +/- 3)\n • Choose a new playbook. Keep what moves you and the Director agree are truly part of your character, and discard the others. Replace them with the starting moves for your new playbook. You do not gain its starting equipment.',
+    }
+  } 
+};
+
+const playbookGear = {
+  arcanist: {
+      startingGear: [
+          {
+              name: 'Astir',
+              tier: 'III',
+              quantity: 1
+          },
+          {
+              name: 'Touch Spells',
+              tier: 'I',
+              tags: ['melee', 'bane'],
+          },
+          {
+              name: 'Arcanist Gear',
+              quantity: 2
+          },
+          {
+              name: 'Clothing appropriate for your look.'
+          }
+      ],
+      classGear: [
+          {
+              name: 'Telescoping Staff',
+              tier: 'I',
+              tags: [
+                  'ranged'
+              ],
+              checked: false
+          },
+          {
+              name: 'Reagent Knife',
+              tier: 'I',
+              tags: [
+                  'melee',
+                  '**mundane**' // ! Maybe add span with special class.
+              ]
+          },
+          {
+            name: 'Sidearm',
+            tier: 'I',
+            tags: [
+              'ranged',
+              'defensive',
+            ],
+          },
+          {
+            name: 'Shield Broach',
+            tier: 'I',
+            tags: [
+              'ward'
+            ]
+          }
+      ]
+  },
+
+}
+
   const buttonlist = ['character', 'astir', 'misc'];
   buttonlist.forEach(button => {
       on(`clicked:${button}`, function() {
@@ -261,6 +518,134 @@
       channel_hidden: event.newValue == 'on',
     });
   })
+
+  on(`change:playbook`, (event) => {
+    if (event && event.newValue && event.netValue !== event.previousValue) {
+      /*
+        const value = getPlaybookValue(event.newValue);
+        setAttrs({
+          playbook_descriptors: value
+        });
+      */
+      setPlaybook(event.newValue);
+    }
+  })
+
+  function setPlaybook(book) {
+    const bookValue = getPlaybookValue(book);
+    const playbook = bookName[bookValue];
+    setPlaybookValue(bookValue);
+    setMoves(playbook);
+    setGear(playbook);
+  }
+
+  function getPlaybookValue(book) {
+    const value = book.toLowerCase().replace('the ', '');
+    switch(value) {
+      case 'arcanist' : return 0;
+      case 'impostor' : return 1;
+      case 'paradigm' : return 2;
+      case 'witch'    : return 3;
+      case 'scout'    : return 4;
+      case 'captain'  : return 5;
+      case 'artificer': return 6;
+      case 'diplomat' : return 7;
+      default         : return 0; // ? Setup error handling case?
+    }
+  }
+
+  function setPlaybookValue(book) {
+    setAttrs({
+      playbook_descriptors: `${book}`,
+      channel_hidden: book > 3,
+    });
+  }
+
+  function setMoves(book) {
+    
+  }
+
+  function setGear(book) {
+    // Remove current gear.
+    if (!bookName[book]) {
+      return;
+    }
+    
+    setGear(bookName[book]);
+
+  }
+
+  function addMove(move, rowid = 0) {
+    if (aaMoves[move]) {
+
+    }
+  }
+
+  // Set the checkbox gear list item.
+  function addGear(book, rowid = 0) {
+    const playbook = bookName[book]
+    if (playbook && playbookGear[playbook]) {
+
+    }
+  }
+
+  // Set the starting gear list item.
+  function addGearList(gear, rowid) {
+    const newRowId = rowid || generateRowID();
+
+    const tags = gear.tags && gear.tags.length ? ` - (${gear.tags.join(' / ')})` : '';
+ 
+    setAttrs({
+      [`repeating_gearlist_${newRowId}_name`]: gear.name || '',
+      [`repeating_gearlist_${newRowId}_quantity`]: gear.quantity || '',
+      [`repeating_gearlist_${newRowId}_tier`]: gear.tier || '',
+      [`repeating_gearlist_${newRowId}_tags`]: tags,
+    });
+  }
+
+  function addGear(gear, rowid) {
+    const newRowId = rowid || generateRowID();
+    const tags = gear.tags && gear.tags.length ? ` - (${gear.tags.join(' / ')})` : '';
+
+    setAttrs({
+      [`repeating_gearcheck_${newRowId}_gear_name`]: gear.name || '',
+      [`repeating_gearcheck_${newRowId}_gear_tier`]: gear.tier || '',
+      [`repeating_gearcheck_${newRowId}_gear_tags`]: tags,
+    })
+
+  }
+
+  function setGear(book) {
+    clearGearList();
+
+    if (!playbookGear[book]) {
+      return;
+    }
+
+    const gearList = playbookGear[book].startingGear;
+    const gear = playbookGear[book].classGear;
+
+    for (let i = 0; i < gearList.length; i++) {
+      addGearList(gearList[i]);
+    }
+
+    for (let i = 0; i < gear.length; i++) {
+      addGear(gear[i]);
+    }
+  }
+  
+  function clearGearList() {
+    getSectionIDs('repeating_gearlist', (idArray) => {
+      _.forEach(idArray, (id) => {
+        removeRepeatingRow(`repeating_gearlist_${id}`)
+      });
+    })
+
+    getSectionIDs('repeating_gearcheck', (idArray) => {
+      _.forEach(idArray, (id) => removeRepeatingRow(`repeating_gearcheck_${id}`));
+    })
+  }
+
 </script>
 
 <!-- 
