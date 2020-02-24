@@ -35,20 +35,12 @@
     }
 */
 
-var aaMoves = {
-    weatherTheStormDefy: {
+var playbookMoves = {
+    weatherTheStorm: {
         book: 'basic',
         fullName: 'Weather The Storm (DEFY)',
         trigger: 'When you <b>weather the storm</b> to do something safely under pressure.',
-        roll: 'DEFY',
-        success: 'You mange to make it to safety.',
-        partial: 'You succed, but at some cost - your Director will ask you to settle for less, take a <i>risk</i>, or make a difficult choice.',
-    },
-    weatherTheStormKnow: {
-        book: 'basic',
-        fullName: 'Weather The Storm (DEFY)',
-        trigger: 'When you <b>weather the storm</b> to do something safely under pressure.',
-        roll: 'KNOW',
+        rolls: ['DEFY', 'KNOW'],
         success: 'You mange to make it to safety.',
         partial: 'You succed, but at some cost - your Director will ask you to settle for less, take a <i>risk</i>, or make a difficult choice.',
     },
@@ -88,21 +80,16 @@ var aaMoves = {
     },
     coolOff: {
         book: 'basic',
+        fullName: 'coolOff',
         trigger: 'When you take a moment in safety to <b>cool off</b> or help someone else do the same, you declare a <i>risk</i> you want to get rid of.',
-        roll: 'SELECT', // ! Another tricky one. If we can pass in an array of values to a popup, might work. Trait -> Bonus -> Result
+        roll: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK' ],
         success: 'You/they erase a <i>risk</i> or untick \'overheating\' from an Astir.',
         partial: 'As above, but your moment of safety is interrupted.'
     },
-    exchangeBlowsClash: {
+    exchangeBlows: {
         book: 'basic',
-        fullName: 'Exchange Blows (CLASH)',
-        trigger: 'When you <b>exchange blows</b> with foes capable of defending themselves, and advance a GRAVITY clock if you have one.',
-        success: 'Either your opponent takes a <i>risk</i>, or you take a <i>risk</i> and put your opponent in <i>peril.</i>',
-        partial: 'Both you and your target are forced to take a <i>risk</i>',
-    },
-    exchangeBlowsTalk: {
-        book: 'basic',
-        fullName: 'Exchange Blows (TALK)',
+        fullName: 'Exchange Blows',
+        rolls: ['CLASH', 'TALK'],
         trigger: 'When you <b>exchange blows</b> with foes capable of defending themselves, and advance a GRAVITY clock if you have one.',
         success: 'Either your opponent takes a <i>risk</i>, or you take a <i>risk</i> and put your opponent in <i>peril.</i>',
         partial: 'Both you and your target are forced to take a <i>risk</i>',
