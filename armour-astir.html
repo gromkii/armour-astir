@@ -158,7 +158,7 @@
                     </button>
                   </div>
                 </div>
-                 
+
                 <!-- Hidden based on playbook. -->
                 <input type="hidden" class="channel_hidden" name="attr_channel_hidden" value="false" />
                 <div class="trait trait-channel">
@@ -236,6 +236,10 @@
                 <h4>Basic Moves</h4>
                 <fieldset class="repeating_basicmoves">
                   <div class="move-main">
+
+                    <input type="hidden" name="attr_move_rollvalue" value="" />
+                    <button type="roll" name="roll_moveroll" value="@{move_rollvalue}">Roll</button>
+
                     <span name="attr_move_name" value="@{move_name}"></span>
                     <input type="checkbox" name="attr_move_selected" class="move-selected" />
                     <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
@@ -429,7 +433,7 @@
   },
   coolOff: {
       book: 'basic',
-      fullName: 'coolOff',
+      fullName: 'Cool Off',
       trigger: 'When you take a moment in safety to <b>cool off</b> or help someone else do the same, you declare a <i>risk</i> you want to get rid of.',
       roll: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK' ],
       success: 'You/they erase a <i>risk</i> or untick \'overheating\' from an Astir.',
@@ -454,6 +458,15 @@
   strikeDecisivelyTalk: {
       book: 'basic',
       fullName: 'Strike Decisively (TALK)',
+      trigger: 'When you <b>strike decisively</b> against someone wwho is defenseless.',
+      success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
+      partial: 'You succeed as above, but choose 1.',
+      details: '• You overreach or underestimate - take a <i>risk</i>. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
+  },
+  strikeDecisively: {
+      book: 'basic',
+      fullName: 'Strike Decisively',
+      rollValue:`?{Choose a Trait|+CLASH,&{template:default&#125; {{name=Strike Decisively&#125;&#125; {{result=[[2d6 + @{clash}]]&#125;&#125;|NONE,/roll 2d6}`,
       trigger: 'When you <b>strike decisively</b> against someone wwho is defenseless.',
       success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
       partial: 'You succeed as above, but choose 1.',
@@ -645,6 +658,7 @@ const playbookGear = {
     addBasicMove('weaveMagic')
     addBasicMove('coolOff')
     addBasicMove('biteTheDust');
+    addBasicMove('strikeDecisively');
   }
 
   function setMoves(book) {
@@ -671,6 +685,11 @@ const playbookGear = {
     const m = playbookMoves[moveName];
     const newRowId = rowid || generateRowID();
 
+    let rollValue = '';
+    if (!m.rollValue && m.rolls) {
+      rollValue = buildRollValue(m.rolls);
+    }
+
     let newAttrs = {
         [`repeating_basicmoves_${newRowId}_move_name`]: m.fullName || '',
         [`repeating_basicmoves_${newRowId}_move_name_base`]: m.fullName || '',
@@ -679,17 +698,8 @@ const playbookGear = {
         [`repeating_basicmoves_${newRowId}_move_partial`]: m.partial || '',
         [`repeating_basicmoves_${newRowId}_move_miss`]: m.miss || '',
         [`repeating_basicmoves_${newRowId}_move_details`]: m.details || '',
+        [`repeating_basicmoves_${newRowId}_move_rollvalue`]: m.rollValue || rollValue,
     }
-
-    /*
-    if (m.roll) {
-      newAttrs[`repeating_basicmoves_${newRowId}_move_trait`] = m.roll
-    }
-    
-    if (m.rolls) {
-      newAttrs[`repeating_basicmoves_${newRowId}_move_trait`] = m.rolls.join(',')
-    }
-    */
 
     setAttrs(newAttrs);
   }
@@ -769,10 +779,24 @@ const playbookGear = {
   function clearBasicMoveList() {
     getSectionIDs('repeating_basicmoves', (idArray) => {
       _.forEach(idArray, (id) => {
-        removeRepeatingRow(`repeating_basicmove_${id}`);
+        removeRepeatingRow(`repeating_basicmoves_${id}`);
       });
     })
   }
+
+  // takes array of strings
+  function buildRollValue(rolls) {
+    let rollvalue = '?{Choose a Trait|';
+
+    _.forEach(rolls, (roll, index) => {
+      const last = index === rolls.length - 1;
+      const lastChar = last ? '}' : '|';
+      rollvalue += roll + ', &{template:default&#125 {{name=Move Name&#125&#125 {{result=[[ 2d6 + @{' + roll.toLowerCase() + '}]] &#125&#125' + lastChar;
+    });
+
+    return rollvalue;
+  } 
+
 
 </script>
 

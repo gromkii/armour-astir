@@ -280,7 +280,7 @@ h3 {
 
 input.sheet-gear-expandtoggle {
   position: absolute;
-  right: 0;
+  right: 1em;
 }
 
 .sheet-gear-expansion {
@@ -298,7 +298,7 @@ input.sheet-gear-expandtoggle:checked ~ .sheet-gear-expansion {
 /* ----- MOVES ----- */
 input.sheet-move-expandtoggle {
   position: absolute;
-  right: 0;
+  right: 1em;
 }
 
 .sheet-move-expansion {
