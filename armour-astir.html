@@ -264,7 +264,7 @@
                       <input type="text" name="attr_move_miss">
                       <label>Miss (6 or less)</label>
     
-                      <textarea name="attr_move_details"></textarea>
+                      <textarea type="text" name="attr_move_details"></textarea>
                       <label>Details</label> 
     
                     </div>
@@ -399,10 +399,6 @@
       <div class="row">
         <span>{{movename}}</span>
       </div>
-      {{#trait}}
-      trait
-      {{/trait}}
-      Something else.
     </div>
   {{#result}}
     <div class="sheet-template-content">
@@ -447,13 +443,13 @@
     </div>
   </div>
 
-  <!-- <div>
-    <caption>Fuck</caption>
+  <div>
+    <caption>All Props</caption>
     {{#allprops()}}
        <div>key - {{key}}</div>
        <div>value - {{value}}</div>
     {{/allprops()}}
-  </div> -->
+  </div>
 </rolltemplate>
 
 
@@ -476,8 +472,7 @@
       rolls: ['DEFY', 'KNOW'],
       success: 'You mange to make it to safety.',
       partial: 'You succeed, but at some cost - your Director will ask you to settle for less, take a **risk**, or make a difficult choice.',
-      miss: '',
-      details: '',
+      miss: 'MISS',
   },
   readTheRoom: {
       fullName: 'Read The Room',
@@ -492,47 +487,36 @@
       roll: 'KNOW',
       success: 'The Director will tell you something directly useful you know about the situation or subject at hand.',
       partial: 'The Director will tell you something potentially useful, but it is up to you to discern how. The Director might ask you to explain how you know that information, or where you learned it.',
-      miss:'',
-      details:'',
   },
   helpOrHinder: {
       fullName: 'Help or Hinder',
       roll: 'GRAVITY', // ! This one might be tricky to handle.
       succcess: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
       partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.',
-      miss:'',
-      details:'',
   },
   weaveMagic: {
       fullName: 'Weave Magic',
       roll: 'CHANNEL',
       success: 'You manage to channel power the way you desired without ill effect.',
       partial: 'You succeed but your invocation is twisted in an unexpected and dangerous way.',
-      miss:'',
-      details:'',
   },
   coolOff: {
       fullName: 'Cool Off',
       rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK' ],
       success: 'You/they erase a **risk** or untick \'overheating\' from an Astir.',
       partial: 'As above, but your moment of safety is interrupted.',
-      miss:'',
-      details:'',
   },
   exchangeBlows: {
       fullName: 'Exchange Blows',
       rolls: ['CLASH', 'TALK'],
       success: 'Either your opponent takes a **risk**, or you take a **risk** and put your opponent in **peril.**',
       partial: 'Both you and your target are forced to take a **risk**',
-      miss:'',
-      details:'',
   },
   strikeDecisively: {
       fullName: 'Strike Decisively',
       rolls: ['CLASH', 'TALK'],
       success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
       partial: 'You succeed as above, but choose 1.',
-      miss:'',
       details: '• You overreach or underestimate - take a **risk**. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
   },
   biteTheDust: {
@@ -712,15 +696,15 @@ const playbookGear = {
   function setBasicMoves() {
     clearBasicMoveList();
 
-    addBasicMove('weatherTheStorm');
-    addBasicMove('readTheRoom');
-    addBasicMove('dispelUncertainties');
-    addBasicMove('helpOrHinder');
-    addBasicMove('weaveMagic')
-    addBasicMove('coolOff');
-    addBasicMove('exchangeBlows');
-    addBasicMove('strikeDecisively');
-    addBasicMove('biteTheDust');
+    addBasicMove('weatherTheStorm', true);
+    addBasicMove('readTheRoom', true);
+    addBasicMove('dispelUncertainties', true);
+    addBasicMove('helpOrHinder', true);
+    addBasicMove('weaveMagic', true);
+    addBasicMove('coolOff', true);
+    addBasicMove('exchangeBlows', true);
+    addBasicMove('strikeDecisively', true);
+    addBasicMove('biteTheDust', true);
   }
 
   function setMoves(book) {
@@ -738,32 +722,39 @@ const playbookGear = {
   }
 
   // Add Moves from SRD (defined in playbook.js, copy/pasted here. Doesn't actually pull them in.)
-  function addBasicMove(moveName, rowid = 0) {
+  function addBasicMove(moveName, basicMove) {
     if (!playbookMoves[moveName]) {
       console.log('Invalid/Unknown Move Name');
       return;
     }
 
     const m = playbookMoves[moveName];
-    const newRowId = rowid || generateRowID();
+    const newRowId = generateRowID();
+    const moves =  basicMove ? 'basicmoves' : 'moves';
+    const prefix = `repeating_${moves}_${newRowId}_move_`;
+    const attrs = {};
 
-    let rollValue = '';
-    if (!m.rollValue && m.rolls) {
-      rollValue = buildRollValue(m.rolls, m);
-    }
+    attrs[prefix + 'name'] = m.fullName;
+    attrs[prefix + 'name_base'] = m.fullName;
+
     
-    let newAttrs = {
-        [`repeating_basicmoves_${newRowId}_move_name`]: m.fullName || '',
-        [`repeating_basicmoves_${newRowId}_move_name_base`]: m.fullName || '',
-        [`repeating_basicmoves_${newRowId}_move_trigger`]: m.trigger || '',
-        [`repeating_basicmoves_${newRowId}_move_success`]: m.success || '',
-        [`repeating_basicmoves_${newRowId}_move_partial`]: m.partial || '',
-        [`repeating_basicmoves_${newRowId}_move_miss`]: m.miss || '',
-        [`repeating_basicmoves_${newRowId}_move_details`]: m.details || '',
-        [`repeating_basicmoves_${newRowId}_move_rollvalue`]: m.rollValue || rollValue,
-    }
+    if (m.success) attrs[prefix + 'success'] = m.success;
+    if (m.partial) attrs[prefix + 'partial'] = m.partial;
+    if (m.miss) attrs[prefix + 'miss'] = m.miss;
+    if (m.details) attrs[prefix + 'details'] = m.details;
 
-    setAttrs(newAttrs);
+    attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
+    
+    setAttrs(attrs, () => {
+      rollAttrs = {};
+      if (m.rolls) {
+        rollAttrs[prefix + 'rollvalue'] = buildRollValue(m.rolls, prefix);
+      } else if (m.roll) {
+        rollAttrs[prefix + 'rollvalue'] = '&{template:default} {{name=' + m.fullName + '}} {{result=[[ 2d6 + @{' + m.roll.toLowerCase() + '}]] {{success=' + m.success + '}}}}'
+      }
+
+      setAttrs(rollAttrs);
+    });
   }
   
   function addMove(move, rowid = 0) {
@@ -846,27 +837,27 @@ const playbookGear = {
     })
   }
 
-  // takes array of strings
-  function buildRollValue(rolls, m) {
+  // takes array of strings, eg: ['KNOW', 'DEFY']
+  function buildRollValue(rolls, prefix) {
     let rollValue = '?{Choose a Trait|';
 
     _.forEach(rolls, (roll, index) => {
       const last = index === rolls.length - 1;
       const lastChar = last ? '}' : '|';
+      
       rollValue += '+' + roll 
       +', &{template:move&#125 {{charactername=@{character_name}&#125&#125 '
-      +'{{movename='+m.fullName+'&#125&#125 '
-      +'{{trait=' + roll + '&#125&#125'
-      +'{{result=[[ 2d6 + @{'+roll.toLowerCase()+'}]]&#125&#125 '
-      +'{{miss='+ m.miss +'&#125&#125 '
-      +'{{partial='+m.partial+'&#125&#125 '
-      +'{{success='+m.success+'&#125&#125 '
-      +'{{details='+m.details+'&#125&#125 '
-      + lastChar
+      +'{{movename=@{' + prefix + 'name}&#125&#125 '
+      +'{{trait='+ roll +'&#125&#125'
+      +'{{result=[[ 2d6 + @{' + roll.toLowerCase() + '}]]&#125&#125 '
+      +'{{success=@{' + prefix + 'success}&#125&#125 '
+      +'{{partial=@{'+ prefix + 'partial}&#125&#125 '
+      +'{{miss=@{'+ prefix + 'miss}&#125&#125 '
+      +'{{doroll=@{' + prefix + 'doroll}&#125&#125 '
+      +'{{details=@{' + prefix + 'details}&#125&#125'
+      + lastChar;
+
     });
-
-
-    console.log(rollValue);
 
     return rollValue;
   } 
@@ -879,5 +870,26 @@ const playbookGear = {
     - Radio buttons for dangers section.
     - Moves keep bugging out, fix it.
     - Figure out equipment name with tags formatting/interpolation.
+
+  ?{Choose a Trait|+DEFY, &{template:move} 
+  {{charactername=@{character_name}}} 
+  {{movename=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_name}}} 
+  {{trait=DEFY}}{{result=[[ 2d6 + @{defy}]]}} 
+  {{success=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_success}}} 
+  {{partial=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_partial}}} 
+  {{miss=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_miss}}} 
+  {{doroll=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_doroll}}} 
+  {{details=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_details}}}
+  |
+  +KNOW, &{template:move}
+  {{charactername=@{character_name}}}
+  {{movename=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_name}}}
+  {{trait=KNOW}}
+  {{result=[[ 2d6 + @{know}]]}}
+  {{success=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_success}}}
+  {{partial=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_partial}}}
+  {{miss=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_miss}}}
+  {{doroll=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_doroll}}}
+  {{details=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_details}}}}
 
 -->
