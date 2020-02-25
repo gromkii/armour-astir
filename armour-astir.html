@@ -1,4 +1,8 @@
-
+<!-- 
+  Design considerations
+  - move catchphrase into Character Info, only appear if channeler.\
+  - move traits + dangers up, and add ideals underneath it?
+ -->
 
 <div class="main">
   <div class="top-section">
@@ -375,6 +379,84 @@
   
 </div>
 
+
+<!-- MOVE TEMPLATE -->
+<!-- 
+  &{template:move} 
+  {{charactername=CHARACTER_NAME}}
+  {{movename=MOVE_NAME}} 
+  {{trait=TRAIT}}
+  {{miss=MISS}}
+  {{partial=PARTIAL}}
+  {{success=SUCCESS}}
+  {{details=DETAILS}}
+  {{result=RESULT}}
+-->
+<rolltemplate class="sheet-rolltemplate-move">
+  <div class="sheet-template-container">
+    <div class="sheet-template-header">
+      {{charactername}}
+      <div class="row">
+        <span>{{movename}}</span>
+      </div>
+      {{#trait}}
+      trait
+      {{/trait}}
+      Something else.
+    </div>
+  {{#result}}
+    <div class="sheet-template-content">
+      <div class="sheet-template-row">
+        <span class="label value">{{trait}}</span>
+        <span clas="value text">{{result}}</span>
+      </div>
+      {{#rollLess() result 7}}
+      {{#miss}}
+      <div class="row">
+        <span class="label value miss">6- </span>
+        <span clas="value text">{{miss}}</span>
+      </div>
+      {{/miss}}
+      {{/rollLess() result 7}}
+
+      {{#rollBetween() result 7 9}}
+      {{#partial}}
+      <div class="row">
+        <span class="label value miss">7-9 </span>
+        <span clas="value text">{{partial}}</span>
+      </div>
+      {{/partial}}
+      {{/rollBetween() result 7 9}}
+
+      {{#rollGreater() result 9}}
+      {{#success}}
+      <div class="row">
+        <span class="label value miss">10+ </span>
+        <span clas="value text">{{success}}</span>
+      </div>
+      {{/success}}
+      {{/rollGreater() result 9}}
+    {{/result}}
+
+    {{#details}}
+    <div class="row">
+      <span class="label value miss">Details </span>
+      <span clas="value text">{{details}}</span>
+    </div>
+    {{/details}}
+    </div>
+  </div>
+
+  <!-- <div>
+    <caption>Fuck</caption>
+    {{#allprops()}}
+       <div>key - {{key}}</div>
+       <div>value - {{value}}</div>
+    {{/allprops()}}
+  </div> -->
+</rolltemplate>
+
+
 <script type="text/worker">
 
   const bookName = {
@@ -390,17 +472,15 @@
 
   const playbookMoves = {
     weatherTheStorm: {
-      book: 'basic',
-      fullName: 'Weather The Storm (DEFY)',
-      trigger: 'When you <b>weather the storm</b> to do something safely under pressure.',
+      fullName: 'Weather The Storm',
       rolls: ['DEFY', 'KNOW'],
       success: 'You mange to make it to safety.',
-      partial: 'You succed, but at some cost - your Director will ask you to settle for less, take a <i>risk</i>, or make a difficult choice.',
+      partial: 'You succeed, but at some cost - your Director will ask you to settle for less, take a **risk**, or make a difficult choice.',
+      miss: '',
+      details: '',
   },
   readTheRoom: {
-      book: 'basic',
       fullName: 'Read The Room',
-      trigger: 'When you <b>read the room</b> to get insight on your situation.',
       roll: 'SENSE', // ! Single roll, automatically does it, or prompt for bonus?
       success: 'Hold 3',
       partial: 'Hold 1',
@@ -408,77 +488,58 @@
       details: 'Spend your hold 1-for-1 to ask the following questions. Your hold lasts until you leave the current situation or it changes significantly. \n\n • Who has the upper hand here?\n • What is being overlooked here?\n • How does x really feel?\n • What are x\'s real intentions?\n • How is x at risk or in peril? \n\n Roll with Advantage when you act on the answers to what you\'ve asked',
   },
   dispelUncertainties: {
-      book: 'basic',
       fullName: 'Dispel Uncertainties',
-      trigger: 'When you <b>dispel uncertainties</b> by clarifying something unknown or answering a question.',
       roll: 'KNOW',
       success: 'The Director will tell you something directly useful you know about the situation or subject at hand.',
       partial: 'The Director will tell you something potentially useful, but it is up to you to discern how. The Director might ask you to explain how you know that information, or where you learned it.',
+      miss:'',
+      details:'',
   },
   helpOrHinder: {
-      book: 'basic',
       fullName: 'Help or Hinder',
-      trigger: 'When you <b>help or hinder</b> someome to influence their attemps to do something.',
       roll: 'GRAVITY', // ! This one might be tricky to handle.
       succcess: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
-      partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.'
+      partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.',
+      miss:'',
+      details:'',
   },
   weaveMagic: {
-      book: 'basic',
       fullName: 'Weave Magic',
-      trigger: 'When you <b>weave magic</b> to do something taxing with your power.',
       roll: 'CHANNEL',
       success: 'You manage to channel power the way you desired without ill effect.',
-      partial: 'You succeed, but your invocation is twisted in an unexpected and dangerous way.'
+      partial: 'You succeed but your invocation is twisted in an unexpected and dangerous way.',
+      miss:'',
+      details:'',
   },
   coolOff: {
-      book: 'basic',
       fullName: 'Cool Off',
-      trigger: 'When you take a moment in safety to <b>cool off</b> or help someone else do the same, you declare a <i>risk</i> you want to get rid of.',
-      roll: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK' ],
-      success: 'You/they erase a <i>risk</i> or untick \'overheating\' from an Astir.',
-      partial: 'As above, but your moment of safety is interrupted.'
+      rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK' ],
+      success: 'You/they erase a **risk** or untick \'overheating\' from an Astir.',
+      partial: 'As above, but your moment of safety is interrupted.',
+      miss:'',
+      details:'',
   },
   exchangeBlows: {
-      book: 'basic',
       fullName: 'Exchange Blows',
       rolls: ['CLASH', 'TALK'],
-      trigger: 'When you <b>exchange blows</b> with foes capable of defending themselves, and advance a GRAVITY clock if you have one.',
-      success: 'Either your opponent takes a <i>risk</i>, or you take a <i>risk</i> and put your opponent in <i>peril.</i>',
-      partial: 'Both you and your target are forced to take a <i>risk</i>',
-  },
-  strikeDecisivelyClash: {
-      book: 'basic',
-      fullName: 'Strike Decisively (CLASH)',
-      trigger: 'When you <b>strike decisively</b> against someone wwho is defenseless.',
-      success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
-      partial: 'You succeed as above, but choose 1.',
-      details: '• You overreach or underestimate - take a <i>risk</i>. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
-  },
-  strikeDecisivelyTalk: {
-      book: 'basic',
-      fullName: 'Strike Decisively (TALK)',
-      trigger: 'When you <b>strike decisively</b> against someone wwho is defenseless.',
-      success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
-      partial: 'You succeed as above, but choose 1.',
-      details: '• You overreach or underestimate - take a <i>risk</i>. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
+      success: 'Either your opponent takes a **risk**, or you take a **risk** and put your opponent in **peril.**',
+      partial: 'Both you and your target are forced to take a **risk**',
+      miss:'',
+      details:'',
   },
   strikeDecisively: {
-      book: 'basic',
       fullName: 'Strike Decisively',
-      rollValue:`?{Choose a Trait|+CLASH,&{template:default&#125; {{name=Strike Decisively&#125;&#125; {{result=[[2d6 + @{clash}]]&#125;&#125;|NONE,/roll 2d6}`,
-      trigger: 'When you <b>strike decisively</b> against someone wwho is defenseless.',
+      rolls: ['CLASH', 'TALK'],
       success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
       partial: 'You succeed as above, but choose 1.',
-      details: '• You overreach or underestimate - take a <i>risk</i>. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
+      miss:'',
+      details: '• You overreach or underestimate - take a **risk**. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
   },
   biteTheDust: {
-      book: 'basic',
       fullName: 'Bite the Dust',
-      trigger: 'When you\'re defenseless or risk harm so sever you might <b>bite the dust</b>.',
       roll: 'DEFY',
-      success: 'They miss, hesitate, or you\'re saved by sheer luck - you rally, and clear a <i>risk</i> if you have one.',
-      partial: 'Retreat from the Sortie safely, or be put in <i>peril.</i>',
+      success: 'They miss, hesitate, or you\'re saved by sheer luck - you rally, and clear a **risk** if you have one.',
+      partial: 'Retreat from the Sortie safely, or be put in **peril.**',
       miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? Have hat you lost? Who and what is changed by your defeat?',
       details: 'If you survive, you are changed by your defeat. As well as the above, choose one: \n\n • Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher lower than +/- 3)\n • Choose a new playbook. Keep what moves you and the Director agree are truly part of your character, and discard the others. Replace them with the starting moves for your new playbook. You do not gain its starting equipment.',
   }
@@ -656,9 +717,10 @@ const playbookGear = {
     addBasicMove('dispelUncertainties');
     addBasicMove('helpOrHinder');
     addBasicMove('weaveMagic')
-    addBasicMove('coolOff')
-    addBasicMove('biteTheDust');
+    addBasicMove('coolOff');
+    addBasicMove('exchangeBlows');
     addBasicMove('strikeDecisively');
+    addBasicMove('biteTheDust');
   }
 
   function setMoves(book) {
@@ -687,9 +749,9 @@ const playbookGear = {
 
     let rollValue = '';
     if (!m.rollValue && m.rolls) {
-      rollValue = buildRollValue(m.rolls);
+      rollValue = buildRollValue(m.rolls, m);
     }
-
+    
     let newAttrs = {
         [`repeating_basicmoves_${newRowId}_move_name`]: m.fullName || '',
         [`repeating_basicmoves_${newRowId}_move_name_base`]: m.fullName || '',
@@ -785,16 +847,28 @@ const playbookGear = {
   }
 
   // takes array of strings
-  function buildRollValue(rolls) {
-    let rollvalue = '?{Choose a Trait|';
+  function buildRollValue(rolls, m) {
+    let rollValue = '?{Choose a Trait|';
 
     _.forEach(rolls, (roll, index) => {
       const last = index === rolls.length - 1;
       const lastChar = last ? '}' : '|';
-      rollvalue += roll + ', &{template:default&#125 {{name=Move Name&#125&#125 {{result=[[ 2d6 + @{' + roll.toLowerCase() + '}]] &#125&#125' + lastChar;
+      rollValue += '+' + roll 
+      +', &{template:move&#125 {{charactername=@{character_name}&#125&#125 '
+      +'{{movename='+m.fullName+'&#125&#125 '
+      +'{{trait=' + roll + '&#125&#125'
+      +'{{result=[[ 2d6 + @{'+roll.toLowerCase()+'}]]&#125&#125 '
+      +'{{miss='+ m.miss +'&#125&#125 '
+      +'{{partial='+m.partial+'&#125&#125 '
+      +'{{success='+m.success+'&#125&#125 '
+      +'{{details='+m.details+'&#125&#125 '
+      + lastChar
     });
 
-    return rollvalue;
+
+    console.log(rollValue);
+
+    return rollValue;
   } 
 
 
