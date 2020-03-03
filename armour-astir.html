@@ -51,10 +51,10 @@
               <label>Your magic is like...</label>
             </div>
 
-            <!-- <div class="descriptor channeler">
-              <textarea></textarea>
+            <div class="descriptor channeler">
+              <textarea rows="2"></textarea>
               <label>When You Launch Your Astir, You Say...</label>
-            </div> -->
+            </div>
             
             <!-- attr_playbook 4 -->
             <div class="descriptor scout">
@@ -77,19 +77,15 @@
           </div>
         </div>
         <div class="character-info">
-          <div class="launch-phrase section">
+          <!-- <div class="launch-phrase section">
             <h3>When You Launch Your Astir, You Say...</h3>
             <div class="section-content">
               <input type="text" class="input-full" />
             </div>
-          </div>
+          </div> -->
           <div class="character-traits section">
             <h3> 
-              <div>Traits</div>
-            <!-- <div class="character-support">
-              <input name="attr_support" class="support-toggle" type="checkbox" />
-              Support
-            </div> -->
+              Traits            
             </h3>
             <div class="section-content">
               <div class="traits">
@@ -286,9 +282,6 @@
                     <div class="move-expansion">
                       <input type="text" name="attr_move_name_base" />
                       <label>Move Name</label>
-
-                      <input type="text" name="attr_move_trigger" />
-                      <label>Trigger</label>
                       
                       <input type="text" name="attr_move_trait" />
                       <label>Trait (Comma Separate Multiple)</label>
@@ -319,7 +312,7 @@
             <h3>Ideals</h3>
             <div class="section-content">
               <fieldset class="repeating_ideals">
-                <input type="text" />
+                <input type="text" name="attr_ideal" />
               </fieldset>
             </div>
           </div>
@@ -368,7 +361,102 @@
     </div>
 
     <div class="astir-page">
-      Astir page. :)
+      <div class="section-row">
+        <div class="section flex-1">
+          <h3>Astir Information</h3>
+          <div class="section-content">
+            <div class="info-row">
+              <div class="flex-2">
+                <input type="text" name="attr_astir_name"/>
+                <label>Astir Name</label>
+              </div>
+              <div class="flex-1">
+                <input type="number" name="attr_astir_tier"/>
+                <label>Tier</label>
+              </div>
+              <div class="flex-1">
+                <input type="number" name="attr_astir_mana"/>
+                <label>Mana</label>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="flex-1">
+                <input type="text" name="attr_astir_approach" />
+                <label>Approach</label>
+              </div>
+              <div class="flex-1">
+                <input type="text" name="attr_astir_core" />
+                <label>Core</label>
+              </div>
+              <div class="flex-1">
+                <input type="checkbox" name="attr_astir_overheating" />
+                <label>Overheating</label>
+              </div>
+            </div>
+            <div class="info-row">
+              <textarea name="attr_astir_description"></textarea>
+              <label>Description</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="section flex-1">
+          <h3>Astir Parts</h3>
+          <div class="section-content">
+            <input type="text" name="attr_part_a_name">
+            <label>Part A</label>
+
+            <textarea name="attr_part_a_description"></textarea>
+            <label>Description</label>
+            
+            <input type="text" name="attr_part_b_name">
+            <label>Part B</label>
+
+            <textarea name="attr_part_b_description"></textarea>
+            <label>Description</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-row">
+        <div class="section flex-1">
+          <h3>Astir Move</h3>
+          <div class="section-content">
+            <div>
+              <input type="text" name="attr_astir_move_name">
+              <label>Name</label>
+            </div>
+            <div>
+              <textarea name="attr_astir_move_description"></textarea>
+              <label>Description</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="section flex-2">
+          <h3>Weapons</h3>
+          <div class="section-content">
+            <fieldset class="repeating_astir_weapons">
+              <div class="info-row">
+                <div class="flex-1">
+                  <input type="text" name="attr_weapon_equip" />
+                  <label>Equip</label>
+                </div>
+                
+                <div class="flex-1">
+                  <input type="text" name="attr_weapon_name" />
+                  <label>Name</label>
+                </div>
+  
+                <div class="flex-2">
+                  <input type="text" name="attr_weapon_tags" class="italics" />
+                  <label>Tags</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="misc-page">
@@ -655,6 +743,57 @@ const playbookGear = {
       });
     });
 
+    on('change:repeating_moves:move_name_base', () => {
+      getAttrs(['repeating_moves_move_name_base'], (v) => {
+        setAttrs({
+          repeating_moves_move_name: v.repeating_moves_move_name_base
+        }, () => {
+          // ! Set roll value.
+        })
+      })
+    })
+
+    on('change:repating_moves:move_trait', () => {
+      getAttrs(['repeating_moves_move_trait'], (v) => {
+        setAttrs({
+          repeating_moves_move_trait: v.repeating_moves_move_trait
+        }, () => {
+          // ! Set roll value.
+        })
+      })
+    })
+
+    on('change:repating_moves:move_success', () => {
+      getAttrs(['repeating_moves_move_success'], (v) => {
+        setAttrs({
+          repeating_moves_move_success: v.repeating_moves_move_success
+        }, () => {
+          // ! Set roll value.
+        })
+      })
+    })
+
+    on('change:repating_moves:move_partial', () => {
+      getAttrs(['repeating_moves_move_partial'], (v) => {
+        setAttrs({
+          repeating_moves_move_partial: v.repeating_moves_move_partial
+        }, () => {
+          // ! Set roll value.
+        })
+      })
+    })
+
+    on('change:repating_moves:move_miss', () => {
+      getAttrs(['repeating_moves_move_miss'], (v) => {
+        setAttrs({
+          repeating_moves_move_miss: v.repeating_moves_move_miss
+        }, () => {
+          // ! Set roll value.
+        })
+      })
+    })
+
+
   // ----- HELPER FUNCTIONS ----- //
   function setPlaybook(book) {
     const bookValue = getPlaybookValue(book);
@@ -745,20 +884,10 @@ const playbookGear = {
         rollAttrs[prefix + 'rollvalue'] = buildRollValue(m.rolls, prefix);
       } else if (m.roll) {
         const rollTemplate = buildRollTemplateValue(m.roll, prefix);
-        rollAttrs[prefix + 'rollvalue'] = '&{template:move} '
-          +'{{charname=@{character_name}}}'
-          +'{{movename=@{' + prefix + 'name}}} '
-          +'{{trait='+ m.roll +'}}'
-          +'{{result=[[ 2d6 + @{' + m.roll.toLowerCase() + '}]]}} '
-          +'{{success=@{' + prefix + 'success}}} '
-          +'{{partial=@{'+ prefix + 'partial}}} '
-          +'{{miss=@{'+ prefix + 'miss}}} '
-          +'{{doroll=@{' + prefix + 'doroll}}} '
-          +'{{details=@{' + prefix + 'details}}}';
-        }
-
-        console.log(rollAttrs);
-        setAttrs(rollAttrs);
+        rollAttrs[prefix + 'rollvalue'] = buildSingleRollValue(m.roll, prefix);
+      }
+      
+      setAttrs(rollAttrs);
     });
   }
 
@@ -854,6 +983,32 @@ const playbookGear = {
         removeRepeatingRow(`repeating_moves_${id}`);
       });
     })
+  }
+
+  function setRollValue(prefix) {
+    
+    if (!prefix) {
+      return;
+    }
+    
+    getAttrs([
+      `repeating_moves_${prefix}_move_name`,
+    ], (values) => {
+
+    });
+  }
+
+  function buildSingleRollValue(roll, prefix) {
+    return '&{template:move} '
+          +'{{charname=@{character_name}}}'
+          +'{{movename=@{' + prefix + 'name}}} '
+          +'{{trait='+ roll +'}}'
+          +'{{result=[[ 2d6 + @{' + roll.toLowerCase() + '}]]}} '
+          +'{{success=@{' + prefix + 'success}}} '
+          +'{{partial=@{'+ prefix + 'partial}}} '
+          +'{{miss=@{'+ prefix + 'miss}}} '
+          +'{{doroll=@{' + prefix + 'doroll}}} '
+          +'{{details=@{' + prefix + 'details}}}';
   }
 
   // takes array of strings, eg: ['KNOW', 'DEFY']

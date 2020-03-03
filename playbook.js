@@ -41,7 +41,7 @@ var playbookMoves = { // basic moves
       fullName: 'Weather The Storm',
       rolls: ['DEFY', 'KNOW'],
       success: 'You mange to make it to safety.',
-      partial: 'You succeed&#44; but at some cost - your Director will ask you to settle for less&#44; take a *risk*&#44; or make a difficult choice.',
+      partial: 'You succeed, but at some cost - your Director will ask you to settle for less, take a *risk*, or make a difficult choice.',
     },
     {
       fullName: 'Read The Room',

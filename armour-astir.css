@@ -28,6 +28,11 @@ label {
   font-weight: bold;
 }
 
+.sheet-section-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .sheet-section {
   border: 1px solid black;
   margin: 1em;
@@ -310,7 +315,19 @@ input.sheet-move-expandtoggle {
 }
 
 /* ----- ASTIR PAGE ----- */
+.sheet-info-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
+.sheet-flex-1 {
+  flex: 1;
+}
+
+.sheet-flex-2 {
+  flex: 2;
+}
 
 /* ----- From Roll20 Patterns ----- */
 button {
