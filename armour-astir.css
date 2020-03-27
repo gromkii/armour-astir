@@ -79,6 +79,12 @@ label {
 	content: "◂";
 }
 
+textarea {
+  overflow: auto;
+  resize: vertical;
+  height: 5em; 
+}
+
 /* Inputs */
 input[type=text] {
   background-color: transparent;
