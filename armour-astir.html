@@ -315,41 +315,47 @@
           
           <div class="character-gear section">
             <h3>Gear</h3>
-            <div class="section-content">
-              <fieldset class="repeating_gearlist">
-                <!-- 
-                  {Quantity} {Name} - {Tier} ({tags} / {tags})
-                 -->
-                 <span name="attr_quantity" value="@{quantity}"></span>
-                 <span name="attr_name" value="@{name}"></span>
-                 <span name="attr_tier" value="@{tier}"></span>
-                 <span name="attr_tags" value="@{tags}" class="italics"></span>
-              </fieldset>
-
-              <fieldset class="repeating_gearcheck">
-                <div class="gear-main">
-                  <input type="checkbox" name="attr_gear_expanded" class="gear-expandtoggle" />
-                  <div class="gear-display">
-                    <input type="checkbox" name="attr_gear_equip" class="gear-equip" />
-                    <span name="attr_gear_name" value="@{gear_name}"></span>
-                    <span name="attr_gear_tier" value="@{gear_tier}"></span>
-                    <span name="attr_gear_tags" value="@{gear_tags}"></span>
+            <div class="section-content section-gear">
+              
+              <div class="gearlist-container">
+                <h4>Starting Gear</h4>
+                <fieldset class="repeating_gearlist">
+                  <div class="gearlist-item">
+                    <span name="attr_quantity" value="@{quantity}"></span>
+                    <span name="attr_name" value="@{name}"></span>
+                    <span name="attr_tier" value="@{tier}"></span>
+                    <span name="attr_tags" value="@{tags}" class="italics"></span>
                   </div>
-                  <!-- <input type="checkbox" class="expander expand-gear"> -->
-                  <div class="gear-expansion">
-                    <!-- name -->
-                    <input type="text" class="gear-edit" name="attr_gear_name_edit" value="" />
-                    <label>Name</labeL>
-                    <!-- tier -->
-                    <input type="text" class="gear-edit" name="attr_gear_tier_edit" value="" />
-                    <label>Tier</label>
-                    <!-- tags -->
-                    <input type="text" class="gear-edit" name="attr_gear_tags_edit" value="" />
-                    <label>Tags (Comma Separated)</label>
-                  </div>
+                </fieldset>
+              </div>
 
-                </div>
-              </fieldset>
+              <div class="gearcheck-container">
+                <h4>Playbook Gear</h4>
+                <fieldset class="repeating_gearcheck">
+                  <div class="gear-main">
+                    <input type="checkbox" name="attr_gear_expanded" class="gear-expandtoggle" />
+                    <div class="gear-display">
+                      <input type="checkbox" name="attr_gear_equip" class="gear-equip" />
+                      <span name="attr_gear_name" value="@{gear_name}"></span>
+                      <span name="attr_gear_tier" value="@{gear_tier}"></span>
+                      <span name="attr_gear_tags" value="@{gear_tags}"></span>
+                    </div>
+                    <!-- <input type="checkbox" class="expander expand-gear"> -->
+                    <div class="gear-expansion">
+                      <!-- name -->
+                      <input type="text" class="gear-edit" name="attr_gear_name_edit" value="" />
+                      <label>Name</labeL>
+                      <!-- tier -->
+                      <input type="text" class="gear-edit" name="attr_gear_tier_edit" value="" />
+                      <label>Tier</label>
+                      <!-- tags -->
+                      <input type="text" class="gear-edit" name="attr_gear_tags_edit" value="" />
+                      <label>Tags (Comma Separated)</label>
+                    </div>
+  
+                  </div>
+                </fieldset>
+              </div>
 
             </div>
           </div>
@@ -457,7 +463,7 @@
     </div>
 
     <div class="misc-page">
-      Misc page. :D
+      Misc Page
     </div>
 
   </div>
@@ -467,17 +473,6 @@
 
 
 <!-- MOVE TEMPLATE -->
-<!-- 
-  &{template:move} 
-  {{charname=CHARACTER_NAME}}
-  {{movename=MOVE_NAME}} 
-  {{trait=TRAIT}}
-  {{miss=MISS}}
-  {{partial=PARTIAL}}
-  {{success=SUCCESS}}
-  {{details=DETAILS}}
-  {{result=RESULT}}
--->
 <rolltemplate class="sheet-rolltemplate-move">
   <div class="sheet-template-container">
     <div class="sheet-template-header">{{charname}}</div>
@@ -502,7 +497,6 @@
     <div class="sheet-template-row">Miss: {{miss}}</div>
     {{/miss}}
     {{/rollLess() result 7}}
-
 
     {{#details}}<div class="sheet-template-row">{{details}}</div>{{/details}}
   </div>

@@ -79,10 +79,14 @@ label {
 	content: "◂";
 }
 
-textarea {
-  overflow: auto;
+.charsheet textarea {
+  width: 95%;
+  max-width: 95%;
+  min-width: 95%;
   resize: vertical;
-  height: 5em; 
+  overflow-y: auto;
+  min-height: 5em;
+  border: 1px solid black;
 }
 
 /* Inputs */
@@ -285,8 +289,12 @@ h3 {
 }
 
 /* ----- GEAR ----- */
+.sheet-character-gear {
+  height: 100%;
+}
+
 .sheet-gear-display {
-  font-size:.8em;
+  font-size: .8em;
 }
 
 input.sheet-gear-expandtoggle {
@@ -302,10 +310,23 @@ input.sheet-gear-expandtoggle:checked ~ .sheet-gear-expansion {
   display: block;
 }
 
-.sheet-gear-edit {
-  /* edit styling for gear stuff. */
+.sheet-section-gear {
+  display: flex;
+  flex-direction: column;
 }
 
+.repcontainer[data-groupname="repeating_gearlist"],
+.repcontainer[data-groupname="repeating_gearcheck"] {
+  margin-bottom: 1.5em;
+}
+
+.repcontainer[data-groupname="repeating_gearcheck"] .repitem {
+  margin-bottom: .75em;
+}
+
+.repcontrol[data-groupname="repeating_gearlist"] {
+  display: none;
+}
 /* ----- MOVES ----- */
 input.sheet-move-expandtoggle {
   position: absolute;
