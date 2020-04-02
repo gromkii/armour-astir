@@ -13,14 +13,16 @@ Collection of todo items, as well as quick thoughts. Feel free to add any here a
 ---
 
 ### Descriptors
-* Style the text area box.
+* ~~Style the text area box.~~
 
 ### Traits
-* Roll buttons should be styled.
+* Roll buttons should be styled. (How?)
+* Roll template for trait moves.
 
 ### Dangers
-* Change risk/peril to radio buttons.
-* Add button to clear risk/peril.
+* ~~Change risk/peril to radio buttons.~~
+* ~~Add button to clear risk/peril.~~
+* Check to see if we like the radio button approach, first.
 * Styling.
 
 ### Ideals

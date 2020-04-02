@@ -205,15 +205,20 @@
               </div>
               <div class="danger">
                 <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_3_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <input type="checkbox" /><span class="danger-type">Risk</span>
+                    <input type="radio" name="attr_danger_3_radio" value="0"/><span class="danger-type">Risk</span>
                   </div>
                   <div class="danger-group">
-                    <input type="checkbox" /><span class="danger-type">Peril</span>
+                    <input type="radio" name="attr_danger_3_radio" value="1"/><span class="danger-type">Peril</span>
                   </div>
                 </div>
                 <div class="character-danger-input">
-                  <input type="text" class="input-full" />
+                  <input type="text" class="input-full" name="attr_danger_3_description" />
+                </div>
+
+                <div class="danger-group">
+                  <input type="radio" name="attr_danger_3_radio" value="2"/><span>Clear</span>
                 </div>
               </div>
             </div>
@@ -242,7 +247,7 @@
                 <fieldset class="repeating_basicmoves">
                   <div class="move-main">
 
-                    <input type="hidden" name="attr_domove" />
+                    <input type="hidden" name="attr_move_doroll" value="1"/>
                     <input type="hidden" name="attr_move_rollvalue" value="" />
                     <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}">Roll</button>
 
@@ -278,11 +283,14 @@
                 <h4>Playbook Moves</h4>
                 <fieldset class="repeating_moves">
                   <div class="move-main">
+
+                    <input type="hidden" name="attr_move_doroll" value="1" />
+                    <input type="hidden" name="attr_move_rollvalue" value="" />
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}">Roll</button>
+
+                    <span name="attr_move_name" value="@{move_name}"></span>
+                    <input type="checkbox" name="attr_move_selected" class="move-selected" />
                     <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
-                    <div class="move-display">
-                      <input type="checkbox" name="attr_move_selected" class="move-selected" />
-                      <span name="attr_move_name" value="@{move_name}"></span>
-                    </div>
     
                     <div class="move-expansion">
                       <input type="text" name="attr_move_name_base" />
@@ -300,7 +308,7 @@
                       <input type="text" name="attr_move_miss">
                       <label>Miss (6 or less)</label>
     
-                      <textarea name="attr_move_details"></textarea>
+                      <textarea type="text" name="attr_move_details"></textarea>
                       <label>Details</label> 
     
                     </div>
@@ -716,6 +724,7 @@ const playbookGear = {
 
 
   // ----- MOVES EDIT ----- //
+  // TODO: Read article about improving performance. This is a lot of event listeners.
     on('change:repeating_moves:move_name_base', () => {
       getAttrs(['repeating_moves_move_name_base'], (v) => {
         console.log(v);
@@ -739,22 +748,27 @@ const playbookGear = {
         setAttrs({
           repeating_moves_move_name: v.repeating_moves_move_name_base
         }, () => {
-          // ! Set roll value.
+          // ? Do we need to set the roll value here?
         })
       })
     })
 
-    on('change:repating_moves:move_trait', () => {
+    on('change:repeating_moves:move_trait', (event) => {
+      const prefix = event.sourceAttribute.split('trait')[0];
       getAttrs(['repeating_moves_move_trait'], (v) => {
+        const traitString = v.repeating_moves_move_trait.toUpperCase();
+        const traits = traitString.replace(' ', '').split(',');
+        const doRoll = traits.length ? 1 : 0;
+        const rollValue = setRollValue(traits, prefix);
+        
         setAttrs({
-          repeating_moves_move_trait: v.repeating_moves_move_trait
-        }, () => {
-          // ! Set roll value.
+          repeating_moves_move_rollvalue: rollValue,
+          repeating_moves_move_doroll: doRoll,
         })
       })
     })
 
-    on('change:repating_moves:move_success', () => {
+    on('change:repeating_moves:move_success', () => {
       getAttrs(['repeating_moves_move_success'], (v) => {
         setAttrs({
           repeating_moves_move_success: v.repeating_moves_move_success
@@ -764,7 +778,7 @@ const playbookGear = {
       })
     })
 
-    on('change:repating_moves:move_partial', () => {
+    on('change:repeating_moves:move_partial', () => {
       getAttrs(['repeating_moves_move_partial'], (v) => {
         setAttrs({
           repeating_moves_move_partial: v.repeating_moves_move_partial
@@ -774,7 +788,7 @@ const playbookGear = {
       })
     })
 
-    on('change:repating_moves:move_miss', () => {
+    on('change:repeating_moves:move_miss', () => {
       getAttrs(['repeating_moves_move_miss'], (v) => {
         setAttrs({
           repeating_moves_move_miss: v.repeating_moves_move_miss
@@ -897,6 +911,17 @@ const playbookGear = {
     }
   }
 
+  // ----- Dangers ----- //
+
+  on('change:danger_3_radio', (event) => {
+    if (event && event.newValue && event.newValue === "2") {
+      setAttrs({
+        danger_3_radio: '4',
+        danger_3_description: '',
+      });
+    }
+  })
+
 
 
   // ---- Gear ----- //
@@ -976,17 +1001,16 @@ const playbookGear = {
     })
   }
 
-  function setRollValue(prefix) {
+  function setRollValue(traits, prefix) {
     
-    if (!prefix) {
-      return;
+    if (traits && traits.length === 1) {
+      return buildSingleRollValue(traits[0], prefix);
+    } else if (traits && traits.length > 1) {
+      return buildRollValue(traits, prefix);
     }
-    
-    getAttrs([
-      `repeating_moves_${prefix}_move_name`,
-    ], (values) => {
 
-    });
+    return '';
+    
   }
 
   function buildSingleRollValue(roll, prefix) {
