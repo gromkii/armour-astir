@@ -35,7 +35,7 @@
     }
 */
 
-var playbookMoves = { // basic moves
+const playbookMoves = { // basic moves
   basic: [
     {
       fullName: 'Weather The Storm',
@@ -59,7 +59,6 @@ var playbookMoves = { // basic moves
     },
     {
       fullName: 'Help or Hinder',
-      roll: 'GRAVITY', // ! This one might be tricky to handle.
       succcess: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
       partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.'
     },
@@ -113,45 +112,60 @@ var playbookMoves = { // basic moves
   ]
 };
 
-const playbook = {
-  arcanist: {
-    generalGear: [
-      {
-        name: 'Astir',
-        tier: 'III',
-        quantity: 1
-      },
-      {
-        name: 'Touch Spells',
-        tier: 'I',
-        tags: ['melee', 'bane'],
-      },
-      {
-        name: 'Arcanist Gear',
-        quantity: 2
-      },
-      {
-        name: 'CLothing appropriate for your look.'
-      }
+const playbookGear = {
+arcanist: {
+    startingGear: [
+        {
+            name: 'Astir',
+            tier: 'III',
+            quantity: 1
+        },
+        {
+            name: 'Touch Spells',
+            tier: 'I',
+            tags: ['melee', 'bane'],
+        },
+        {
+            name: 'Arcanist Gear',
+            quantity: 2
+        },
+        {
+            name: 'Clothing appropriate for your look.'
+        }
     ],
     classGear: [
-      {
-        name: 'Telescoping Staff',
-        tier: 'I',
-        tags: [
-          'ranged'
-        ],
-        checked: false
-      },
-      {
-        name: 'Reagent Knife',
-        tier: 'I',
-        tags: [
-          'melee',
-          '<b>mundane</b>' // ! Maybe add span with special class.
-        ]
-      }
+        {
+            name: 'Telescoping Staff',
+            tier: 'I',
+            tags: [
+                'ranged'
+            ],
+            checked: false
+        },
+        {
+            name: 'Reagent Knife',
+            tier: 'I',
+            tags: [
+                'melee',
+                'mundane'
+            ]
+        },
+        {
+          name: 'Sidearm',
+          tier: 'I',
+          tags: [
+            'ranged',
+            'defensive',
+          ],
+        },
+        {
+          name: 'Shield Broach',
+          tier: 'I',
+          tags: [
+            'ward'
+          ]
+        }
     ]
-  },
+},
 
 }

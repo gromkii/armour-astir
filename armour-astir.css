@@ -395,3 +395,46 @@ button [type='action'] {
 .sheet-tabstoggle[value="misc"] ~ div.sheet-misc-page {
 	display: block;
 }
+
+/* ---- Move Roll Template ----- */
+.sheet-template-move {
+  margin-left: -37px;
+}
+
+.sheet-rolltemplate-move .sheet-template-container-move {
+  border: 1px solid black;
+  background-color: #FEF6E1;
+  padding: 5px 10px;
+}
+
+.sheet-rolltemplate-move .sheet-template-header-move {
+  font-variant-caps: petite-caps;
+}
+
+.sheet-rolltemplate-move .sheet-template-divider-move {
+  margin: 5px;
+}
+
+.sheet-rolltemplate-move .sheet-template-movename-move {
+  font-variant-caps: petite-caps;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.sheet-rolltemplate-move .sheet-template-row-move {
+  font-variant-caps: all-petite-caps;
+}
+
+.sheet-rolltemplate-move .sheet-template-success {
+  color: #5D9C67;
+}
+
+.sheet-rolltemplate-move .sheet-template-partial {
+  color: #DFC647;
+}
+
+
+.sheet-rolltemplate-move .sheet-template-miss {
+  color: #C23232;
+}
+

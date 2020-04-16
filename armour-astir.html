@@ -482,31 +482,36 @@
 
 <!-- MOVE TEMPLATE -->
 <rolltemplate class="sheet-rolltemplate-move">
-  <div class="sheet-template-container">
-    <div class="sheet-template-header">{{charname}}</div>
-    {{movename}}
+  <div class="sheet-template-container-move">
+    <div class="sheet-template-header-move">{{charname}}</div>
 
-    {{#result}}<div class="sheet-template-row">{{trait}}: {{result}}</div>{{/result}}
+    <hr class="sheet-template-divider-move" />
+
+    <div class="sheet-template-movename-move">{{movename}}</div>
+
+    {{#result}}<div class="sheet-template-row-move">+{{trait}}: {{result}}</div>{{/result}}
+    
+    <hr class="sheet-template-divider-move" />
 
     {{#rollGreater() result 9}}
     {{#success}}
-    <div class="sheet-template-row">Success: {{success}}</div>
+    <div class="sheet-template-row-move"><span class="sheet-template-success">10+</span>: {{success}}</div>
     {{/success}}
     {{/rollGreater() result 9}}
 
     {{#rollBetween() result 7 9}}
     {{#partial}}
-    <div class="sheet-template-row">Partial: {{partial}}</div>
+    <div class="sheet-template-row-move"><span class="sheet-template-partial">7-9</span>: {{partial}}</div>
     {{/partial}}
     {{/rollBetween() result 7 9}}
 
     {{#rollLess() result 7}}
     {{#miss}}
-    <div class="sheet-template-row">Miss: {{miss}}</div>
+    <div class="sheet-template-row-move"><span class="sheet-template-miss">6-</span>: {{miss}}</div>
     {{/miss}}
     {{/rollLess() result 7}}
 
-    {{#details}}<div class="sheet-template-row">{{details}}</div>{{/details}}
+    {{#details}}<div class="sheet-template-row-move">{{details}}</div>{{/details}}
   </div>
 </rolltemplate>
 
