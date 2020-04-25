@@ -8,13 +8,12 @@
     moveName: {               // ! Style note here, use camel case for these names.
         book:     string,     // Playbook for move.
         fullName: string,     // Full name for move.
-        trigger:  string,     // How the roll is activated.
-        roll:     string,     // If a move has a single trait, use this property.
-        rolls:    string[],   // If a move can call for different traits, use an array of applicable traits.
-        success:  string,     // 10+ roll message
-        partial:  string,     // 7-9 roll message
-        miss:     string,     // 6 or less roll message.
-        details:  string,     // Body for context. Formatting for text TBD, but for now try to use \n and • or &bull;
+        roll?:    string,     // If a move has a single trait, use this property.
+        rolls?:   string[],   // If a move can call for different traits, use an array of applicable traits.
+        success?:  string,     // 10+ roll message
+        partial?:  string,     // 7-9 roll message
+        miss?:     string,     // 6 or less roll message.
+        details?:  string,     // Body for context. Formatting for text TBD, but for now try to use \n and • or &bull;
     }
 
     GEAR -----
@@ -45,7 +44,7 @@ const playbookMoves = { // basic moves
     },
     {
       fullName: 'Read The Room',
-      roll: 'SENSE', // ! Single roll, automatically does it, or prompt for bonus?
+      roll: 'SENSE',
       success: 'Hold 3',
       partial: 'Hold 1',
       miss: 'On a failure, you may ask one of the below questions, but the answer creates a problem or puts you in danger.',
@@ -108,6 +107,37 @@ const playbookMoves = { // basic moves
       + '• A **clarity ritual** - When you **read the room&&, you may ask questions of a broader situation than here and now.\n\n'
       + 'All rituals expire after the Sortie, and you lose their effects when that happens.',
       moveSelected: true,
+    },
+    {
+      fullName: 'Plans',
+      details: 'Arcanists are educated in the art of war, and fght according to preordained tactics in ' 
+      + 'order to perform at their best. Unexpected situations are the bane of a good arcanist. '
+      + 'Whenever the party enters a dangerous situation, declare your plan to resolve it.\n\n'
+      + 'If your plan is interfered with or prevented at any point, take the risk (perturbed, '
+      + 'irritated, vexed, confounded).\n\n'
+      + 'If your plan succeeds, even accidentally, advance a GRAVITY clock with someone '
+      + 'who didn\'t think it would.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Expend Ritual',
+      details: 'When you disperse the magical energy of a ***ritual*** to re-use that energy in a pinch, '
+      + 'choose one of your prepared rituals - you no longer gain its beneft. You may then '
+      + 'choose an option from the ***subsystems*** move without spending Mana.',
+      moveSelected: false,
+    }
+  ],
+  imposter: [
+    {
+      fullName: 'Arcane Augments',
+      detials: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
+      + 'organs. These augmentations allow a non-magic user to power and control an Astir, '
+      + 'but otherwise do not interfere with your life unless you (the player) decide so. Being '
+      + 'bonded to magic in this way often leads to it affecting the body and vice versa, '
+      + 'irreversibly tying their magic to their emotional and physical state.\n\n'
+      + 'Your CHANNEL is increased by 1 for each danger you have (upto a max of +3). '
+      + 'When someone you have GRAVITY with sees you be put in peril, advance it.',
+      moveSelected: true,
     }
   ]
 };
@@ -167,5 +197,48 @@ arcanist: {
         }
     ]
 },
+imposter: {
+  startingGear: [
+    {
+      name: 'Astir',
+      tier: 'III',
+      quantity: 1
+    },
+    {
+      name: 'Augments',
+      tier: 1,
+      tags: ['melee', 'bane'],
+    },
+    {
+      name: 'Imposter Gear',
+      quantity: 2
+    },
+    {
+      name: 'Clothes that match your look',
+    }
+  ],
+  classGear: [
+    {
+      name: 'Mana Focus',
+      tier: 'I',
+      tags: ['ranged'],
+    },
+    {
+      name: 'Shortsword',
+      tier: 'I',
+      tags: ['melee', '***mundane***'],
+    },
+    {
+      name: 'Sidearm',
+      tier: 'I',
+      tags: ['ranged', 'defensive'],
+    },
+    {
+      name: 'Shield Broach',
+      tier: 'I',
+      tags: ['ward']
+    }
+  ]
+}
 
 }

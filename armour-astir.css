@@ -152,6 +152,8 @@ h3 {
 /* Navigation */
 .sheet-navigation {
   margin: 1em;
+  display: flex;
+  justify-content: space-between;
 }
 
 .sheet-navigation button {
@@ -352,12 +354,57 @@ input.sheet-move-expandtoggle {
   justify-content: space-evenly;
 }
 
+.sheet-info-row-textarea {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.sheet-info-row-textarea textarea { 
+  height: 160px;
+  resize: vertical;
+}
+
 .sheet-flex-1 {
   flex: 1;
 }
 
 .sheet-flex-2 {
   flex: 2;
+}
+
+.sheet-flex-3 {
+  flex: 3;
+}
+
+.sheet-form-input {
+  margin: 5px;
+}
+
+.sheet-form-input input {
+  width: 100% !important;
+}
+
+.sheet-form-checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.sheet-form-checkbox input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.sheet-form-checkbox label {
+  margin: 0;
+  padding: 0;
+  width: inherit;
+}
+
+.sheet-astir-part-textarea {
+  height: 80px;
+  resize: vertical;
 }
 
 /* ----- From Roll20 Patterns ----- */
@@ -385,6 +432,7 @@ button [type='action'] {
 /* ---- Tabs ---- */
 .sheet-character-page,
 .sheet-astir-page,
+.sheet-show-carrier,
 .sheet-misc-page {
 	display: none;
 }
@@ -392,8 +440,63 @@ button [type='action'] {
 /* show the selected tab */
 .sheet-tabstoggle[value="character"] ~ div.sheet-character-page,
 .sheet-tabstoggle[value="astir"] ~ div.sheet-astir-page,
+.sheet-tabstoggle[value="astir"] ~ div.sheet-show-carrier,
 .sheet-tabstoggle[value="misc"] ~ div.sheet-misc-page {
 	display: block;
+}
+
+/* ---- Astir Page Toggle ----- */
+.sheet-show-carrier[value="show"] ~ .sheet-astir-page-container,
+.sheet-show-carrier[value="0"] ~ .sheet-carrier-page-container {
+  display: none;
+}
+
+.sheet-astir-page-container,
+.sheet-carrier-page-container {
+  display: block;
+}
+
+/* ---- Carrier Page ---- */
+.sheet-carrier-floor {
+  display: flex;
+}
+
+.sheet-carrier-level-box {
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.sheet-info-box {
+  background-color: black;
+  color: white;
+}
+
+.sheet-section-carrier {
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet-room-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sheet-room-box input[type="checkbox"] {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.sheet-room-box input[type="text"] {
+  border: none;
+  outline: none;
 }
 
 /* ---- Move Roll Template ----- */
@@ -436,5 +539,9 @@ button [type='action'] {
 
 .sheet-rolltemplate-move .sheet-template-miss {
   color: #C23232;
+}
+
+.sheet-rolltemplate-move .sheet-template-details {
+  margin-top: 10px;
 }
 

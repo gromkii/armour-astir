@@ -17,9 +17,16 @@
     </div>
 
     <div class="navigation">
-      <button type="action" name="act_character">Character</button>
-      <button type="action" name="act_astir">Astir</button>
-      <button type="action" name="act_misc">Misc</button>
+      <input type="hidden" value="character" name="attr_sheet_tab" class="tabstoggle" />
+      <div class="page-tabs">
+        <button type="action" name="act_character">Character</button>
+        <button type="action" name="act_astir">Astir</button>
+        <button type="action" name="act_misc">Misc</button>
+      </div>
+      <div class="show-carrier">
+        <input type="checkbox" name="attr_show_carrier_toggle" value="show">
+        <span>Carrier</span>
+      </div>
     </div>
 
     <input type="hidden" class="tabstoggle" name="attr_sheet_tab" value="character"/>
@@ -372,99 +379,208 @@
     </div>
 
     <div class="astir-page">
-      <div class="section-row">
-        <div class="section flex-1">
-          <h3>Astir Information</h3>
-          <div class="section-content">
-            <div class="info-row">
-              <div class="flex-2">
-                <input type="text" name="attr_astir_name"/>
-                <label>Astir Name</label>
+      <input type="hidden" class="show-carrier" name="attr_show_carrier" value="0"/>
+      <div class="astir-page-container">
+        <div class="section-row">
+          <div class="section flex-1"> 
+            <h3>Astir Information</h3>
+            <div class="section-content">
+              <div class="info-row">
+                <div class="flex-2 form-input">
+                  <input type="text" name="attr_astir_name"/>
+                  <label>Astir Name</label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_tier"/>
+                  <label>Tier</label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="number" name="attr_astir_mana"/>
+                  <label>Mana</label>
+                </div>
               </div>
-              <div class="flex-1">
-                <input type="number" name="attr_astir_tier"/>
-                <label>Tier</label>
+              <div class="info-row">
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_approach" />
+                  <label>Approach</label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_core" />
+                  <label>Core</label>
+                </div>
+                <div class="flex-1 form-checkbox">
+                  <input type="checkbox" name="attr_astir_overheating" />
+                  <label>Overheating</label>
+                </div>
               </div>
-              <div class="flex-1">
-                <input type="number" name="attr_astir_mana"/>
-                <label>Mana</label>
+              <div class="info-row-textarea">
+                <textarea name="attr_astir_description"></textarea>
+                <label>Description</label>
               </div>
             </div>
-            <div class="info-row">
-              <div class="flex-1">
-                <input type="text" name="attr_astir_approach" />
-                <label>Approach</label>
-              </div>
-              <div class="flex-1">
-                <input type="text" name="attr_astir_core" />
-                <label>Core</label>
-              </div>
-              <div class="flex-1">
-                <input type="checkbox" name="attr_astir_overheating" />
-                <label>Overheating</label>
-              </div>
-            </div>
-            <div class="info-row">
-              <textarea name="attr_astir_description"></textarea>
+          </div>
+
+          <div class="section flex-1">
+            <h3>Astir Parts</h3>
+            <div class="section-content">
+              <input type="text" name="attr_part_a_name">
+              <label>Part A</label>
+
+              <textarea name="attr_part_a_description" class="astir-part-textarea"></textarea>
+              <label>Description</label>
+              
+              <input type="text" name="attr_part_b_name">
+              <label>Part B</label>
+
+              <textarea name="attr_part_b_description" class="astir-part-textarea"></textarea>
               <label>Description</label>
             </div>
           </div>
         </div>
+        
+        <div class="section-row">
+          <div class="section flex-1">
+            <h3>Astir Move</h3>
+            <div class="section-content">
+              <div>
+                <input type="text" name="attr_astir_move_name">
+                <label>Name</label>
+              </div>
+              <div>
+                <textarea name="attr_astir_move_description"></textarea>
+                <label>Description</label>
+              </div>
+            </div>
+          </div>
 
-        <div class="section flex-1">
-          <h3>Astir Parts</h3>
-          <div class="section-content">
-            <input type="text" name="attr_part_a_name">
-            <label>Part A</label>
-
-            <textarea name="attr_part_a_description"></textarea>
-            <label>Description</label>
-            
-            <input type="text" name="attr_part_b_name">
-            <label>Part B</label>
-
-            <textarea name="attr_part_b_description"></textarea>
-            <label>Description</label>
+          <div class="section flex-2">
+            <h3>Weapons</h3>
+            <div class="section-content">
+              <fieldset class="repeating_astir_weapons">
+                <div class="info-row">
+                  <div class="flex-1">
+                    <input type="text" name="attr_weapon_equip_slot" />
+                    <label>Equip</label>
+                  </div>
+                  
+                  <div class="flex-1">
+                    <input type="text" name="attr_weapon_name" />
+                    <label>Name</label>
+                  </div>
+    
+                  <div class="flex-2">
+                    <input type="text" name="attr_weapon_tags" class="italics" />
+                    <label>Tags</label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="section-row">
-        <div class="section flex-1">
-          <h3>Astir Move</h3>
-          <div class="section-content">
-            <div>
-              <input type="text" name="attr_astir_move_name">
-              <label>Name</label>
-            </div>
-            <div>
-              <textarea name="attr_astir_move_description"></textarea>
-              <label>Description</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="section flex-2">
-          <h3>Weapons</h3>
-          <div class="section-content">
-            <fieldset class="repeating_astir_weapons">
+      <div class="carrier-page-container">
+        <div class="section-row">
+          <div class="section flex-1">
+            <h3>Carrier Information</h3>
+            <div class="section-content">
               <div class="info-row">
-                <div class="flex-1">
-                  <input type="text" name="attr_weapon_equip" />
-                  <label>Equip</label>
+                <div class="form-input flex-3">
+                  <input type="text" name="attr_carrier_name">
+                  <label>Name</labewwl>
                 </div>
-                
-                <div class="flex-1">
-                  <input type="text" name="attr_weapon_name" />
-                  <label>Name</label>
-                </div>
-  
-                <div class="flex-2">
-                  <input type="text" name="attr_weapon_tags" class="italics" />
-                  <label>Tags</label>
+                <div class="form-input flex-1">
+                  <input type="text" name="attr_carrier_tier">
+                  <label>Tier</label>
                 </div>
               </div>
-            </fieldset>
+              <div class="info-row">
+                <div class="form-input flex-1">
+                  <input type="number" name="attr_carrier_crew">
+                  <label>Crew</label>
+                </div>
+                <div class="form-input flex-3">
+                  <input type="text" name="attr_carrier_type">
+                  <label>Type</label>
+                </div>
+              </div>
+              <div class="info-row-textarea">
+                <textarea name="attr_carrier_description"></textarea>
+                <label>Description</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-carrier flex-3">
+          <div class="section">
+            <h3>Carrier</h3>
+            <div class="section-content">
+              <div class="carrier-floor">
+                <div class="carrier-level-box info-box">
+                  Level 1
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_11_check" />
+                  <input type="text" name="attr_carrier_11_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+              </div>
+              <div class="carrier-floor">
+                <div class="carrier-level-box info-box">
+                  Level 2
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+                <div class="carrier-level-box room-box">
+                  
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="section flex-2">
+            <h3>Weapons</h3>
+            <div class="section-content">
+              <fieldset class="repeating_carrier_weapons">
+                <div class="info-row">
+                  <div class="flex-2">
+                    <input type="text" name="attr_carrier_weapon_name" />
+                    <label>Name</label>
+                  </div>
+                  
+                  <div class="flex-1">
+                    <input type="text" name="attr_carrier_weapon_tier" />
+                    <label>Tier</label>
+                  </div>
+    
+                  <div class="flex-3">
+                    <input type="text" name="attr_carrier_weapon_tags" class="italics" />
+                    <label>Tags</label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -493,6 +609,7 @@
     
     <hr class="sheet-template-divider-move" />
 
+    {{#rollGreater() doroll 0}}
     {{#rollGreater() result 9}}
     {{#success}}
     <div class="sheet-template-row-move"><span class="sheet-template-success">10+</span>: {{success}}</div>
@@ -510,8 +627,10 @@
     <div class="sheet-template-row-move"><span class="sheet-template-miss">6-</span>: {{miss}}</div>
     {{/miss}}
     {{/rollLess() result 7}}
+    {{/rollGreater() doroll 0}}
 
-    {{#details}}<div class="sheet-template-row-move">{{details}}</div>{{/details}}
+
+    {{#details}}<div class="sheet-template-row-move sheet-template-details">{{details}}</div>{{/details}}
   </div>
 </rolltemplate>
 
@@ -528,7 +647,7 @@
     7: 'diplomat'
   };
 
-  const playbookMoves ={ // basic moves
+  const playbookMoves = { // basic moves
     basic: [
       {
         fullName: 'Weather The Storm',
@@ -552,7 +671,6 @@
       },
       {
         fullName: 'Help or Hinder',
-        roll: 'GRAVITY', // ! This one might be tricky to handle.
         succcess: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
         partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.'
       },
@@ -603,7 +721,20 @@
         + 'All rituals expire after the Sortie, and you lose their effects when that happens.',
         moveSelected: true,
       }
-    ]
+    ],
+    impostor: [
+      {
+        fullName: 'Arcane Augments',
+        detials: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
+        + 'organs. These augmentations allow a non-magic user to power and control an Astir, '
+        + 'but otherwise do not interfere with your life unless you (the player) decide so. Being '
+        + 'bonded to magic in this way often leads to it affecting the body and vice versa, '
+        + 'irreversibly tying their magic to their emotional and physical state.\n\n'
+        + 'Your CHANNEL is increased by 1 for each danger you have (upto a max of +3). '
+        + 'When someone you have GRAVITY with sees you be put in peril, advance it.',
+        moveSelected: true,
+      }
+    ],
   };
 
 const playbookGear = {
@@ -661,6 +792,49 @@ const playbookGear = {
           }
       ]
   },
+  impostor: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1
+      },
+      {
+        name: 'Augments',
+        tier: 1,
+        tags: ['melee', 'bane'],
+      },
+      {
+        name: 'Imposter Gear',
+        quantity: 2
+      },
+      {
+        name: 'Clothes that match your look',
+      }
+    ],
+    classGear: [
+      {
+        name: 'Mana Focus',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Shortsword',
+        tier: 'I',
+        tags: ['melee', '***mundane***'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive'],
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
+    ]
+  },
 
 }
 
@@ -673,6 +847,14 @@ const playbookGear = {
       });
   });
 
+  on('change:show_carrier_toggle', (event) => {
+    console.log('yup')
+    console.log(event.newValue);
+    setAttrs({
+      show_carrier: event.newValue,
+    });
+  });
+
   // Show/Hide 'CHANNEL' Trait.
   on(`change:support`, (event) => {
     setAttrs({
@@ -681,6 +863,7 @@ const playbookGear = {
   })
 
   on(`change:playbook`, (event) => {
+    console.log('hello??');
     if (event && event.newValue && event.netValue !== event.previousValue) {
       setPlaybook(event.newValue);
     }
@@ -812,7 +995,6 @@ const playbookGear = {
     setMoves(playbook);
     setGear(playbook);
     setBasicMoves(playbook);
-    setMoves()
   }
 
   function getPlaybookValue(book) {
@@ -846,6 +1028,7 @@ const playbookGear = {
   }
 
   function setMoves(book) {
+    console.log(book);
     if (!playbookMoves[book]) {
       console.log('Error, playbook not found.')
       return;
@@ -886,8 +1069,12 @@ const playbookGear = {
     if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, '&#44;');
     if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, '&#44;');
 
-    attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
-    
+    let doRoll = 0;
+
+    if (m.roll || m.rolls) { doRoll = 1; }
+
+    attrs[prefix + 'doroll'] = doRoll;
+
     setAttrs(attrs, () => {
       rollAttrs = {};
       if (m.rolls) {
@@ -895,6 +1082,8 @@ const playbookGear = {
       } else if (m.roll) {
         const rollTemplate = buildRollTemplateValue(m.roll, prefix);
         rollAttrs[prefix + 'rollvalue'] = buildSingleRollValue(m.roll, prefix);
+      } else {
+        rollAttrs[prefix + 'rollvalue'] = buildEmptyRollValue(prefix);
       }
       
       setAttrs(rollAttrs);
@@ -1016,6 +1205,17 @@ const playbookGear = {
 
     return '';
     
+  }
+
+  function buildEmptyRollValue(prefix) {
+    return '&{template:move} '
+          +'{{charname=@{character_name}}}'
+          +'{{movename=@{' + prefix + 'name}}} '
+          +'{{success=@{' + prefix + 'success}}} '
+          +'{{partial=@{'+ prefix + 'partial}}} '
+          +'{{miss=@{'+ prefix + 'miss}}} '
+          +'{{doroll=@{' + prefix + 'doroll}}} '
+          +'{{details=@{' + prefix + 'details}}}';
   }
 
   function buildSingleRollValue(roll, prefix) {
