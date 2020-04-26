@@ -92,7 +92,7 @@
                     <button 
                       name="roll_defy" 
                       type="roll" 
-                      value="&{template:default} {{name=DEFY}} {{result=[[2d6 + @{defy}]]}}">
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=DEFY}} {{result=[[2d6 + @{defy}]]}}">
                       <span>DEFY</span>
                     </button>
                   </div>
@@ -106,7 +106,7 @@
                     <button 
                       name="roll_sense" 
                       type="roll" 
-                      value="&{template:default} {{name=SENSE}} {{result=[[2d6 + @{sense}]]}}">
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=SENSE}} {{result=[[2d6 + @{sense}]]}}">
                       <span>SENSE</span>
                     </button>
                   </div>
@@ -120,7 +120,7 @@
                     <button 
                       name="roll_clash" 
                       type="roll" 
-                      value="&{template:default} {{name=CLASH}} {{result=[[2d6 + @{clash}]]}}">
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=CLASH}} {{result=[[2d6 + @{clash}]]}}">
                       <span>CLASH</span>
                     </button>
                   </div>
@@ -134,8 +134,7 @@
                     <button 
                       name="roll_talk" 
                       type="roll" 
-                      value="&{template:default} {{name=TALK}} {{result=[[2d6 + @{talk}]]}}">
-                      <span>TALK</span>
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=TALK}} {{result=[[2d6 + @{talk}]]}}">                      <span>TALK</span>
                     </button>
                   </div>
                 </div>
@@ -164,7 +163,7 @@
                     <button 
                       name="roll_channel" 
                       type="roll" 
-                      value="&{template:default} {{name=CHANNEL}} {{result=[[2d6 + @{channel}]]}}">
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=CHANNEL}} {{result=[[2d6 + @{channel}]]}}">
                       <span>CHANNEL</span>
                     </button>
                   </div>
