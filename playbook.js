@@ -226,7 +226,7 @@ const playbookGear = {
       {
         name: 'Shortsword',
         tier: 'I',
-        tags: ['melee', '***mundane***'],
+        tags: ['melee', 'mundane'],
       },
       {
         name: 'Sidearm',

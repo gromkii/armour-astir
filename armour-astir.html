@@ -153,6 +153,20 @@
                   </div>
                 </div>
 
+                <!-- <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_know">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_know" 
+                      type="roll" 
+                      value="?{Modifiers|Advantage,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6k2 + @{know}]]&#125&#125|Disadvantage,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[3d6k2 + @{know}]]&#125&#125}">
+                      <span>TEST</span>
+                    </button>
+                  </div>
+                </div> -->
+
                 <!-- Hidden based on playbook. -->
                 <input type="hidden" class="channel_hidden" name="attr_channel_hidden" value="false" />
                 <div class="trait trait-channel">
@@ -356,18 +370,18 @@
                       <input type="checkbox" name="attr_gear_equip" class="gear-equip" />
                       <span name="attr_gear_name" value="@{gear_name}"></span>
                       <span name="attr_gear_tier" value="@{gear_tier}"></span>
-                      <span name="attr_gear_tags" value="@{gear_tags}"></span>
+                      - (<span class="italics" name="attr_gear_tags" value="@{gear_tags}"></span>)
                     </div>
                     <!-- <input type="checkbox" class="expander expand-gear"> -->
                     <div class="gear-expansion">
                       <!-- name -->
-                      <input type="text" class="gear-edit" name="attr_gear_name_edit" value="" />
+                      <input type="text" class="gear-edit" name="attr_gear_name" value="@{gear_name}" />
                       <label>Name</labeL>
                       <!-- tier -->
-                      <input type="text" class="gear-edit" name="attr_gear_tier_edit" value="" />
+                      <input type="text" class="gear-edit" name="attr_gear_tier" value="@{gear_tier}" />
                       <label>Tier</label>
                       <!-- tags -->
-                      <input type="text" class="gear-edit" name="attr_gear_tags_edit" value="" />
+                      <input type="text" class="gear-edit" name="attr_gear_tags" value="@{gear_tags}" />
                       <label>Tags (Comma Separated)</label>
                     </div>
   
@@ -893,27 +907,6 @@ const playbookGear = {
     }
   });
 
-  // ---- GEARLIST EDIT ----- //
-  // Not sure we'll need this one.
-
-  // ---- GEARCHECK EDIT ----- //
-  on('change:repeating_gearcheck:gear_expanded', (value) => {
-    getAttrs(['repeating_gearcheck_gear_name', 'repeating_gearcheck_gear_tier', 'repeating_gearcheck_gear_tags'], (v) => {
-      const name = v.repeating_gearcheck_gear_name || '';
-      const tier= v.repeating_gearcheck_gear_tier || '';
-      const tags = v.repeating_gearcheck_gear_tags || undefined;
-      const parsedTags = tags ? tags.replace('- (', '').replace(')', '').split(' / ').join(', ') : ''; // This sucks.
-
-
-      // TODO: Compare values for attrs and only the ones that have changed.
-      setAttrs({
-        repeating_gearcheck_gear_name_edit: name, 
-        repeating_gearcheck_gear_tier_edit: tier,
-        repeating_gearcheck_gear_tags_edit: parsedTags,
-      });
-    });
-  });
-
   on('change:repeating_gearcheck:gear_name_edit', () => {
     getAttrs(['repeating_gearcheck_gear_name_edit'], (values) => {
       setAttrs({ repeating_gearcheck_gear_name: values.repeating_gearcheck_gear_name_edit });
@@ -929,7 +922,7 @@ const playbookGear = {
   on('change:repeating_gearcheck:gear_tags_edit', () => {
     getAttrs(['repeating_gearcheck_gear_tags_edit'], (values) => {
       const tags = values.repeating_gearcheck_gear_tags_edit;
-      const parsedTags = tags ? `- (${tags.replace(' ', '').split(',').join(' / ')})` : '';
+      const parsedTags = tags ? `${tags}` : '';
       setAttrs({ repeating_gearcheck_gear_tags: parsedTags });
     });
   });
@@ -1068,16 +1061,6 @@ const playbookGear = {
     })
   }
 
-  function setGear(book) {
-    // Remove current gear.
-    if (!bookName[book]) {
-      return;
-    }
-    
-    setGear(bookName[book]);
-
-  }
-
   // Add Moves from SRD (defined in playbook.js, copy/pasted here. Doesn't actually pull them in.)
   function addBasicMove(m, basicMove) {
     const newRowId = generateRowID();
@@ -1109,14 +1092,6 @@ const playbookGear = {
       
       setAttrs(rollAttrs);
     });
-  }
-
-  // Set the checkbox gear list item.
-  function addGear(book, rowid = 0) {
-    const playbook = bookName[book]
-    if (playbook && playbookGear[playbook]) {
-
-    }
   }
 
   // ----- Dangers ----- //
@@ -1155,7 +1130,7 @@ const playbookGear = {
   function addGearList(gear, rowid) {
     const newRowId = rowid || generateRowID();
 
-    const tags = gear.tags && gear.tags.length ? ` - (${gear.tags.join(' / ')})` : '';
+    const tags = gear.tags && gear.tags.length ? `${gear.tags.join(', ')}` : '';
  
     setAttrs({
       [`repeating_gearlist_${newRowId}_name`]: gear.name || '',
@@ -1167,7 +1142,7 @@ const playbookGear = {
 
   function addGear(gear, rowid) {
     const newRowId = rowid || generateRowID();
-    const tags = gear.tags && gear.tags.length ? ` - (${gear.tags.join(' / ')})` : '';
+    const tags = gear.tags && gear.tags.length ? `${gear.tags.join(', ')}` : '';
 
     setAttrs({
       [`repeating_gearcheck_${newRowId}_gear_name`]: gear.name || '',
