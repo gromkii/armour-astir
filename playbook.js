@@ -58,7 +58,7 @@ const playbookMoves = { // basic moves
     },
     {
       fullName: 'Help or Hinder',
-      succcess: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
+      success: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
       partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.'
     },
     {
@@ -104,7 +104,7 @@ const playbookMoves = { // basic moves
       + '• A **realigning ritual** - Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher or lower than -/+3)\n\n'
       + '• A **contingency ritual** - Specify three specific situations: if you find yourself in one of them, increase your level of success on your next move and this ritual expires.\n\n'
       + '• An **adaptation ritual** - when you fail a roll, take Advantage on your next one.\n\n'
-      + '• A **clarity ritual** - When you **read the room&&, you may ask questions of a broader situation than here and now.\n\n'
+      + '• A **clarity ritual** - When you **read the room**, you may ask questions of a broader situation than here and now.\n\n'
       + 'All rituals expire after the Sortie, and you lose their effects when that happens.',
       moveSelected: true,
     },
@@ -127,10 +127,10 @@ const playbookMoves = { // basic moves
       moveSelected: false,
     }
   ],
-  imposter: [
+  impostor: [
     {
       fullName: 'Arcane Augments',
-      detials: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
+      details: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
       + 'organs. These augmentations allow a non-magic user to power and control an Astir, '
       + 'but otherwise do not interfere with your life unless you (the player) decide so. Being '
       + 'bonded to magic in this way often leads to it affecting the body and vice versa, '
@@ -143,102 +143,101 @@ const playbookMoves = { // basic moves
 };
 
 const playbookGear = {
-arcanist: {
-    startingGear: [
-        {
-            name: 'Astir',
-            tier: 'III',
-            quantity: 1
-        },
-        {
-            name: 'Touch Spells',
+  arcanist: {
+      startingGear: [
+          {
+              name: 'Astir',
+              tier: 'III',
+              quantity: 1
+          },
+          {
+              name: 'Touch Spells',
+              tier: 'I',
+              tags: ['melee', 'bane'],
+          },
+          {
+              name: 'Arcanist Gear',
+              quantity: 2
+          },
+          {
+              name: 'Clothing appropriate for your look.'
+          }
+      ],
+      classGear: [
+          {
+              name: 'Telescoping Staff',
+              tier: 'I',
+              tags: [
+                  'ranged'
+              ],
+              checked: false
+          },
+          {
+              name: 'Reagent Knife',
+              tier: 'I',
+              tags: [
+                  'melee',
+                  'mundane'
+              ]
+          },
+          {
+            name: 'Sidearm',
             tier: 'I',
-            tags: ['melee', 'bane'],
-        },
-        {
-            name: 'Arcanist Gear',
-            quantity: 2
-        },
-        {
-            name: 'Clothing appropriate for your look.'
-        }
+            tags: [
+              'ranged',
+              'defensive',
+            ],
+          },
+          {
+            name: 'Shield Broach',
+            tier: 'I',
+            tags: [
+              'ward'
+            ]
+          }
+      ]
+  },
+  impostor: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1
+      },
+      {
+        name: 'Augments',
+        tier: 1,
+        tags: ['melee', 'bane'],
+      },
+      {
+        name: 'Impostor Gear',
+        quantity: 2
+      },
+      {
+        name: 'Clothes that match your look',
+      }
     ],
     classGear: [
-        {
-            name: 'Telescoping Staff',
-            tier: 'I',
-            tags: [
-                'ranged'
-            ],
-            checked: false
-        },
-        {
-            name: 'Reagent Knife',
-            tier: 'I',
-            tags: [
-                'melee',
-                'mundane'
-            ]
-        },
-        {
-          name: 'Sidearm',
-          tier: 'I',
-          tags: [
-            'ranged',
-            'defensive',
-          ],
-        },
-        {
-          name: 'Shield Broach',
-          tier: 'I',
-          tags: [
-            'ward'
-          ]
-        }
+      {
+        name: 'Mana Focus',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Shortsword',
+        tier: 'I',
+        tags: ['melee', '***mundane***'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive'],
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
     ]
-},
-imposter: {
-  startingGear: [
-    {
-      name: 'Astir',
-      tier: 'III',
-      quantity: 1
-    },
-    {
-      name: 'Augments',
-      tier: 1,
-      tags: ['melee', 'bane'],
-    },
-    {
-      name: 'Imposter Gear',
-      quantity: 2
-    },
-    {
-      name: 'Clothes that match your look',
-    }
-  ],
-  classGear: [
-    {
-      name: 'Mana Focus',
-      tier: 'I',
-      tags: ['ranged'],
-    },
-    {
-      name: 'Shortsword',
-      tier: 'I',
-      tags: ['melee', '***mundane***'],
-    },
-    {
-      name: 'Sidearm',
-      tier: 'I',
-      tags: ['ranged', 'defensive'],
-    },
-    {
-      name: 'Shield Broach',
-      tier: 'I',
-      tags: ['ward']
-    }
-  ]
-}
-
+  }
 }

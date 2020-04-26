@@ -1,9 +1,3 @@
-<!-- 
-  Design considerations
-  - move catchphrase into Character Info, only appear if channeler.\
-  - move traits + dangers up, and add ideals underneath it?
- -->
-
 <div class="main">
   <div class="top-section">
     <div class="page-header">
@@ -154,7 +148,7 @@
                     <button 
                       name="roll_know" 
                       type="roll" 
-                      value="&{template:default} {{name=KNOW}} {{result=[[2d6 + @{know}]]}}">
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=KNOW}} {{result=[[2d6 + @{know}]]}}">
                       <span>KNOW</span>
                     </button>
                   </div>
@@ -186,28 +180,38 @@
             <div class="section-content">
               <div class="danger">
                 <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_1_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <input type="checkbox" /><span class="danger-type">Risk</span>
+                    <input type="radio" name="attr_danger_1_radio" value="0"/><span class="danger-type">Risk</span>
                   </div>
                   <div class="danger-group">
-                    <input type="checkbox" /><span class="danger-type">Peril</span>
+                    <input type="radio" name="attr_danger_1_radio" value="1"/><span class="danger-type">Peril</span>
                   </div>
                 </div>
                 <div class="character-danger-input">
-                  <input type="text" class="input-full" />
+                  <input type="text" class="input-full" name="attr_danger_1_description" />
+                </div>
+
+                <div class="danger-group">
+                  <input type="radio" name="attr_danger_1_radio" value="2"/><span>Clear</span>
                 </div>
               </div>
               <div class="danger">
                 <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_2_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <input type="checkbox" /><span class="danger-type">Risk</span>
+                    <input type="radio" name="attr_danger_2_radio" value="0"/><span class="danger-type">Risk</span>
                   </div>
                   <div class="danger-group">
-                    <input type="checkbox" /><span class="danger-type">Peril</span>
+                    <input type="radio" name="attr_danger_2_radio" value="1"/><span class="danger-type">Peril</span>
                   </div>
                 </div>
                 <div class="character-danger-input">
-                  <input type="text" class="input-full" />
+                  <input type="text" class="input-full" name="attr_danger_2_description" />
+                </div>
+
+                <div class="danger-group">
+                  <input type="radio" name="attr_danger_2_radio" value="2"/><span>Clear</span>
                 </div>
               </div>
               <div class="danger">
@@ -523,16 +527,20 @@
                   <input type="text" name="attr_carrier_11_text" />
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_12_check" />
+                  <input type="text" name="attr_carrier_12_text" />
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_13_check" />
+                  <input type="text" name="attr_carrier_13_text" />
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_14_check" />
+                  <input type="text" name="attr_carrier_14_text" />
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_15_check" />
+                  <input type="text" name="attr_carrier_15_text" />
                 </div>
               </div>
               <div class="carrier-floor">
@@ -540,19 +548,24 @@
                   Level 2
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_21_check" />
+                  <input type="text" name="attr_carrier_21_text" />
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_22_check" />
+                  <input type="text" name="attr_carrier_22_text" />
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_23_check" />
+                  <input type="text" name="attr_carrier_23_text" />
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_24_check" />
+                  <input type="text" name="attr_carrier_24_text" />
                 </div>
                 <div class="carrier-level-box room-box">
-                  
+                  <input type="checkbox" name="attr_carrier_25_check" />
+                  <input type="text" name="attr_carrier_25_text" />
                 </div>
               </div>
 
@@ -609,7 +622,6 @@
     
     <hr class="sheet-template-divider-move" />
 
-    {{#rollGreater() doroll 0}}
     {{#rollGreater() result 9}}
     {{#success}}
     <div class="sheet-template-row-move"><span class="sheet-template-success">10+</span>: {{success}}</div>
@@ -627,7 +639,6 @@
     <div class="sheet-template-row-move"><span class="sheet-template-miss">6-</span>: {{miss}}</div>
     {{/miss}}
     {{/rollLess() result 7}}
-    {{/rollGreater() doroll 0}}
 
 
     {{#details}}<div class="sheet-template-row-move sheet-template-details">{{details}}</div>{{/details}}
@@ -657,7 +668,7 @@
       },
       {
         fullName: 'Read The Room',
-        roll: 'SENSE', // ! Single roll, automatically does it, or prompt for bonus?
+        roll: 'SENSE',
         success: 'Hold 3',
         partial: 'Hold 1',
         miss: 'On a failure, you may ask one of the below questions, but the answer creates a problem or puts you in danger.',
@@ -671,7 +682,7 @@
       },
       {
         fullName: 'Help or Hinder',
-        succcess: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
+        success: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
         partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.'
       },
       {
@@ -717,15 +728,33 @@
         + '• A **realigning ritual** - Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher or lower than -/+3)\n\n'
         + '• A **contingency ritual** - Specify three specific situations: if you find yourself in one of them, increase your level of success on your next move and this ritual expires.\n\n'
         + '• An **adaptation ritual** - when you fail a roll, take Advantage on your next one.\n\n'
-        + '• A **clarity ritual** - When you **read the room&&, you may ask questions of a broader situation than here and now.\n\n'
+        + '• A **clarity ritual** - When you **read the room**, you may ask questions of a broader situation than here and now.\n\n'
         + 'All rituals expire after the Sortie, and you lose their effects when that happens.',
         moveSelected: true,
+      },
+      {
+        fullName: 'Plans',
+        details: 'Arcanists are educated in the art of war, and fght according to preordained tactics in ' 
+        + 'order to perform at their best. Unexpected situations are the bane of a good arcanist. '
+        + 'Whenever the party enters a dangerous situation, declare your plan to resolve it.\n\n'
+        + 'If your plan is interfered with or prevented at any point, take the risk (perturbed, '
+        + 'irritated, vexed, confounded).\n\n'
+        + 'If your plan succeeds, even accidentally, advance a GRAVITY clock with someone '
+        + 'who didn\'t think it would.',
+        moveSelected: true,
+      },
+      {
+        fullName: 'Expend Ritual',
+        details: 'When you disperse the magical energy of a ***ritual*** to re-use that energy in a pinch, '
+        + 'choose one of your prepared rituals - you no longer gain its beneft. You may then '
+        + 'choose an option from the ***subsystems*** move without spending Mana.',
+        moveSelected: false,
       }
     ],
     impostor: [
       {
         fullName: 'Arcane Augments',
-        detials: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
+        details: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
         + 'organs. These augmentations allow a non-magic user to power and control an Astir, '
         + 'but otherwise do not interfere with your life unless you (the player) decide so. Being '
         + 'bonded to magic in this way often leads to it affecting the body and vice versa, '
@@ -734,7 +763,7 @@
         + 'When someone you have GRAVITY with sees you be put in peril, advance it.',
         moveSelected: true,
       }
-    ],
+    ]
   };
 
 const playbookGear = {
@@ -805,7 +834,7 @@ const playbookGear = {
         tags: ['melee', 'bane'],
       },
       {
-        name: 'Imposter Gear',
+        name: 'Impostor Gear',
         quantity: 2
       },
       {
@@ -834,8 +863,7 @@ const playbookGear = {
         tags: ['ward']
       }
     ]
-  },
-
+  }
 }
 
   const buttonlist = ['character', 'astir', 'misc'];
@@ -848,8 +876,6 @@ const playbookGear = {
   });
 
   on('change:show_carrier_toggle', (event) => {
-    console.log('yup')
-    console.log(event.newValue);
     setAttrs({
       show_carrier: event.newValue,
     });
@@ -863,7 +889,6 @@ const playbookGear = {
   })
 
   on(`change:playbook`, (event) => {
-    console.log('hello??');
     if (event && event.newValue && event.netValue !== event.previousValue) {
       setPlaybook(event.newValue);
     }
@@ -915,7 +940,6 @@ const playbookGear = {
   // TODO: Read article about improving performance. This is a lot of event listeners.
     on('change:repeating_moves:move_name_base', () => {
       getAttrs(['repeating_moves_move_name_base'], (v) => {
-        console.log(v);
         setAttrs({
           repeating_moves_move_name: v.repeating_moves_move_name_base
         });
@@ -924,22 +948,11 @@ const playbookGear = {
     
     on('change:repeating_basicmoves:move_name_base', () => {
       getAttrs(['repeating_moves_move_name_base'], (v) => {
-        console.log(v);
         setAttrs({
           repeating_basicmovesmoves_move_name: v.repeating_moves_move_name_base
         });
       });
     });
-
-    on('change:repeating_moves:move_name_base', () => {
-      getAttrs(['repeating_moves_move_name_base'], (v) => {
-        setAttrs({
-          repeating_moves_move_name: v.repeating_moves_move_name_base
-        }, () => {
-          // ? Do we need to set the roll value here?
-        })
-      })
-    })
 
     on('change:repeating_moves:move_trait', (event) => {
       const prefix = event.sourceAttribute.split('trait')[0];
@@ -952,6 +965,21 @@ const playbookGear = {
         setAttrs({
           repeating_moves_move_rollvalue: rollValue,
           repeating_moves_move_doroll: doRoll,
+        })
+      })
+    })
+
+    on('change:repeating_basicmoves:move_trait', (event) => {
+      const prefix = event.sourceAttribute.split('trait')[0];
+      getAttrs(['repeating_basicmoves_move_trait'], (v) => {
+        const traitString = v.repeating_basicmoves_move_trait.toUpperCase();
+        const traits = traitString.replace(' ', '').split(',');
+        const doRoll = traits.length ? 1 : 0;
+        const rollValue = setRollValue(traits, prefix);
+        
+        setAttrs({
+          repeating_basicmoves_move_rollvalue: rollValue,
+          repeating_basicmoves_move_doroll: doRoll,
         })
       })
     })
@@ -994,7 +1022,7 @@ const playbookGear = {
     setPlaybookValue(bookValue);
     setMoves(playbook);
     setGear(playbook);
-    setBasicMoves(playbook);
+    setBasicMoves();
   }
 
   function getPlaybookValue(book) {
@@ -1028,7 +1056,6 @@ const playbookGear = {
   }
 
   function setMoves(book) {
-    console.log(book);
     if (!playbookMoves[book]) {
       console.log('Error, playbook not found.')
       return;
@@ -1069,18 +1096,13 @@ const playbookGear = {
     if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, '&#44;');
     if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, '&#44;');
 
-    let doRoll = 0;
-
-    if (m.roll || m.rolls) { doRoll = 1; }
-
-    attrs[prefix + 'doroll'] = doRoll;
+    attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
 
     setAttrs(attrs, () => {
       rollAttrs = {};
       if (m.rolls) {
         rollAttrs[prefix + 'rollvalue'] = buildRollValue(m.rolls, prefix);
       } else if (m.roll) {
-        const rollTemplate = buildRollTemplateValue(m.roll, prefix);
         rollAttrs[prefix + 'rollvalue'] = buildSingleRollValue(m.roll, prefix);
       } else {
         rollAttrs[prefix + 'rollvalue'] = buildEmptyRollValue(prefix);
@@ -1088,13 +1110,6 @@ const playbookGear = {
       
       setAttrs(rollAttrs);
     });
-  }
-
-  function addMove(move, rowid = 0) {
-    if (!playbookMoves[move]) {
-      console.log('Invalid/Unknown Move Name');
-      return;
-    }
   }
 
   // Set the checkbox gear list item.
@@ -1106,6 +1121,24 @@ const playbookGear = {
   }
 
   // ----- Dangers ----- //
+  // TODO: Consolidate this into single listener.
+  on('change:danger_1_radio', (event) => {
+    if (event && event.newValue && event.newValue === "2") {
+      setAttrs({
+        danger_1_radio: '4',
+        danger_1_description: '',
+      });
+    }
+  })
+
+  on('change:danger_2_radio', (event) => {
+    if (event && event.newValue && event.newValue === "2") {
+      setAttrs({
+        danger_2_radio: '4',
+        danger_2_description: '',
+      });
+    }
+  })
 
   on('change:danger_3_radio', (event) => {
     if (event && event.newValue && event.newValue === "2") {
@@ -1196,7 +1229,7 @@ const playbookGear = {
   }
 
   function setRollValue(traits, prefix) {
-    
+
     if (traits && traits.length === 1) {
       return buildSingleRollValue(traits[0], prefix);
     } else if (traits && traits.length > 1) {
@@ -1222,7 +1255,7 @@ const playbookGear = {
     return '&{template:move} '
           +'{{charname=@{character_name}}}'
           +'{{movename=@{' + prefix + 'name}}} '
-          +'{{trait='+ roll +'}}'
+          +'{{trait='+ roll +'}} '
           +'{{result=[[ 2d6 + @{' + roll.toLowerCase() + '}]]}} '
           +'{{success=@{' + prefix + 'success}}} '
           +'{{partial=@{'+ prefix + 'partial}}} '
@@ -1233,6 +1266,11 @@ const playbookGear = {
 
   // takes array of strings, eg: ['KNOW', 'DEFY']
   function buildRollValue(rolls, prefix) {
+
+    if (!rolls.length) {
+      return '';
+    }
+
     let rollValue = '?{Choose a Trait|';
 
     _.forEach(rolls, (roll, index) => {
@@ -1256,12 +1294,6 @@ const playbookGear = {
 
     return rollValue;
   }
-
-  function buildRollTemplateValue(roll, prefix) {
-    return 
-  }
-
-
 </script>
 
 <!-- 
