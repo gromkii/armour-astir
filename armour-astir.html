@@ -267,16 +267,15 @@
             <div class="character-moves-container">
 
               <div class="move-list-container">
-                <h4>Basic Moves</h4>
+                <h4 class="move-list-header">Basic Moves</h4>
                 <fieldset class="repeating_basicmoves">
                   <div class="move-main">
 
                     <input type="hidden" name="attr_move_doroll" value="1"/>
                     <input type="hidden" name="attr_move_rollvalue" value="" />
-                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}">Roll</button>
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}"><span style="font-family: 'dicefontd30'">0</span></button>
 
-                    <span name="attr_move_name" value="@{move_name}"></span>
-                    <input type="checkbox" name="attr_move_selected" class="move-selected" />
+                    <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
                     <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
     
                     <div class="move-expansion">
@@ -304,15 +303,15 @@
               </div>
 
               <div class="move-list-container">
-                <h4>Playbook Moves</h4>
+                <h4 class="move-list-header">Playbook Moves</h4>
                 <fieldset class="repeating_moves">
                   <div class="move-main">
 
                     <input type="hidden" name="attr_move_doroll" value="1" />
                     <input type="hidden" name="attr_move_rollvalue" value="" />
-                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}">Roll</button>
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}"><span style="font-family: 'dicefontd30'">0</span></button>
 
-                    <span name="attr_move_name" value="@{move_name}"></span>
+                    <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
                     <input type="checkbox" name="attr_move_selected" class="move-selected" />
                     <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
     

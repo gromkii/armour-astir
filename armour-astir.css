@@ -284,6 +284,28 @@ h3 {
   flex: 1;
 }
 
+.sheet-move-list-header {
+  font-size: 1.5rem;
+}
+
+.repcontainer[data-groupname="repeating_basicmoves"] > .repitem .sheet-move-main,
+.repcontainer[data-groupname="repeating_moves"] > .repitem .sheet-move-main {
+  margin: 5px;
+}
+
+
+/* .repcontainer[data-groupname="repeating_basicmoves"] > .repitem .sheet-move-list-name,
+.repcontainer[data-groupname="repeating_moves"] > .repitem .sheet-move-list-name {
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-variant-caps: petite-caps;
+} */
+.sheet-move-list-name {
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-variant-caps: petite-caps;
+}
+
 .sheet-character-lower-info {
   flex: 1;
   display: flex;
