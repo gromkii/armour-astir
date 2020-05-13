@@ -125,6 +125,56 @@ const playbookMoves = { // basic moves
       + 'choose one of your prepared rituals - you no longer gain its beneft. You may then '
       + 'choose an option from the ***subsystems*** move without spending Mana.',
       moveSelected: false,
+    },
+    {
+      fullName: 'Diverse Channeling',
+      details: 'When you make a move while piloting an Astir, you can roll +CHANNEL instead of the usual '
+      + 'Trait - if you do so, tick \'overheating\' on your Astir. If it\'s already fully ticked, it '
+      + 'destroys one of your Astir\'s parts — you are in *peril* (burnout).',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Consult Literature',
+      details: 'You have a store of books and scrolls on various subjects that you can consult for '
+      + 'information when given time. Choose 1 subject you have almost perfect records of, '
+      + 'and 2 you have extensive information on:\n\n'
+      + '• Construct models and design\n\n'
+      + '• Magical beasts and monsters\n\n'
+      + '• Enchantment and spell-craft\n\n'
+      + '• Mundane craft and building\n\n'
+      + '• Natural flora and fauna\n\n'
+      + '• Military tactics\n\n'
+      + '• A specific nation/faction\n\n'
+      + '• General world history',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Combat Spells',
+      details: 'If you are outside your Astir and fighting on foot, you can ***exchange blows*** and '
+      + '***strike decisively*** with +CHANNEL when attempting to cause physical harm, using '
+      + 'the following profile:\n\n',
+      + '• Hand-casting II (*ranged / area, bane*)',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Tactical Illusions',
+      details: 'When you distract your foes with magic, roll +CHANNEL.',
+      roll: 'CHANNEL',
+      success: 'Choose 2:\n\n'
+      + '• The illusions last until you stop sustaining them (otherwise they last up to a minute)\n\n'
+      + '• Your illusions affect anyone you intend to perceive them, rather than a signle person.\n\n'
+      + '• You can create illusions that affect all the senses, rather than just sight.',
+      partial: 'Choose 1, but your illusions also distract an unintended audience:\n\n'
+      + '• The illusions last until you stop sustaining them (otherwise they last up to a minute)\n\n'
+      + '• Your illusions affect anyone you intend to perceive them, rather than a signle person.\n\n'
+      + '• You can create illusions that affect all the senses, rather than just sight.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Archivist [Requires: *Consult Literature*]',
+      details: 'You aquire a new source of knowledge, and choose 2 more subjects you have extensive information '
+      + 'of to your ***consult literature*** move. ',
+      moveSelected: false,
     }
   ],
   impostor: [
