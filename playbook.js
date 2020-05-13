@@ -152,7 +152,7 @@ const playbookMoves = { // basic moves
       fullName: 'Combat Spells',
       details: 'If you are outside your Astir and fighting on foot, you can ***exchange blows*** and '
       + '***strike decisively*** with +CHANNEL when attempting to cause physical harm, using '
-      + 'the following profile:\n\n',
+      + 'the following profile:\n\n'
       + '• Hand-casting II (*ranged / area, bane*)',
       moveSelected: false,
     },
