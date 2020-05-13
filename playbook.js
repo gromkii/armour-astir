@@ -188,6 +188,55 @@ const playbookMoves = { // basic moves
       + 'Your CHANNEL is increased by 1 for each danger you have (upto a max of +3). '
       + 'When someone you have GRAVITY with sees you be put in peril, advance it.',
       moveSelected: true,
+    },
+    {
+      fullName: 'Vent Wrath',
+      details: 'If you are outside your Astir and fighting on foot, you can ***exchange blows*** and ***strike decisively*** with +CHANNEL when attempting to cause physical harm, using the following profile:\n\n• Hand-casting II (ranged / area, bane)',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Scour Existence',
+      details: 'You can ***exchange blows*** and strike decisively with +CHANNEL when attempting to cause physical harm with Astir-mounted weapons. If you do so, tick \'overheating\' on your Astir. If it\'s already ticked, it destroys one of your Astir’s parts—you are in peril (burnout).',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Don\'t Follow Me',
+      details: 'When you ***lead a Sortie*** with +DEFY, give everyone that follows Advantage to their next roll.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Resonance',
+      details: 'When you would weave magic to form a clear empathic bond with another, sharing your true feelings and ideals, choose 2 instead of rolling;\n\n'
+      + '• Your connection lasts a single, precious moment—time for little more than a short exchange.'
+      + '• They or someone else view it as a breach of trust or some kind of trick, and will hold it against you.'
+      + '• You miss something important while you\'re together.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Let Loose',
+      moveSelected: false,
+      details: 'Whenever you gain a *peril*, ***exchange blows*** and ***strike decisively*** with Advantage until the end of the Sortie.'
+    },
+    {
+      fullName: 'Bullheaded',
+      moveSelected: false,
+      details: 'You may take a *risk* to take Advantage on your next roll.'
+    },
+    {
+      fullName: 'Face to Face',
+      roll: 'TALK',
+      success: 'NPCs will leave their Astir to face you. PCs must weather the storm to refuse.'
+      partial: 'NPCs will leave their Astir to face you, but choose one:\n\n'
+      + '• Take the *risk* (entangled)\n\n'
+      + '• You have Disadvantage to moves against the other Channeler.\n\n'
+      + '• You are seperated from your Astirs temporarily.\n\n'
+      + 'PCs may choose whether to leave their Astir or not – if they do, they pick one of the above for you.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Realignment',
+      moveSelected: false,
+      details: 'You undergo deeper alteration and enhancement to your body. Discuss what it is with your GM, and either choose a move from another playbook to represent its effects, or work with your GM to create a new one.'
     }
   ]
 };
