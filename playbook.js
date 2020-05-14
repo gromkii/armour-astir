@@ -225,7 +225,7 @@ const playbookMoves = { // basic moves
     {
       fullName: 'Face to Face',
       roll: 'TALK',
-      success: 'NPCs will leave their Astir to face you. PCs must weather the storm to refuse.'
+      success: 'NPCs will leave their Astir to face you. PCs must weather the storm to refuse.',
       partial: 'NPCs will leave their Astir to face you, but choose one:\n\n'
       + '• Take the *risk* (entangled)\n\n'
       + '• You have Disadvantage to moves against the other Channeler.\n\n'
