@@ -238,7 +238,77 @@ const playbookMoves = { // basic moves
       moveSelected: false,
       details: 'You undergo deeper alteration and enhancement to your body. Discuss what it is with your GM, and either choose a move from another playbook to represent its effects, or work with your GM to create a new one.'
     }
-  ]
+  ],
+    paradigm : [
+      {
+        fullName: 'Evangelize',
+        moveSelected: true,
+        details: 'You are in service of a deity or faith and are responsible for the spiritual well-being of your Carrier\'s crew. You gain an additional action during Downtime that can only be used to give formal service or privately consult with a crew-member, both using the talk it out move.
+      },
+      {
+        fullName: 'Tenets',
+        moveSelected: true,
+        details: 'Instead of Ideals, write three tenets that represent your deity’s will. When you discuss your faith with someone or learn something about how they personally relate to faith and religion, advance a GRAVITY clock with them if you have one. If you ever sacrifice or break a tenet, it is lost forever; replace it with an Ideal instead of crossing it off and taking an advancement. Your CHANNEL Trait is also reduced by 1 until you make amends in whatever way is appropriate for your faith.\n\n'
+        + 'Example tenets might be:\n\n'
+        + '• Violence is a road taken when all others are closed.'
+        + '• Share your faith freely, that it might spread.'
+        + '• Scepticism is an affront to the divine.'
+        + '• From each according to his ability, to each according to his needs.'
+      },
+      {
+        fullName: 'Divine Guidance',
+        moveSelected: false,
+        roll: 'CHANNEL',
+        success: 'Your Director will tell you something directly useful you know about the situation or subject at hand.',
+        partial: 'The information is still direclty useful, but it is difficult to discern if your answer came from the intended deity.',
+        details: 'When you consult your deity for information or guidance, you may ***dispel uncertainties*** with +CHANNEL.',
+      },
+      {
+        fullName: 'Inspire Focus',
+        moveSelected: false,
+        details: 'Once per Sortie, you may take a visible position over the battlefield and inspire confidence and clarity in your allies that see you - they each clear a risk and take Advantage to their next roll.',
+      },
+      {
+        fullName: 'Bless',
+        moveSelected: false,
+        details: 'When you enter battle with a group of allies, give up to four people (including yourself) Advantage when they next ***bite the dust***.',
+      },
+      {
+        fullName: 'Safeguard',
+        moveSelected: false,
+        details: 'When you ***exchange blows*** and someone ***helps or hinders*** you, you can protect them from any harm they might suffer as a result. When you ***help or hinder*** someone who is ***exchanging blows***, you can suffer any harm taken in their place.',
+      },
+      {
+        fullName: 'Turn Unearthly',
+        moveSelected: false,
+        details: 'When piloting an Astir you are attuned to, you may project an aura that causes otherworldly creatures to flee.',
+        roll: 'CHANNEL',
+        success: 'Any creature not native to this plane is sent back to their home plane instantly. If they are powerful enough to return themselves (or are summoned) during the same Sortie, they are in *peril* (turned) as your divine presence sickens them.',
+        partial: 'They must flee from your sight, and are in *peril* (turned).',
+      },
+      {
+        fullName: 'Firebrand',
+        moveSelected: false,
+        rolls = ['TALK', 'CHANNEL'],
+        success: 'Choose 2',
+        partial: 'Choose 1',
+        miss: 'Your words are misinterpreted, co-opted, or misrepresented in a terrible way.',
+        details: 'When you openly and loudly advocate for something related to one of your tenets, roll the highest of +TALK or +CHANNEL. Choices:\n\n'
+        + '• Your words reach people far beyond where your voice is heard.'
+        + '• Even those not of your faith connect to your message.'
+        + '• You are not targeted immediately for what you preach.',
+      },
+      {
+        fullName: 'Consecrate Ground',
+        moveSelected: false,
+        roll: 'CHANNEL'
+        details: 'When you attempt to imbue an area or building with your divine power and presence, roll +CHANNEL. Choices:\n\n'
+        + '• Creatures opposed by your deity cannot enter the consecrated area.'
+        + '• Creatures within your consecrated area cannot take violent action against each other.'
+        + '• Creatures within the consecrated area ***cool off*** with Advantage.'
+        + '• Creatures within your consecrated area cannot knowingly lie.',
+      },
+    ]
 };
 
 const playbookGear = {
