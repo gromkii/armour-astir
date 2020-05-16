@@ -761,6 +761,56 @@
         + 'choose one of your prepared rituals - you no longer gain its beneft. You may then '
         + 'choose an option from the ***subsystems*** move without spending Mana.',
         moveSelected: false,
+      },
+      {
+        fullName: 'Diverse Channeling',
+        details: 'When you make a move while piloting an Astir, you can roll +CHANNEL instead of the usual '
+        + 'Trait - if you do so, tick \'overheating\' on your Astir. If it\'s already fully ticked, it '
+        + 'destroys one of your Astir\'s parts — you are in *peril* (burnout).',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Consult Literature',
+        details: 'You have a store of books and scrolls on various subjects that you can consult for '
+        + 'information when given time. Choose 1 subject you have almost perfect records of, '
+        + 'and 2 you have extensive information on:\n\n'
+        + '• Construct models and design\n\n'
+        + '• Magical beasts and monsters\n\n'
+        + '• Enchantment and spell-craft\n\n'
+        + '• Mundane craft and building\n\n'
+        + '• Natural flora and fauna\n\n'
+        + '• Military tactics\n\n'
+        + '• A specific nation/faction\n\n'
+        + '• General world history',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Combat Spells',
+        details: 'If you are outside your Astir and fighting on foot, you can ***exchange blows*** and '
+        + '***strike decisively*** with +CHANNEL when attempting to cause physical harm, using '
+        + 'the following profile:\n\n'
+        + '• Hand-casting II (*ranged / area, bane*)',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Tactical Illusions',
+        details: 'When you distract your foes with magic, roll +CHANNEL.',
+        roll: 'CHANNEL',
+        success: 'Choose 2:\n\n'
+        + '• The illusions last until you stop sustaining them (otherwise they last up to a minute)\n\n'
+        + '• Your illusions affect anyone you intend to perceive them, rather than a signle person.\n\n'
+        + '• You can create illusions that affect all the senses, rather than just sight.',
+        partial: 'Choose 1, but your illusions also distract an unintended audience:\n\n'
+        + '• The illusions last until you stop sustaining them (otherwise they last up to a minute)\n\n'
+        + '• Your illusions affect anyone you intend to perceive them, rather than a signle person.\n\n'
+        + '• You can create illusions that affect all the senses, rather than just sight.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Archivist [Requires: *Consult Literature*]',
+        details: 'You aquire a new source of knowledge, and choose 2 more subjects you have extensive information '
+        + 'of to your ***consult literature*** move. ',
+        moveSelected: false,
       }
     ],
     impostor: [
@@ -774,109 +824,158 @@
         + 'Your CHANNEL is increased by 1 for each danger you have (upto a max of +3). '
         + 'When someone you have GRAVITY with sees you be put in peril, advance it.',
         moveSelected: true,
+      },
+      {
+        fullName: 'Vent Wrath',
+        details: 'If you are outside your Astir and fighting on foot, you can ***exchange blows*** and ***strike decisively*** with +CHANNEL when attempting to cause physical harm, using the following profile:\n\n• Hand-casting II (ranged / area, bane)',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Scour Existence',
+        details: 'You can ***exchange blows*** and strike decisively with +CHANNEL when attempting to cause physical harm with Astir-mounted weapons. If you do so, tick \'overheating\' on your Astir. If it\'s already ticked, it destroys one of your Astir’s parts—you are in peril (burnout).',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Don\'t Follow Me',
+        details: 'When you ***lead a Sortie*** with +DEFY, give everyone that follows Advantage to their next roll.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Resonance',
+        details: 'When you would weave magic to form a clear empathic bond with another, sharing your true feelings and ideals, choose 2 instead of rolling;\n\n'
+        + '• Your connection lasts a single, precious moment—time for little more than a short exchange.'
+        + '• They or someone else view it as a breach of trust or some kind of trick, and will hold it against you.'
+        + '• You miss something important while you\'re together.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Let Loose',
+        moveSelected: false,
+        details: 'Whenever you gain a *peril*, ***exchange blows*** and ***strike decisively*** with Advantage until the end of the Sortie.'
+      },
+      {
+        fullName: 'Bullheaded',
+        moveSelected: false,
+        details: 'You may take a *risk* to take Advantage on your next roll.'
+      },
+      {
+        fullName: 'Face to Face',
+        roll: 'TALK',
+        success: 'NPCs will leave their Astir to face you. PCs must weather the storm to refuse.',
+        partial: 'NPCs will leave their Astir to face you, but choose one:\n\n'
+        + '• Take the *risk* (entangled)\n\n'
+        + '• You have Disadvantage to moves against the other Channeler.\n\n'
+        + '• You are seperated from your Astirs temporarily.\n\n'
+        + 'PCs may choose whether to leave their Astir or not – if they do, they pick one of the above for you.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Realignment',
+        moveSelected: false,
+        details: 'You undergo deeper alteration and enhancement to your body. Discuss what it is with your GM, and either choose a move from another playbook to represent its effects, or work with your GM to create a new one.'
       }
     ]
   };
-
-const playbookGear = {
-  arcanist: {
-      startingGear: [
-          {
-              name: 'Astir',
-              tier: 'III',
-              quantity: 1
-          },
-          {
-              name: 'Touch Spells',
+  
+  const playbookGear = {
+    arcanist: {
+        startingGear: [
+            {
+                name: 'Astir',
+                tier: 'III',
+                quantity: 1
+            },
+            {
+                name: 'Touch Spells',
+                tier: 'I',
+                tags: ['melee', 'bane'],
+            },
+            {
+                name: 'Arcanist Gear',
+                quantity: 2
+            },
+            {
+                name: 'Clothing appropriate for your look.'
+            }
+        ],
+        classGear: [
+            {
+                name: 'Telescoping Staff',
+                tier: 'I',
+                tags: [
+                    'ranged'
+                ],
+                checked: false
+            },
+            {
+                name: 'Reagent Knife',
+                tier: 'I',
+                tags: [
+                    'melee',
+                    'mundane'
+                ]
+            },
+            {
+              name: 'Sidearm',
               tier: 'I',
-              tags: ['melee', 'bane'],
-          },
-          {
-              name: 'Arcanist Gear',
-              quantity: 2
-          },
-          {
-              name: 'Clothing appropriate for your look.'
-          }
+              tags: [
+                'ranged',
+                'defensive',
+              ],
+            },
+            {
+              name: 'Shield Broach',
+              tier: 'I',
+              tags: [
+                'ward'
+              ]
+            }
+        ]
+    },
+    impostor: {
+      startingGear: [
+        {
+          name: 'Astir',
+          tier: 'III',
+          quantity: 1
+        },
+        {
+          name: 'Augments',
+          tier: 1,
+          tags: ['melee', 'bane'],
+        },
+        {
+          name: 'Impostor Gear',
+          quantity: 2
+        },
+        {
+          name: 'Clothes that match your look',
+        }
       ],
       classGear: [
-          {
-              name: 'Telescoping Staff',
-              tier: 'I',
-              tags: [
-                  'ranged'
-              ],
-              checked: false
-          },
-          {
-              name: 'Reagent Knife',
-              tier: 'I',
-              tags: [
-                  'melee',
-                  'mundane'
-              ]
-          },
-          {
-            name: 'Sidearm',
-            tier: 'I',
-            tags: [
-              'ranged',
-              'defensive',
-            ],
-          },
-          {
-            name: 'Shield Broach',
-            tier: 'I',
-            tags: [
-              'ward'
-            ]
-          }
+        {
+          name: 'Mana Focus',
+          tier: 'I',
+          tags: ['ranged'],
+        },
+        {
+          name: 'Shortsword',
+          tier: 'I',
+          tags: ['melee', 'mundane'],
+        },
+        {
+          name: 'Sidearm',
+          tier: 'I',
+          tags: ['ranged', 'defensive'],
+        },
+        {
+          name: 'Shield Broach',
+          tier: 'I',
+          tags: ['ward']
+        }
       ]
-  },
-  impostor: {
-    startingGear: [
-      {
-        name: 'Astir',
-        tier: 'III',
-        quantity: 1
-      },
-      {
-        name: 'Augments',
-        tier: 1,
-        tags: ['melee', 'bane'],
-      },
-      {
-        name: 'Impostor Gear',
-        quantity: 2
-      },
-      {
-        name: 'Clothes that match your look',
-      }
-    ],
-    classGear: [
-      {
-        name: 'Mana Focus',
-        tier: 'I',
-        tags: ['ranged'],
-      },
-      {
-        name: 'Shortsword',
-        tier: 'I',
-        tags: ['melee', '***mundane***'],
-      },
-      {
-        name: 'Sidearm',
-        tier: 'I',
-        tags: ['ranged', 'defensive'],
-      },
-      {
-        name: 'Shield Broach',
-        tier: 'I',
-        tags: ['ward']
-      }
-    ]
+    }
   }
-}
 
   const buttonlist = ['character', 'astir', 'misc'];
   buttonlist.forEach(button => {
