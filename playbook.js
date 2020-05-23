@@ -238,6 +238,88 @@ const playbookMoves = { // basic moves
       moveSelected: false,
       details: 'You undergo deeper alteration and enhancement to your body. Discuss what it is with your GM, and either choose a move from another playbook to represent its effects, or work with your GM to create a new one.'
     }
+  ],
+  paradigm: [
+    { 
+      fullName: 'Evangelise',
+      details: 'You are in service of a deity or faith and are responsible for the spiritual well-being of'
+      +'your Carrier’s crew. You gain an additional action during Downtime that can only be'
+      +'used to give formal service or privately consult with a crew-member, both using the'
+      +'talk it out move',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Tenets',
+      details: 'Instead of Ideals, write three tenets that represent your deity’s will. When you discuss'
+      + 'your faith with someone or learn something about how they personally relate to faith'
+      + 'and religion, advance a GRAVITY clock with them if you have one. If you ever'
+      + 'sacrifce or break a tenet, it is lost forever; replace it with an Ideal instead of crossing'
+      + 'it off and taking an advancement. Your CHANNEL Trait is also reduced by 1 until you'
+      + 'make amends in whatever way is appropriate for your faith.\n\n'
+      + 'Example tenets might be:\n'
+      + '• Violence is a road taken when all others are closed.\n'
+      + '• Share your faith freely, that it might spread.\n'
+      + '• Scepticism is an affront to the divine.\n'
+      + '• From each according to his ability, to each according to his needs.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Divine Guidance',
+      details: 'When you consult your deity for information or guidance, you may ***dispel uncertainties***'
+        + 'with +CHANNEL. If you do so, on a 7-9 the information is still directly'
+        + 'useful, but it is diffcult to discern if your answer came from the intended deity.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Inspire Focus',
+      details: '',
+      moveSelected: false
+    },
+    {
+      fullName: 'Bless',
+      details: '',
+      moveSelected: false
+    },
+    {
+      fullName: 'Safeguard',
+      details: '',
+      moveSelected: false
+    },
+    {
+      fullName: 'Turn Unearthly',
+      success: 'Any creature not native to'
+        + 'this plane of existence is sent back to their home plane instantly. If they are powerful'
+        + 'enough to return themselves (or are summoned) during the same Sortie, they are in'
+        + 'peril (turned) as your divine presence sickens them.',
+      partial: 'They must flee from your sight and are in *peril* (turned).',
+      details: 'When piloting an Astir you are attuned to, you may project an aura that causes otherwordly creatures to flee.',
+      roll: 'CHANNEL',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Firebrand',
+      rolls: ['TALK', 'CHANNEL'],
+      success: 'Choose 2',
+      partial: 'Choose 1',
+      miss: 'Your words are misinterpreted, co-opted, or misrepresented in a terrible way.',
+      details: 'When you openly and loudly advocate for something related to one of your tenets, roll the highest of +TALK or +CHANNEL.\n\n'
+        + '• Your words reach people far beyond where your voice is heard.\n'
+        + '• Even those not of your faith connect to your message.\n'
+        + '• You are not targeted immediately for what you preach.',
+      moveSelected: 'false'
+    },
+    {
+      fullName: 'Consecrate Ground',
+      success: 'Choose 2',
+      partial: 'Choose 1',
+      roll: 'CHANNEL',
+      details: 'When you attempt to imbue an area or building with your divine power and presence, roll +CHANNEL.\n\n'
+        + '• Creatures opposed by your deity cannot enter the consecrated area.\n'
+        + '• Creatures within your consecrated area cannot take violent action against each other.\n'
+        + '• Creatures within the consecrated area cool off with Advantage.\n'
+        + '• Creatures within your consecrated area cannot knowingly lie.',
+      moveSelected: false,
+    }
   ]
 };
 
@@ -331,6 +413,49 @@ const playbookGear = {
         name: 'Sidearm',
         tier: 'I',
         tags: ['ranged', 'defensive'],
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
+    ]
+  },
+  paradigm: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1,
+      },
+      {
+        name: 'Divine Touch',
+        tier: 'I',
+        tags: ['melee', 'bane'],
+      }, 
+      {
+        name: 'Paradigm Gear',
+        quantity: 2,
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Holy Symbol',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Sacred Weapon',
+        tier: 'I',
+        tags: ['melee', 'mundane'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive']
       },
       {
         name: 'Shield Broach',
