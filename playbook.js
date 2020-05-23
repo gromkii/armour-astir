@@ -353,7 +353,7 @@ const playbookMoves = { // basic moves
       + 'On a 7-9, the Director will tell you a flaw with your disguise.\n'
       + '***4 · Shielding Boon*** - You may give your ***patron*** 1 Influence to have Advantage when facing harm.\n'
       + '***5 · Vigorous Boon*** - You may give your ***patron*** 1 Influence to make the ***subsystems*** move for free.\n'
-      + '6 · Trickster’s Boon - When you use the ***subsystems*** to use an Artifact, instead of taking Advantage '
+      + '***6 · Trickster’s Boon*** - When you use the ***subsystems*** to use an Artifact, instead of taking Advantage '
       + 'you may roll a d6 and replace either or both of your regular dice results with it.'
     },
     {

@@ -956,6 +956,95 @@
           + '• Creatures within your consecrated area cannot knowingly lie.',
         moveSelected: false,
       }
+    ],
+    witch: [
+      {
+        fullName: 'Patron',
+        details: 'You receive your magic from an otherworldly patron or benefactor, whose motivations '
+        + ' are typically not something you can discern. While they are often content to let you '
+        + ' run free with their power, they will sometimes require things of you - and when they'
+        + ' can, they will exert their Inﬂuence to make sure their bidding is done. You have a'
+        + ' GRAVITY clock with your patron, representing the tenuous bond between you.'
+        + ' Your patron may spend their Inﬂuence like hold in order to do the following:\n\n'
+        + '• Help or hinder you, succeeding as if they had rolled a 10+.\n'
+        + '• Attempt to force you to do something; you may weather the storm to resist.\n'
+        + '• Re-roll your boons for the day.\n\n'
+        + 'Whenever your Patron spends Inﬂuence, advance your GRAVITY clock with them. '
+        + 'As long as you Patron has at least 1 Inﬂuence, your CHANNEL Trait is set to +3.',
+        moveSelected: true,
+      },
+      {
+        fullName: 'Receive Boons',
+        details: 'At each dawn, you recieve ***boons*** from your patron. Roll on the list below two times to discern what powers you receive. They last until the next dawn. \n\n'
+        + '***1 · Channelling Boon*** - You may give your patron 1 Influence to make a move with +CHANNEL instead '
+        + 'of the usual trait—when you do so, tick \'overheating\' on your Astir. If it\'s already fully ticked, it destroys '
+        + 'one of your Astir’s parts—you are in peril (burnout).\n'
+        + '***2 · Hexxing Boon*** - You can curse an Astir, locking it out of some of its systems. When you do so, roll'
+        + ' +CHANNEL. On a 10+, choose 2. On a 7-9, choose 1:\n'
+        + '• A Player or Rival cannot spend Mana to activate ***subsystems***.\n'
+        + '• A weapon, tool or function stalls, malfunctions, and stops working.\n'
+        + '• The Channeler cannot prevent you from communicating with them.\n'
+        + '***3 · Masking Boon*** - You can mask yourself or an Astir you are attuned to against detection. When you '
+        + 'do so, roll +CHANNEL. On a 10+, you are disguised or cloaked in a fashion appropriate to your ***patron***. '
+        + 'On a 7-9, the Director will tell you a flaw with your disguise.\n'
+        + '***4 · Shielding Boon*** - You may give your ***patron*** 1 Influence to have Advantage when facing harm.\n'
+        + '***5 · Vigorous Boon*** - You may give your ***patron*** 1 Influence to make the ***subsystems*** move for free.\n'
+        + '6 · Trickster’s Boon - When you use the ***subsystems*** to use an Artifact, instead of taking Advantage '
+        + 'you may roll a d6 and replace either or both of your regular dice results with it.'
+      },
+      {
+        fullName: 'Occult Lore',
+        details: 'When you consult your patron for information, you may ***dispel uncertainties*** with '
+          +' +CHANNEL. If you do so, on a 7-9 the information is still directly useful, but using it '
+          + 'would cause some unforeseen complication entertaining or benefcial to your patron.',
+        moveSelected: false,
+        roll: 'CHANNEL'
+      },
+      {
+        fullName: 'Whims',
+        details: 'Your patron is unfathomable, and their interests obscure. Your GM should, once per '
+          + 'Sortie, give you some minor goal or abstract requirement your patron demands of '
+          + 'you - it should be doable within the session. If you complete it, at the next dawn you '
+          + 'may choose your boons instead of rolling. If you don\'t, give your patron 1 Inﬂuence.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Embrace Chaos',
+        details: 'Whenever you roll a 10+, you may opt to instead take a partial success as if you had '
+        + 'rolled a 7-9. If you do so, hold 1, which you may spend at any point before the end of'
+        + 'the Sortie to do one of the following:\n\n'
+        + '• Swap two of your Traits.\n'
+        + '• Increase the level of success on your next roll by one.\n',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Re-weave Reality',
+        details: 'When you use a piece of equipment to make a move, e.g using a weapon to ***strike decisively***,'
+        + ' you can ignore one of its tags OR act as if it had an additional one of'
+        + ' your choice. When you do so, give your patron 1 Inﬂuence',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Relinquish',
+        details: 'If a part of your Astir is damaged or destroyed and you take a peril as a result, you '
+        + 'may relinquish your boons; losing them until you receive boons again but fixing '
+        + 'that part and losing the peril. You cannot re-roll relinquished boons.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Share the Burden',
+        details: 'When you cool off, you may choose to succeed as you had rolled a 1+. If you do so, give your patron 1 Influence',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Borrowed Power',
+        success: 'Hold 3',
+        partial: 'Hold 1, or be in peril and hold 3',
+        roll: 'CHANNEL',
+        details: 'When you request help from your patron, roll +CHANNEL and give your patron 1 Influence. You may spend your hold at any point during '
+        + 'the Sortie 1-for-1 to use any ***boon*** you don\'t currently have, or you may spend 2 hold to make any move from another playbook.',
+        moveSelected: false,
+      }
     ]
   };
   
@@ -1097,6 +1186,49 @@
           name: 'Shield Broach',
           tier: 'I',
           tags: ['ward']
+        }
+      ]
+    },
+    witch: {
+      startingGear: [
+        {
+          name: 'Astir',
+          tier: 'III',
+          quantity: 1,
+        },
+        {
+          name: 'Pact Weapon',
+          tier: 'I',
+          tags: ['melee', 'bane'],
+        },
+        {
+          name: 'Witch Gear',
+          quantity: 2
+        },
+        {
+          name: 'Clothes that match your look'
+        }
+      ],
+      classGear: [
+        {
+          name: 'Patron\'s Icon',
+          tier: 'I',
+          tags: ['ranged'],
+        },
+        {
+          name: 'Ritual Dagger',
+          tier: 'I',
+          tags: ['melee', 'mundane']
+        },
+        {
+          name: 'Sidearm',
+          tier: 'I',
+          tags: ['ranged', 'defensive']
+        },
+        {
+          name: 'Shield Broach',
+          tier: 'I',
+          tags: ['ward'],
         }
       ]
     }
