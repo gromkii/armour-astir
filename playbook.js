@@ -409,6 +409,66 @@ const playbookMoves = { // basic moves
       + 'the Sortie 1-for-1 to use any ***boon*** you don\'t currently have, or you may spend 2 hold to make any move from another playbook.',
       moveSelected: false,
     }
+  ],
+  scout: [
+    {
+      fullName: 'Field Scout',
+      details: 'You\'re an expert at managing operations in the field and supporting your allies. You’re agile and strong, you tend to notice things those in Astirs don\'t, '
+      + 'and your size allows you access to spaces too small for them \n\n.'
+      + 'You can wield tier II weapons without much difficulty, can reload weapons easily while on the move or under fire, and don’t need to ***bite the dust*** when threatened by harm from a higher tier than you.\n\n'
+      + 'When you hold your own against Astirs or show yourself completely above the rank- and-file, advance a GRAVITY clock with someone who sees you and is impressed.',
+      moveSelected: true,
+    }, {
+      fullName: 'Team Player',
+      details: 'When you ***read the room***, you may pass the information you gain along and allow an ally to act with Advantage instead of you. When you do so, you may advance a GRAVITY clock with them if you have one.',
+      moveSelected: false,
+    }, {
+      fullName: 'Mobility',
+      roll: 'DEFY',
+      success: 'Hold 3',
+      partial: 'Hold 1',
+      details: 'When you\'re fighting somewhere with the room to be acrobatic and mobile, roll +DEFY.\n\n'
+      + '• Escape from something that binds, traps or impedes you\n'
+      + '• Acquire high ground or a defensible position\n'
+      + '• Get to somewhere or something before others can\n'
+      + '• Avoid an incoming source of physical harm',
+      moveSelected: false,
+    }, {
+      fulName: 'Improvisation',
+      details: 'At the beginning of a Sortie, hold 3. You may spend 1 hold to change your approach for a single move. Explain to your Director what you did or used to do this.',
+      moveSelected: false,
+    }, {
+      fullName: 'Natural Leader',
+      details: 'When participating in a group move, you can always make the roll in place of whoever has the lowest relevant trait.',
+      moveSelected: false,
+    }, {
+      fullName: 'Strong As Hell',
+      details: 'You can carry and wield tier III weapons by taking a risk.',
+      moveSelected: false,
+    }, {
+      fullName: 'Patch Job',
+      details: 'When you ***cool off*** to remove a risk or the ‘overheating’ tick from an Astir, you can do it in a few moments rather than minutes, even while the Astir is still moving. ' 
+      + 'Instead of the usual result, on a 7-9 you attract unwanted attention.',
+      moveSelected: false,
+    }, {
+      fullName: 'Guerilla',
+      roll: 'KNOW',
+      success: 'Choose 2',
+      partial: 'Choose 1',
+      details: 'When you attempt to evade detection or sneak past others, roll +KNOW. \n\n'
+      + '• You avoid detection.\n'
+      + '• You find something hidden or forgotten.\n'
+      + '• You can set up for an ambush.\n'
+      + '• You find a way to allow others to follow you without being detected.',
+      moveSelected: false,
+    }, {
+      fullName: 'Pathfinding',
+      details: 'When you\'re leading a group that is travelling a long distance, hold 3, and spend it 1- for-1 on the following options while you travel:\n\n'
+      + '• You lead the group past an area of difficult terrain without issue.\n'
+      + '• You find a comfortable, sheltered place to set up camp.\n'
+      + '• You\'re familiar with the area: ***dispel uncertainties*** regarding it or the things in it with Advantage during the journey.\n'
+      + '• You find a shortcut, reducing the length of your journey but adding complications.\n'
+    }
   ]
 };
 
@@ -593,6 +653,51 @@ const playbookGear = {
         name: 'Shield Broach',
         tier: 'I',
         tags: ['ward'],
+      }
+    ]
+  },
+  scout: {
+    startingGear: [
+      {
+        name: 'Scout Weapon',
+        quantity: 1
+      },
+      {
+        name: 'Scout Equipment',
+        quantity: 2
+      },
+      {
+        name: 'Any Tier I weapons that feel appropriate'
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Astircleaver',
+        tier: 'II',
+        tags: [
+          'melee / bane',
+          'area',
+          '2H'
+        ],
+      }, {
+        name: 'Crossbow+',
+        tier: 'II',
+        tags: [
+          'ranged / infinite',
+          'blitz',
+          '2H'
+        ]
+      }, {
+        name: 'Force Ballista',
+        tier: 'II',
+        tags: [
+          'sniper / reloading',
+          'ruin',
+          '2H'
+        ]
       }
     ]
   }
