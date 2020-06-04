@@ -694,8 +694,7 @@
       },
       {
         fullName: 'Help or Hinder',
-        success: 'They take Advantage (help) or Disadvantage (hinder) to their roll.',
-        partial: 'As above, but you become entangled in the consequences of their actions, and possibly cause them.'
+        details: 'Roll +GRAVITY. On a 10+, they take Advantage (help) or Disadvantage to their roll. On a 7-9, as 10+, but you become entangled. in the consequences of their actions.'
       },
       {
         fullName: 'Weave Magic',
@@ -1105,6 +1104,76 @@
         + '• You\'re familiar with the area: ***dispel uncertainties*** regarding it or the things in it with Advantage during the journey.\n'
         + '• You find a shortcut, reducing the length of your journey but adding complications.\n'
       }
+    ],
+    captain: [
+      {
+        fullName: 'Coordinator',
+        details: 'When you roll a 10+ to ***help or hinder*** and choose to help, give increased success instead of Advantage.\n\n'
+        + 'When you roll a 6 or below while rolling +CREW, advance a GRAVITY clock with someone who has put their trust in you.',
+        moveSelected: true,
+      },
+      {
+        fullName: 'In Command',
+        details: 'You are the Carrier’s captain, and naturally have command of its crew. While at the helm of the Carrier, you may order the crew to:\n\n'
+        + '• ***Exchange blows*** and ***strike decisively*** with +CREW, using the Carrier’s weaponry.\n'
+        + '• ***Weather the storm*** with +CREW to perform evasive actions.\n'
+        + '• ***Read the room*** with +CREW to assess the battlefield.\n\n'
+        + 'Additionally, both Carrier and crew are part of your character as far as risks and perils are concerned, just like an Astir is an extension of its channeler. To reflect the many minds '
+        + 'and hands at work for you, you are defenceless at 4 dangers while at the helm of your Carrier, rather than 3.',
+        moveSelected: true,
+      },
+      {
+        fullName: 'Tactical Genius',
+        details: 'When you\'re supervising allies from afar during a Sortie, you can lever your tactical know-how into better positioning. Take 3 hold at the start of a Sortie, '
+        + 'and spend it 1- for-1 to do the following: \n\n'
+        + '• Remove one risk from an ally.\n'
+        + '• Give an ally Advantage to their next move, describing how you advise or support them.\n'
+        + '• Have an ally appear somehow in a place they are needed.\n',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Force Multiplier',
+        details: 'You acquire something - a tool, ship upgrade, a caged malevolent sentience, etc - that allows the Carrier and it’s staff to operate far better than usual, but it has a downside. '
+        + 'Once per Sortie you may increase your level of success on a move, but choose 1\n\n'
+        + '• It whispers in your ear - change one of your Ideals to represent its demands.\n'
+        + '• It’s fragile and needs protecting. It grants no benefit while damaged or destroyed.\n'
+        + '• It takes up a lot of resources - spend 1 SUPPLY on it when someone ***leads a Sortie***, or it stops working until you reawaken it by spending 3.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Surprise Requisition',
+        details: 'When you dispatch supplies to another character or reveal something extra you had them deployed with all along, roll +CREW. On a 10+, choose 1 for free. On a 7-9, you had to '
+        + 'requisition that gear personally - pay 1 SUPPLY, or drop 1 Stake from a Faction as they spread themselves thin to help you.\n\n'
+        + '• A weapon rendered unusable by damage or lack of ammo is replaced/rearmed.\n'
+        + '• A weapon gains the bane tag until the end of the scene.\n'
+        + '• A weapon gains the ruin tag for one shot or strike.\n'
+        + '• An Astir changes it’s approach until the end of the scene.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Fire Support',
+        details: 'When you provide instruction and call shots for the Carrier’s crew, you may ***exchange harm*** and ***strike decisively*** using +KNOW and the Carrier’s weaponry.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Information Network',
+        details: 'When you have your crew search for information, you may ***dispel uncertainties*** with +CREW.\n\n'
+        + 'When you contact your superiors for relevant intel, you may ***dispel uncertainties*** with +TALK.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Resupply Priority',
+        details: 'Your Carrier gains 1 SUPPLY whenever you start Downtime.',
+        moveSelected: false,
+      },
+      {
+        fullName: 'Human Resources',
+        details: 'When you read the room, you may also choose from the following questions: \n\n'
+        + '• What is the crew’s mood like?\n'
+        + '• Who is responsible for a problem on-board the Carrier?\n'
+        + '• What could be a problem for the crew in the immediate future?',
+        moveSelected: false,
+      }
     ]
   };
   
@@ -1334,6 +1403,53 @@
             'ruin',
             '2H'
           ]
+        }
+      ]
+    },
+    captain: {
+      startingGear: [
+        {
+          name: 'Ornate Gear',
+          quantity: 2,
+        },
+        {
+          name: 'Bonus Carrier Module',
+          quantity: 1,
+        },
+        {
+          name: 'Clothes that match your look'
+        }
+      ],
+      classGear: [
+        {
+          name: 'Gilded Sidearm',
+          tier: 'I',
+          tags: [
+            'ranged / blitz',
+            'distinct'
+          ]
+        },
+        {
+          name: 'Ruinlock',
+          tier: 'I',
+          tags: [
+            'ranged / profane',
+            'reloading',
+            'ruin'
+          ]
+        },
+        {
+          name: 'Duelist\'s Blade',
+          tier: 'I',
+          tags: [
+            'melee / bane',
+            'distinct',
+          ]
+        },
+        {
+          name: 'Arcane Mantle',
+          tier: 'I',
+          tags: ['melee / arcane']
         }
       ]
     }
