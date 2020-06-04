@@ -521,6 +521,12 @@ button [type='action'] {
   outline: none;
 }
 
+/* ---- Misc Page ----- */
+.sheet-misc-page-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* ---- Move Roll Template ----- */
 .sheet-template-move {
   margin-left: -37px;

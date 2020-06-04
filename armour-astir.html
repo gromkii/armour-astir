@@ -612,7 +612,58 @@
     </div>
 
     <div class="misc-page">
-      Misc Page
+      <div class="misc-page-container">
+        <div class="section flex-2">
+          <h3>Gravity Clocks</h3>
+          <div class="section-content">
+            <div class="clock-container">
+              <fieldset class="repeating_gravity_clocks">
+                <div class="gravity-stat">
+                  <div class="trait">
+                    <div class="trait-top">
+                      <input type="number" value="1" name="attr_gravity">
+                    </div>
+                    <div class="trait-bottom">  
+                      <button 
+                        name="roll_gravity" 
+                        type="roll" 
+                        value="&{template:move} {{charname=@{character_name}}} {{trait=GRAVITY}} {{result=[[2d6 + @{gravity}]]}}">
+                        <span>+GRAVITY</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input name="attr_clock_name" type="text" />
+                </div>
+                <div class="clock-buttons">
+                  <input name="attr_clock_1" type="checkbox" /> 
+                  <input name="attr_clock_2" type="checkbox" /> 
+                  <input name="attr_clock_3" type="checkbox" /> 
+                  <input name="attr_clock_4" type="checkbox" /> 
+                  <input name="attr_clock_5" type="checkbox" /> 
+                  <input name="attr_clock_6" type="checkbox" /> 
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      
+
+      <div class="section flex-1">
+        <h3>Misc Info</h3>
+        <div class="section-content">
+          <div class="additional-gear">
+            <textarea name="attr_additional_gear"></textarea>
+            <label>Additional Gear</label>
+          </div>
+          
+          <div class="character-description">
+            <textarea name="attr_charater_description"></textarea>
+            <label>Chracter Description</label>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
