@@ -109,7 +109,7 @@ const playbookMoves = { // basic moves
     },
     {
       fullName: 'Plans',
-      details: 'Arcanists are educated in the art of war, and fght according to preordained tactics in ' 
+      details: 'Arcanists are educated in the art of war, and fight according to preordained tactics in ' 
       + 'order to perform at their best. Unexpected situations are the bane of a good arcanist. '
       + 'Whenever the party enters a dangerous situation, declare your plan to resolve it.\n\n'
       + 'If your plan is interfered with or prevented at any point, take the risk (perturbed, '
@@ -121,7 +121,7 @@ const playbookMoves = { // basic moves
     {
       fullName: 'Expend Ritual',
       details: 'When you disperse the magical energy of a ***ritual*** to re-use that energy in a pinch, '
-      + 'choose one of your prepared rituals - you no longer gain its beneft. You may then '
+      + 'choose one of your prepared rituals - you no longer gain its benefit. You may then '
       + 'choose an option from the ***subsystems*** move without spending Mana.',
       moveSelected: false,
     },
@@ -161,11 +161,11 @@ const playbookMoves = { // basic moves
       roll: 'CHANNEL',
       success: 'Choose 2:\n\n'
       + '• The illusions last until you stop sustaining them (otherwise they last up to a minute)\n\n'
-      + '• Your illusions affect anyone you intend to perceive them, rather than a signle person.\n\n'
+      + '• Your illusions affect anyone you intend to perceive them, rather than a single person.\n\n'
       + '• You can create illusions that affect all the senses, rather than just sight.',
       partial: 'Choose 1, but your illusions also distract an unintended audience:\n\n'
       + '• The illusions last until you stop sustaining them (otherwise they last up to a minute)\n\n'
-      + '• Your illusions affect anyone you intend to perceive them, rather than a signle person.\n\n'
+      + '• Your illusions affect anyone you intend to perceive them, rather than a single person.\n\n'
       + '• You can create illusions that affect all the senses, rather than just sight.',
       moveSelected: false,
     },
@@ -568,7 +568,7 @@ const playbookMoves = { // basic moves
       moveSelected: false,
     },
     {
-      name: 'Stir The Crowd',
+      fullName: 'Stir The Crowd',
       roll: 'TALK',
       success: 'Choose 1',
       partial: 'Choose 2, or let your Director choose 1.',
@@ -583,7 +583,7 @@ const playbookMoves = { // basic moves
       fullName: 'Bureaucrat',
       details: 'When you would ***exchange blows*** with +TALK to slow someone down or distract'
       + ' them with regulations, bylaws, or whatever piece of red tape you can think of, you'
-      + ' also choose one from the below even on a fail.
+      + ' also choose one from the below even on a fail.'
       + '• You\'re not lying - they’ll really be in trouble if they don’t listen to you.'
       + '• You can hold them up for more than a brief moment.'
       + '• They won\'t remember or recognise you.'
@@ -616,8 +616,71 @@ const playbookMoves = { // basic moves
       + '• You\'ve had something useful planted ahead of time - select a weapon or piece of equipment (one you have access to) to be hidden just where you\'ll need it.',
       moveSelected: false,
     }
+  ],
+  artificer: [
+    {
+      fullName: 'Expert Repairs',
+      details: 'You\'re an expert at fixing broken constructs, and gain an additional Downtime move which you can only spend to ***mend something***. Additionally, you may ***mend something*** with +KNOW. When you tend to someone’s body or Astir, advance a GRAVITY clock with them if you have one.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Jury-Rigger',
+      success: 'Choose 3',
+      partial: 'Choose 2',
+      details: 'When you take random parts or objects and attempt to create something useful out of them, roll +KNOW.\n\n'
+      + '• It fits the purpose you had in mind.\n'
+      + '• It stops working after hours, not minutes.\n'
+      + '• It doesn’t explode when it stops working.\n'
+      + '• It doesn’t look like garbage stuck together.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Augmenter',
+      details: 'When you ***work on a project*** during Downtime, you may fill an additional clock segment on a result of 10+ or 7-9.\n\n'
+      + 'You may ***work on a project*** to create and install magical enhancements or alterations to living creatures.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Arcane Generator',
+      roll: 'KNOW',
+      success: 'You are considered to have CHANNEL at +2 until the end of the Sortie.',
+      partial: 'You are considered to have CHANNEL at +1 until the end of the Sortie.',
+      details: 'You\'ve built a magical device, small enough to be worn on your back or at your hip, that generates arcane power for you. When you start it up, roll +KNOW.\n\n'
+      + 'Should the generator be broken or damaged you lose your CHANNEL trait, and if you are currently attuned to an Astir the connection is severed (meaning it shuts down). '
+      + 'It has the *magic* and *distinct* tags.',
+      moveSelected: false
+    },
+    {
+      fullName: 'From Scratch [Req: Arcane Generator]',
+      details: 'When you tap into magical power to create something long-lasting quickly, roll +CHANNEL. On a 10+, you can create something as big as a tower or as complex as a lock, and it takes but a few minutes of work. On a 7-9, choose 1:\n\n'
+      + '• You must overclock your generator to do so - reduce your CHANNEL to -1.\n'
+      + '• You are unable to conjure any sturdy materials, and everything you have built has the fragile tag.\n'
+      + '• The work is taxing - take the *peril* (exhausted).',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Field Testing',
+      details: 'You\'re used to testing out new equipment, and can easily get to grips with new tech. You have Advantage when trying to use, analyse, or figure out something about unfamiliar equipment, constructs, or similar magical machinery.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'It\'s A Prototype',
+      details: 'Once per Sortie, you may reveal what prototype upgrade you’ve made to a Astir that you reasonably had access to recently. When you do so, choose 2:\n\n'
+      + '• You didn’t have to disassemble anything else for parts.\n'
+      + '• Your invention doesn’t draw unwanted attention to you.\n'
+      + '• The upgrade burns out at the end of the Sortie, rather than after one use.\n'
+      + '• Using the upgrade isn’t dangerous is any way.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Combat Engineer',
+      details: 'You supplement your Artificer training with something more conventional - choose a move from the Scout list instead and a piece of Scout Equipment.',
+      moveSelected: false,
+      details: 'When you get close and use your expertise in magical machinery to try and break a construct or magical mechanism, you may exchange blows and strike decisively with +KNOW using the following profile:\n\n'
+      + '• Counterspell III (melee / slow, ruin)',
+      moveSelected: false,
+    }
   ]
-
 };
 
 const playbookGear = {
@@ -989,5 +1052,4 @@ const playbookGear = {
       }
     ]
   },
-
 }
