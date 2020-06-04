@@ -538,7 +538,86 @@ const playbookMoves = { // basic moves
       + '• What could be a problem for the crew in the immediate future?',
       moveSelected: false,
     }
+  ],
+  diplomat: [
+    {
+      fullName: 'Negotiator',
+      details: 'You may ***read the room*** with +TALK when mediating or taking part in a conversation/discussion. When you successfully negotiate or advocate for something important '
+      + 'to you, advance a GRAVITY clock with another party in the discussion.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Under The Table',
+      details: 'When you set up a clandestine meeting, choose 2: \n\n'
+      + '• There’s no risk of an ambush or interference.\n'
+      + '• Third parties aren’t privy to the contents of the meeting.\n'
+      + '• All parties are willing to discuss in good faith.\n'
+    },
+    {
+      fullName: 'Sharp Tongue',
+      details: 'When you ***exchange blows*** with +TALK, on a roll of 12+ your opponent is put in *peril*.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Sharper Knives',
+      details: 'Daggers and other small weapons are your forte; you can always keep at least one'
+      + ' concealed on your person, no matter how well checked, and you ***strike decisively***'
+      + ' with Advantage while using one to cause harm. This might extend to improvised'
+      +  'weapons, also. You probably struggle not to show off or toy around with knives in'
+      + ' casual situations. It\'s unsettling',
+      moveSelected: false,
+    },
+    {
+      name: 'Stir The Crowd',
+      roll: 'TALK',
+      success: 'Choose 1',
+      partial: 'Choose 2, or let your Director choose 1.',
+      details: 'When you attempt to inspire dissent against the Authority, roll +TALK.\n\n'
+      + '• It takes a tragedy to truly galvanise people.\n'
+      + '• In doing so, you become known and targeted.\n'
+      + '• You have no control or inﬂuence over any acts of protest.\n'
+      + '• People feel better, but nothing really changes\n',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Bureaucrat',
+      details: 'When you would ***exchange blows*** with +TALK to slow someone down or distract'
+      + ' them with regulations, bylaws, or whatever piece of red tape you can think of, you'
+      + ' also choose one from the below even on a fail.
+      + '• You\'re not lying - they’ll really be in trouble if they don’t listen to you.'
+      + '• You can hold them up for more than a brief moment.'
+      + '• They won\'t remember or recognise you.'
+      + '• You don\'t need to take a *risk*.',
+      moveSelected: false,
+    }, 
+    {
+      fullName: 'Irrefutable',
+      details: 'When you argue or advocate for something and back up your point of view with hard'
+      + ' evidence or facts, hold 1. When you reach 3 hold, you may spend them to strike'
+      + ' decisively with +TALK against someone who isn\'t defenceless.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Connected',
+      roll: 'TALK',
+      details: 'When you meet someone, roll +TALK.',
+      success: 'You\'re familiar with them, and you may choose whether their view of you is positive or negative.',
+      partial: 'You\'re familiar with them, but the director decides how they think of you.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Shree Klime',
+      details: 'During Downtime, you may also prepare an alias or disguise. Most people will'
+      + ' believe you are who you say you are, unless you\'re disguised as someone they\'re'
+      + ' very familiar with, or they are given reason to thoroughly check your person or any'
+      + ' identifcation. You may take shore leave to secure 2 of the following:\n\n'
+      + '• You have ID that is either legitimate or so well faked it is impossible to tell the difference.\n'
+      + '• There\'s a reason or expectation for someone ftting your disguise to show up.\n'
+      + '• You\'ve had something useful planted ahead of time - select a weapon or piece of equipment (one you have access to) to be hidden just where you\'ll need it.',
+      moveSelected: false,
+    }
   ]
+
 };
 
 const playbookGear = {
@@ -857,7 +936,7 @@ const playbookGear = {
           'arcane'
         ]
       }
-    ]
+    ],
   },
   artificer: {
     startingGear: [
