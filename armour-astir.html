@@ -112,7 +112,7 @@
                   </div>
                 </div>
                  
-                <div class="trait">
+                <div class="`">
                   <div class="trait-top">
                     <input type="number" value="1" name="attr_clash">
                   </div>
@@ -617,32 +617,31 @@
           <h3>Gravity Clocks</h3>
           <div class="section-content">
             <div class="clock-container">
-              <fieldset class="repeating_gravity_clocks">
-                <div class="gravity-stat">
-                  <div class="trait">
-                    <div class="trait-top">
-                      <input type="number" value="1" name="attr_gravity">
-                    </div>
-                    <div class="trait-bottom">  
-                      <button 
-                        name="roll_gravity" 
-                        type="roll" 
-                        value="&{template:move} {{charname=@{character_name}}} {{trait=GRAVITY}} {{result=[[2d6 + @{gravity}]]}}">
-                        <span>+GRAVITY</span>
-                      </button>
-                    </div>
+              <fieldset class="repeating_gravity">
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_gravity">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_gravity" 
+                      type="roll" 
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=GRAVITY}} {{result=[[2d6 + @{gravity}]]}}">
+                      <span>+GRAVITY</span>
+                    </button>
                   </div>
                 </div>
-                <div>
-                  <input name="attr_clock_name" type="text" />
+                <div class="description">
+                  <input type="text" name="attr_gravity_description" />
+                  <label>Description</label>
                 </div>
-                <div class="clock-buttons">
-                  <input name="attr_clock_1" type="checkbox" /> 
-                  <input name="attr_clock_2" type="checkbox" /> 
-                  <input name="attr_clock_3" type="checkbox" /> 
-                  <input name="attr_clock_4" type="checkbox" /> 
-                  <input name="attr_clock_5" type="checkbox" /> 
-                  <input name="attr_clock_6" type="checkbox" /> 
+                <div class="ticks">
+                  <input name="attr_gravity_tick_1" type="checkbox" />
+                  <input name="attr_gravity_tick_2" type="checkbox" />
+                  <input name="attr_gravity_tick_3" type="checkbox" />
+                  <input name="attr_gravity_tick_4" type="checkbox" />
+                  <input name="attr_gravity_tick_5" type="checkbox" />
+                  <input name="attr_gravity_tick_6" type="checkbox" />
                 </div>
               </fieldset>
             </div>
@@ -720,6 +719,8 @@
     6: 'artificer',
     7: 'diplomat'
   };
+
+  // START PLAYBOOKS
 
   const playbookMoves = { // basic moves
     basic: [
@@ -1120,7 +1121,7 @@
         + '• Avoid an incoming source of physical harm',
         moveSelected: false,
       }, {
-        fulName: 'Improvisation',
+        fullName: 'Improvisation',
         details: 'At the beginning of a Sortie, hold 3. You may spend 1 hold to change your approach for a single move. Explain to your Director what you did or used to do this.',
         moveSelected: false,
       }, {
@@ -1740,6 +1741,8 @@
       ]
     },
   }
+
+  // END PLAYBOOKS
 
   const buttonlist = ['character', 'astir', 'misc'];
   buttonlist.forEach(button => {

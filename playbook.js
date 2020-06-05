@@ -433,7 +433,7 @@ const playbookMoves = { // basic moves
       + '• Avoid an incoming source of physical harm',
       moveSelected: false,
     }, {
-      fulName: 'Improvisation',
+      fullName: 'Improvisation',
       details: 'At the beginning of a Sortie, hold 3. You may spend 1 hold to change your approach for a single move. Explain to your Director what you did or used to do this.',
       moveSelected: false,
     }, {
