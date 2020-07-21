@@ -195,10 +195,13 @@
                 <div class="character-danger-type">
                   <input type="radio" name="attr_danger_1_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <input type="radio" name="attr_danger_1_radio" value="0"/><span class="danger-type">Risk</span>
+                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="0" class="danger-radio"><span>Risk</span></label>
                   </div>
+                  
+                  <div>/</div>
+                
                   <div class="danger-group">
-                    <input type="radio" name="attr_danger_1_radio" value="1"/><span class="danger-type">Peril</span>
+                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="1" class="danger-radio"><span>Peril</span></label>
                   </div>
                 </div>
                 <div class="character-danger-input">
@@ -206,17 +209,20 @@
                 </div>
 
                 <div class="danger-group">
-                  <input type="radio" name="attr_danger_1_radio" value="2"/><span>Clear</span>
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_1_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
                 </div>
               </div>
               <div class="danger">
                 <div class="character-danger-type">
                   <input type="radio" name="attr_danger_2_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <input type="radio" name="attr_danger_2_radio" value="0"/><span class="danger-type">Risk</span>
+                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="0" class="danger-radio"><span>Risk</span></label>
                   </div>
+                  
+                  <div>/</div>
+                
                   <div class="danger-group">
-                    <input type="radio" name="attr_danger_2_radio" value="1"/><span class="danger-type">Peril</span>
+                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="1" class="danger-radio"><span>Peril</span></label>
                   </div>
                 </div>
                 <div class="character-danger-input">
@@ -224,17 +230,20 @@
                 </div>
 
                 <div class="danger-group">
-                  <input type="radio" name="attr_danger_2_radio" value="2"/><span>Clear</span>
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_2_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
                 </div>
               </div>
               <div class="danger">
                 <div class="character-danger-type">
                   <input type="radio" name="attr_danger_3_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <input type="radio" name="attr_danger_3_radio" value="0"/><span class="danger-type">Risk</span>
+                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="0" class="danger-radio"><span>Risk</span></label>
                   </div>
+                  
+                  <div>/</div>
+                
                   <div class="danger-group">
-                    <input type="radio" name="attr_danger_3_radio" value="1"/><span class="danger-type">Peril</span>
+                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="1" class="danger-radio"><span>Peril</span></label>
                   </div>
                 </div>
                 <div class="character-danger-input">
@@ -242,9 +251,10 @@
                 </div>
 
                 <div class="danger-group">
-                  <input type="radio" name="attr_danger_3_radio" value="2"/><span>Clear</span>
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_3_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
                 </div>
               </div>
+  
             </div>
           </div>
 
@@ -276,9 +286,10 @@
 
                     <input type="hidden" name="attr_move_doroll" value="1"/>
                     <input type="hidden" name="attr_move_rollvalue" value="" />
-                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}"><span style="font-family: 'dicefontd30'">0</span></button>
-                    
-                    <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                      <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+                    </button>
+
                     <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
     
                     <div class="move-expansion">
@@ -312,10 +323,10 @@
 
                     <input type="hidden" name="attr_move_doroll" value="1" />
                     <input type="hidden" name="attr_move_rollvalue" value="" />
-                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}"><span style="font-family: 'dicefontd30'">0</span></button>
-
-                    <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
                     <input type="checkbox" name="attr_move_selected" class="move-selected" />
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                      <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+                    </button>
                     <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
     
                     <div class="move-expansion">
@@ -655,6 +666,18 @@
       <div class="section flex-1">
         <h3>Misc Info</h3>
         <div class="section-content">
+          <div class="spotlight">
+          <div class="ticks"></div>
+            <input type="checkbox" name="attr_spotlight_1">
+            <input type="checkbox" name="attr_spotlight_2">
+            <input type="checkbox" name="attr_spotlight_3">
+            <input type="checkbox" name="attr_spotlight_4">
+            <input type="checkbox" name="attr_spotlight_5">
+            <input type="checkbox" name="attr_spotlight_6">
+          </div>
+
+          <label>Spotlight</label>
+
           <div class="additional-gear">
             <textarea name="attr_additional_gear"></textarea>
             <label>Additional Gear</label>
