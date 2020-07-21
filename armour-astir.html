@@ -253,7 +253,10 @@
             <h3>Ideals</h3>
             <div class="section-content">
               <fieldset class="repeating_ideals">
-                <input type="text" name="attr_ideal" />
+                <div class="ideal-section">
+                  <input type="checkbox" name="attr_ideal_used" class="ideal-check"> 
+                  <input type="text" name="attr_ideal" class="ideal-text" />
+                </div>
               </fieldset>
             </div>
           </div>
@@ -274,7 +277,7 @@
                     <input type="hidden" name="attr_move_doroll" value="1"/>
                     <input type="hidden" name="attr_move_rollvalue" value="" />
                     <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}"><span style="font-family: 'dicefontd30'">0</span></button>
-
+                    
                     <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
                     <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
     

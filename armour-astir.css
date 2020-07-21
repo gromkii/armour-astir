@@ -521,6 +521,20 @@ button [type='action'] {
   outline: none;
 }
 
+.sheet-ideal-section {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.sheet-ideal-text {
+  text-decoration: none;
+}
+
+.sheet-ideal-check:checked ~ .sheet-ideal-text {
+  text-decoration: line-through;
+}
+
 /* ---- Misc Page ----- */
 .sheet-misc-page-container {
   display: flex;
