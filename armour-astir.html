@@ -92,7 +92,8 @@
                     <button 
                       name="roll_defy" 
                       type="roll" 
-                      value="&{template:move} {{charname=@{character_name}}} {{trait=DEFY}} {{result=[[2d6 + @{defy}]]}}">
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[2d6 + @{defy}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[3d6kh2 + @{defy}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[4d6kh2 + @{defy}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[3d6kl2 + @{defy}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125 {{result=[[4d6kl2 + @{defy}]]&#125&#125}">
                       <span>DEFY</span>
                     </button>
                   </div>
@@ -106,7 +107,8 @@
                     <button 
                       name="roll_sense" 
                       type="roll" 
-                      value="&{template:move} {{charname=@{character_name}}} {{trait=SENSE}} {{result=[[2d6 + @{sense}]]}}">
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[2d6 + @{sense}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[3d6kh2 + @{sense}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[4d6kh2 + @{sense}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[3d6kl2 + @{sense}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125 {{result=[[4d6kl2 + @{sense}]]&#125&#125}">
                       <span>SENSE</span>
                     </button>
                   </div>
@@ -120,7 +122,8 @@
                     <button 
                       name="roll_clash" 
                       type="roll" 
-                      value="&{template:move} {{charname=@{character_name}}} {{trait=CLASH}} {{result=[[2d6 + @{clash}]]}}">
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[2d6 + @{clash}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[3d6kh2 + @{clash}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[4d6kh2 + @{clash}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[3d6kl2 + @{clash}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125 {{result=[[4d6kl2 + @{clash}]]&#125&#125}">
                       <span>CLASH</span>
                     </button>
                   </div>
@@ -134,7 +137,9 @@
                     <button 
                       name="roll_talk" 
                       type="roll" 
-                      value="&{template:move} {{charname=@{character_name}}} {{trait=TALK}} {{result=[[2d6 + @{talk}]]}}">                      <span>TALK</span>
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[2d6 + @{talk}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[3d6kh2 + @{talk}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[4d6kh2 + @{talk}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[3d6kl2 + @{talk}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125 {{result=[[4d6kl2 + @{talk}]]&#125&#125}">
+                      <span>TALK</span>
                     </button>
                   </div>
                 </div>
@@ -147,30 +152,12 @@
                     <button 
                       name="roll_know" 
                       type="roll" 
-                      value="&{template:move} {{charname=@{character_name}}} {{trait=KNOW}} {{result=[[2d6 + @{know}]]}}">
-                      <span>KNOW</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="trait">
-                  <div class="trait-top">
-                    <input type="number" value="1" name="attr_know">
-                  </div>
-                  <div class="trait-bottom">  
-                    <button 
-                      name="roll_know" 
-                      type="roll" 
                       class="move-button"
-                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[2d6 + @{know}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125}">
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[2d6 + @{know}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125}"">
                       <span>+KNOW</span>
                     </button>
                   </div>
                 </div>
-
-                <!-- <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
-                      <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
-                    </button> -->
 
                 <!-- Hidden based on playbook. -->
                 <input type="hidden" class="channel_hidden" name="attr_channel_hidden" value="false" />
@@ -182,7 +169,7 @@
                     <button 
                       name="roll_channel" 
                       type="roll" 
-                      value="&{template:move} {{charname=@{character_name}}} {{trait=CHANNEL}} {{result=[[2d6 + @{channel}]]}}">
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[2d6 + @{channel}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kh2 + @{channel}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[4d6kh2 + @{channel}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kl2 + @{channel}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125 {{result=[[4d6kl2 + @{channel}]]&#125&#125}">
                       <span>CHANNEL</span>
                     </button>
                   </div>
