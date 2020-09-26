@@ -53,7 +53,7 @@
             </div>
 
             <div class="descriptor channeler">
-              <textarea rows="2" name="attr_character_catchphrase"></textarea>
+              <textarea rows="2" name="attr_character_catchphrase" class="launch-phrase"></textarea>
               <label>When You Launch Your Astir, You Say...</label>
             </div>
             
@@ -161,11 +161,16 @@
                     <button 
                       name="roll_know" 
                       type="roll" 
-                      value="?{Modifiers|Advantage +1,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|Advantage +2,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|Disadvantage -1,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|Disadvantage-2,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125}">
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[2d6 + @{know}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125}">
                       <span>+KNOW</span>
                     </button>
                   </div>
                 </div>
+
+                <!-- <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                      <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+                    </button> -->
 
                 <!-- Hidden based on playbook. -->
                 <input type="hidden" class="channel_hidden" name="attr_channel_hidden" value="false" />
@@ -733,7 +738,7 @@
   </div>
 </rolltemplate>
 
-<script type="text/javascript">
+<script type="text/worker">
 
   const bookName = {
     0: 'arcanist',
@@ -2119,6 +2124,29 @@
     
   }
 
+  const rollModifiers = [
+    {
+      key: 'None',
+      roll: '2d6'
+    },
+    {
+      key: 'Advantage (+1)',
+      roll: '3d6kh2'
+    },
+    {
+      key: 'Confidence (+2)',
+      roll: '4d6kh2'
+    },
+    {
+      key: 'Disadvantage (-1)',
+      roll: '3d6kl2'
+    },
+    {
+      key: 'Desparate (-2)',
+      roll: '4d6kl2'
+    },
+  ];
+
   function buildEmptyRollValue(prefix) {
     return '&{template:move} '
           +'{{charname=@{character_name}}}'
@@ -2131,16 +2159,29 @@
   }
 
   function buildSingleRollValue(roll, prefix) {
-    return '&{template:move} '
-          +'{{charname=@{character_name}}}'
-          +'{{movename=@{' + prefix + 'name}}} '
-          +'{{trait='+ roll +'}} '
-          +'{{result=[[ 2d6 + @{' + roll.toLowerCase() + '}]]}} '
-          +'{{success=@{' + prefix + 'success}}} '
-          +'{{partial=@{'+ prefix + 'partial}}} '
-          +'{{miss=@{'+ prefix + 'miss}}} '
-          +'{{doroll=@{' + prefix + 'doroll}}} '
-          +'{{details=@{' + prefix + 'details}}}';
+    
+    let rollValue = '';
+    rollValue += '?{Modifiers|'
+    _.forEach(rollModifiers, (mod, index) => {
+      const last = index === rollModifiers.length - 1;
+      const lastChar = last ? '}' : '|';
+
+      rollValue += mod.key
+      + ',&{template:move&#125 '
+      +'{{charname=@{character_name}&#125&#125'
+      +'{{movename=@{' + prefix + 'name}&#125&#125 '
+      +'{{details=@{' + prefix + 'details}&#125&#125'
+      +'{{trait='+ roll +'&#125&#125 '
+      +'{{result=[[ '+ mod.roll +' + @{' + roll.toLowerCase() + '}]]&#125&#125 '
+      +'{{success=@{' + prefix + 'success}&#125&#125 '
+      +'{{partial=@{'+ prefix + 'partial}&#125&#125 '
+      +'{{miss=@{'+ prefix + 'miss}&#125&#125 '
+      +'{{doroll=@{' + prefix + 'doroll}&#125 '
+      + lastChar;
+    });
+
+    return rollValue;
+    
   }
 
   // takes array of strings, eg: ['KNOW', 'DEFY']
@@ -2154,37 +2195,42 @@
 
     _.forEach(rolls, (roll, index) => {
       const last = index === rolls.length - 1;
-      const lastChar = last ? '}' : '|';
+      const lastChar = last ? '}' : '|';      
       
-      rollValue += '+' + roll 
-      +',&{template:move&#125 '
-      +'{{details=@{' + prefix + 'details}&#125&#125'
-      +'{{charname=@{character_name}&#125&#125 '
-      +'{{doroll=@{' + prefix + 'doroll}&#125&#125 '
-      +'{{miss=@{'+ prefix + 'miss}&#125&#125 '
-      +'{{movename=@{' + prefix + 'name}&#125&#125 '
-      +'{{partial=@{'+ prefix + 'partial}&#125&#125 '
-      +'{{result=[[ 2d6 + @{' + roll.toLowerCase() + '}]]&#125&#125 '
-      +'{{success=@{' + prefix + 'success}&#125&#125 '
-      +'{{trait='+ roll +'&#125&#125'
-      + lastChar;
+      rollValue += '+' + roll + ', ?{Modifiers&#124'
+      
+      _.forEach(rollModifiers, (mod, modIndex) => {
+        const modLast = modIndex === rollModifiers.length - 1;
+        const modLastChar = modLast ? '&#125' : '&#124';
+        
+        rollValue += mod.key
+        +'&#44; &{template:move&amp;#125 '
+        +'{{details=@{' + prefix + 'details}&amp;#125&amp;#125'
+        +'{{charname=@{character_name}&amp;#125&amp;#125 '
+        +'{{miss=@{'+ prefix + 'miss}&amp;#125&amp;#125 '
+        +'{{movename=@{' + prefix + 'name}&amp;#125&amp;#125 '
+        +'{{trait='+ roll +'&amp;#125&amp;#125'
+        +'{{result=[[' + mod.roll  + ' + @{' + roll.toLowerCase() + '}]]&amp;#125&amp;#125 '
+        +'{{partial=@{'+ prefix + 'partial}&amp;#125&amp;#125 '
+        +'{{success=@{' + prefix + 'success}&amp;#125&amp;#125 '
+        +'{{doroll=@{' + prefix + 'doroll}&amp;#125 '
+        + modLastChar;
+      })
+      rollValue += lastChar;
 
     });
 
     return rollValue;
   }
 
-  function buildRollModifier(trait) {
-    
-  }
 </script>
 
 <!-- 
   TODO:
-    - Radio buttons for dangers section.
-    - Moves keep bugging out, fix it.
-    - Figure out equipment name with tags formatting/interpolation.
-
+  - Radio buttons for dangers section.
+  - Moves keep bugging out, fix it.
+  - Figure out equipment name with tags formatting/interpolation.
+  
   ?{Choose a Trait|+DEFY, &{template:move} 
   {{charactername=@{character_name}}} 
   {{movename=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_name}}} 
@@ -2205,5 +2251,14 @@
   {{miss=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_miss}}}
   {{doroll=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_doroll}}}
   {{details=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_details}}}}
-
+  
+  // function buildRollModifier(trait) {
+  //   return '?{Modifiers|'
+  //     + 'None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[2d6 + @{know}]]&#125&#125|
+  //     + 'Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|'
+  //     + 'Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|'
+  //     + 'Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|'
+  //     + 'Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125';
+  // }
+  
 -->

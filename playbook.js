@@ -68,7 +68,7 @@ const playbookMoves = { // basic moves
     },
     {
       fullName: 'Cool Off',
-      rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK'],
+      rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK', 'CHANNEL'],
       success: 'You/they erase a *risk* or untick \'overheating\' from an Astir.',
       partial: 'As above, but your moment of safety is interrupted.'
     },

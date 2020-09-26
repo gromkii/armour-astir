@@ -185,7 +185,11 @@ h3 {
 /* ---- DESCRIPTORS ---- */
 .sheet-descriptor label {
   font-size: .9em;
+}
 
+.sheet-launch-phrase {
+  height: 80px;
+  resize: vertical;
 }
 
 .sheet-channeler,
