@@ -1983,10 +1983,10 @@
 
     
     // TODO: Create a function to sanitize the text.
-    if (m.success) attrs[prefix + 'success'] = m.success.replace(/,/g, '&#44;');
-    if (m.partial) attrs[prefix + 'partial'] = m.partial.replace(/,/g, '&#44;');
+    if (m.success) attrs[prefix + 'success'] = m.success.replace(/,/g, '&amp;#44;');
+    if (m.partial) attrs[prefix + 'partial'] = m.partial.replace(/,/g, '&amp;#44;');
     if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, '&#44;');
-    if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, '&#44;');
+    if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, '&amp;#44;');
 
     attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
 
