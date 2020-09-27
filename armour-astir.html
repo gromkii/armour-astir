@@ -740,7 +740,6 @@
 
   // START PLAYBOOKS
 
-  //#region Playbook Moves
   const playbookMoves = { // basic moves
   basic: [
     {
@@ -1394,9 +1393,7 @@
     }
   ]
 };
-  //#endregion
 
-  //#region Playbook Gear
   const playbookGear = {
     arcanist: {
         startingGear: [
@@ -1767,9 +1764,32 @@
       ]
     },
   }
-  //#endregion
 
   // END PLAYBOOKS
+
+  // Used for building rollValues.
+  const rollModifiers = [
+    {
+      key: 'None',
+      roll: '2d6'
+    },
+    {
+      key: 'Advantage (+1)',
+      roll: '3d6kh2'
+    },
+    {
+      key: 'Confidence (+2)',
+      roll: '4d6kh2'
+    },
+    {
+      key: 'Disadvantage (-1)',
+      roll: '3d6kl2'
+    },
+    {
+      key: 'Desperate (-2)',
+      roll: '4d6kl2'
+    },
+  ];
 
   // Set the currently displayed tab on the character sheet.
   const buttonlist = ['character', 'astir', 'misc'];
@@ -1827,6 +1847,8 @@
 
   // ----- MOVES EDIT ----- //
   // TODO: Read article about improving performance. This is a lot of event listeners.
+  // TODO: It might be helpful to separate plaintext and sanitized/formatted text, ex: success -> success_text
+  // When moves are being populated on init, some fields are being filled properly.
     on('change:repeating_moves:move_name_base', () => {
       getAttrs(['repeating_moves_move_name_base'], (v) => {
         setAttrs({
@@ -1968,13 +1990,13 @@
     attrs[prefix + 'name'] = m.fullName;
     attrs[prefix + 'name_base'] = m.fullName;
 
-    
-    // TODO: Create a function to sanitize the text.
+    // Parsing nested drop-down roll queries are not great in roll20, so we use the code instead of commas.
     if (m.success) attrs[prefix + 'success'] = m.success.replace(/,/g, '&amp;#44;');
     if (m.partial) attrs[prefix + 'partial'] = m.partial.replace(/,/g, '&amp;#44;');
-    if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, '&#44;');
+    if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, '&amp;#44;');
     if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, '&amp;#44;');
 
+    // Check to see if the move has a roll component, makes the roll template play nicer.
     attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
 
     setAttrs(attrs, () => {
@@ -2111,29 +2133,10 @@
     
   }
 
-  const rollModifiers = [
-    {
-      key: 'None',
-      roll: '2d6'
-    },
-    {
-      key: 'Advantage (+1)',
-      roll: '3d6kh2'
-    },
-    {
-      key: 'Confidence (+2)',
-      roll: '4d6kh2'
-    },
-    {
-      key: 'Disadvantage (-1)',
-      roll: '3d6kl2'
-    },
-    {
-      key: 'Desparate (-2)',
-      roll: '4d6kl2'
-    },
-  ];
 
+  
+
+  // Build the rollValue for a move that contains no trait.
   function buildEmptyRollValue(prefix) {
     return '&{template:move} '
           +'{{charname=@{character_name}}}'
@@ -2145,6 +2148,7 @@
           +'{{details=@{' + prefix + 'details}}}';
   }
 
+  // Build the rollValue for a move with a single trait.
   function buildSingleRollValue(roll, prefix) {
     
     let rollValue = '';
@@ -2171,7 +2175,7 @@
     
   }
 
-  // takes array of strings, eg: ['KNOW', 'DEFY']
+  // Build the rollValue for a move that has multiple traits to choose from.
   function buildRollValue(rolls, prefix) {
 
     if (!rolls.length) {
@@ -2202,50 +2206,12 @@
         +'{{success=@{' + prefix + 'success}&amp;#125&amp;#125 '
         +'{{doroll=@{' + prefix + 'doroll}&amp;#125 '
         + modLastChar;
-      })
-      rollValue += lastChar;
+      });
 
+      rollValue += lastChar;
     });
 
     return rollValue;
   }
 
 </script>
-
-<!-- 
-  TODO:
-  - Radio buttons for dangers section.
-  - Moves keep bugging out, fix it.
-  - Figure out equipment name with tags formatting/interpolation.
-  
-  ?{Choose a Trait|+DEFY, &{template:move} 
-  {{charactername=@{character_name}}} 
-  {{movename=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_name}}} 
-  {{trait=DEFY}}{{result=[[ 2d6 + @{defy}]]}} 
-  {{success=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_success}}} 
-  {{partial=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_partial}}} 
-  {{miss=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_miss}}} 
-  {{doroll=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_doroll}}} 
-  {{details=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_details}}}
-  |
-  +KNOW, &{template:move}
-  {{charactername=@{character_name}}}
-  {{movename=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_name}}}
-  {{trait=KNOW}}
-  {{result=[[ 2d6 + @{know}]]}}
-  {{success=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_success}}}
-  {{partial=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_partial}}}
-  {{miss=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_miss}}}
-  {{doroll=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_doroll}}}
-  {{details=@{repeating_basicmoves_-M0uLOaiZLJXAJDpQFpT_move_details}}}}
-  
-  // function buildRollModifier(trait) {
-  //   return '?{Modifiers|'
-  //     + 'None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[2d6 + @{know}]]&#125&#125|
-  //     + 'Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|'
-  //     + 'Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|'
-  //     + 'Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|'
-  //     + 'Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125';
-  // }
-  
--->
