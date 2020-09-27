@@ -68,7 +68,7 @@ const playbookMoves = { // basic moves
     },
     {
       fullName: 'Cool Off',
-      rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK'],
+      rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK', 'CHANNEL'],
       success: 'You/they erase a *risk* or untick \'overheating\' from an Astir.',
       partial: 'As above, but your moment of safety is interrupted.'
     },
@@ -92,6 +92,10 @@ const playbookMoves = { // basic moves
       partial: 'Retreat from the Sortie safely, or be put in *peril.*',
       miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? Have hat you lost? Who and what is changed by your defeat?',
       details: 'If you survive, you are changed by your defeat. As well as the above, choose one: \n\n • Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher lower than +/- 3)\n • Choose a new playbook. Keep what moves you and the Director agree are truly part of your character, and discard the others. Replace them with the starting moves for your new playbook. You do not gain its starting equipment.',
+    },
+    {
+      fullName: 'Lead a Sortie',
+      rolls: ''
     }
   ],
   arcanist: [
@@ -271,17 +275,22 @@ const playbookMoves = { // basic moves
     },
     {
       fullName: 'Inspire Focus',
-      details: '',
+      details: 'Once per Sortie, you may take a visible position over the battlefeld and inspire'
+      + 'confdence and clarity in your allies that see you - they each clear a risk and take'
+      + 'advantage to their next roll.',
       moveSelected: false
     },
     {
       fullName: 'Bless',
-      details: '',
+      details: 'When you enter battle with a group of allies, give up to four people (including'
+      + 'yourself) advantage when they next ***bite the dust***.',
       moveSelected: false
     },
     {
       fullName: 'Safeguard',
-      details: '',
+      details: 'When you ***exchange blows*** and someone ***helps or hinders*** you, you can protect'
+      + 'them from any harm they might suffer as a result. When you ***help or hinder***'
+      + 'someone who is ***exchanging blows***, you can suffer any harm taken in their place.',
       moveSelected: false
     },
     {
