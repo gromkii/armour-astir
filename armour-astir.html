@@ -1990,11 +1990,18 @@
     attrs[prefix + 'name'] = m.fullName;
     attrs[prefix + 'name_base'] = m.fullName;
 
+    let replaceChar = ',';
+    if (m.roll) { replaceChar = '&#44;' }
+    if (m.rolls) { 
+      replaceChar = '&amp;#44;' 
+    }
+
     // Parsing nested drop-down roll queries are not great in roll20, so we use the code instead of commas.
-    if (m.success) attrs[prefix + 'success'] = m.success.replace(/,/g, '&amp;#44;');
-    if (m.partial) attrs[prefix + 'partial'] = m.partial.replace(/,/g, '&amp;#44;');
-    if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, '&amp;#44;');
-    if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, '&amp;#44;');
+    // This might be dependant on if there is a roll, rolls, or no roll. Rework based on m.roll || m.rolls
+    if (m.success) attrs[prefix + 'success'] = m.success.replace(/,/g, replaceChar);
+    if (m.partial) attrs[prefix + 'partial'] = m.partial.replace(/,/g, replaceChar);
+    if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, replaceChar);
+    if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, replaceChar);
 
     // Check to see if the move has a roll component, makes the roll template play nicer.
     attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
