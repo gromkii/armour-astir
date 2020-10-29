@@ -632,3 +632,11 @@ button [type='action'] {
   margin-top: 10px;
 }
 
+.sheet-version-info {
+  margin: 1em;
+  font-size: .7em;
+  font-style: italic;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
