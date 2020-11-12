@@ -2,10 +2,10 @@
   <div class="top-section">
     <div class="page-header">
       <div class="header">
-        <input type="text" placeholder="Character Name" name="attr_character_name" />
+        <input type="text" data-i18n-placeholder="character_name" name="attr_character_name" />
       </div>
       <div class="header">
-        <input type="text" class="playbook" name="attr_playbook" placeholder="Playbook"/>
+        <input type="text" class="playbook" name="attr_playbook" data-18n-placeholder="playbook"/>
         <!-- TODO: Make this an attr_ and create sheet script. -->
       </div>
     </div>
@@ -13,13 +13,13 @@
     <div class="navigation">
       <input type="hidden" value="character" name="attr_sheet_tab" class="tabstoggle" />
       <div class="page-tabs">
-        <button type="action" name="act_character">Character</button>
-        <button type="action" name="act_astir">Astir</button>
-        <button type="action" name="act_misc">Misc</button>
+        <button type="action" name="act_character" data-i18n="character"></button>
+        <button type="action" name="act_astir" data-i18n="astir"></button>
+        <button type="action" name="act_misc" data-i18n="misc"></button>
       </div>
       <div class="show-carrier">
         <input type="checkbox" name="attr_show_carrier_toggle" value="show">
-        <span>Carrier</span>
+        <span data-i18n="carrier_toggle"></span>
       </div>
     </div>
 
@@ -28,60 +28,56 @@
     <div class="character-page">
       <div class="character-upper-section">
         <div class="character-descriptors section">
-          <h3>
-            Character Info
-          </h3>
+          <h3 data-i18n="character_info"></h3>
           <div class="section-content">
           <input type="hidden" name="attr_playbook_descriptors" class="descriptors-toggle"/>
             <div class="descriptor">
               <input type="text" name="attr_character_pronouns"/>
-              <label>Pronouns...</label>
+              <label data-i18n="pronouns"></label>
             </div>
             <div class="descriptor">
               <input type="text" name="attr_character_looks"/>
-              <label>You look...</label>
+              <label data-i18n="you_look"></label>
             </div>
             <div class="descriptor">
               <input type="text" name="attr_character_wears"/>
-              <label>You wear...</label>
+              <label data-i18n="you_wear"></label>
             </div>
             
             <!-- attr_playbook 0-3 -->
             <div class="descriptor channeler">
               <input type="text" name="attr_character_magic"/>
-              <label>Your magic is like...</label>
+              <label data-i18n="your_magic_is_like"></label>
             </div>
 
             <div class="descriptor channeler">
               <textarea rows="2" name="attr_character_catchphrase" class="launch-phrase"></textarea>
-              <label>When You Launch Your Astir, You Say...</label>
+              <label data-i18n="when_you_launch_your_astir_you_say"></label>
             </div>
             
             <!-- attr_playbook 4 -->
             <div class="descriptor scout">
               <input type="text" name="attr_character_fights"/>
-              <label>You fight with...</label>
+              <label data-i18n="you_fight_with"></label>
             </div>
             
             <!-- attr_playbook 5 -->
             <div class="descriptor captain">
               <input type="text" name="attr_character_leads"/>
-              <label>You lead with...</label>
+              <label data-i18n="you_lead_with"></label>
             </div>
             
             <!-- attr_playbook 6-7 -->
             <div class="descriptor support">
               <input type="text" name="attr_character_handiworks"/>
-              <label>Your handiwork looks...</label>
+              <label data-i18n="your_handiwork_looks"></label>
             </div>
             
           </div>
         </div>
         <div class="character-info">
           <div class="character-traits section">
-            <h3> 
-              Traits            
-            </h3>
+            <h3  data-i18n="traits"></h3>
             <div class="section-content">
               <div class="traits">
                 <div class="trait">
@@ -94,7 +90,7 @@
                       type="roll" 
                       class="move-button"
                       value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[2d6 + @{defy}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[3d6kh2 + @{defy}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[4d6kh2 + @{defy}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[3d6kl2 + @{defy}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125 {{result=[[4d6kl2 + @{defy}]]&#125&#125}">
-                      <span>DEFY</span>
+                      <span data-i18n="defy"></span>
                     </button>
                   </div>
                 </div>
@@ -109,7 +105,7 @@
                       type="roll" 
                       class="move-button"
                       value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[2d6 + @{sense}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[3d6kh2 + @{sense}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[4d6kh2 + @{sense}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[3d6kl2 + @{sense}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125 {{result=[[4d6kl2 + @{sense}]]&#125&#125}">
-                      <span>SENSE</span>
+                      <span data-i18n="sense"></span>
                     </button>
                   </div>
                 </div>
@@ -124,7 +120,7 @@
                       type="roll" 
                       class="move-button"
                       value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[2d6 + @{clash}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[3d6kh2 + @{clash}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[4d6kh2 + @{clash}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[3d6kl2 + @{clash}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125 {{result=[[4d6kl2 + @{clash}]]&#125&#125}">
-                      <span>CLASH</span>
+                      <span data-i18n="clash"></span>
                     </button>
                   </div>
                 </div>
@@ -139,7 +135,7 @@
                       type="roll" 
                       class="move-button"
                       value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[2d6 + @{talk}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[3d6kh2 + @{talk}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[4d6kh2 + @{talk}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[3d6kl2 + @{talk}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125 {{result=[[4d6kl2 + @{talk}]]&#125&#125}">
-                      <span>TALK</span>
+                      <span data-i18n="talk"></span>
                     </button>
                   </div>
                 </div>
@@ -154,7 +150,7 @@
                       type="roll" 
                       class="move-button"
                       value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[2d6 + @{know}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125}"">
-                      <span>+KNOW</span>
+                      <span data-i18n="know"></span>
                     </button>
                   </div>
                 </div>
@@ -170,7 +166,7 @@
                       name="roll_channel" 
                       type="roll" 
                       value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[2d6 + @{channel}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kh2 + @{channel}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[4d6kh2 + @{channel}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kl2 + @{channel}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125 {{result=[[4d6kl2 + @{channel}]]&#125&#125}">
-                      <span>CHANNEL</span>
+                      <span data-i18n="channel"></span>
                     </button>
                   </div>
                 </div>
@@ -179,21 +175,19 @@
           </div>
           
           <div class="character-dangers section">
-            <h3>
-              Dangers
-            </h3>
+            <h3 data-i18n="dangers"></h3>
             <div class="section-content">
               <div class="danger">
                 <div class="character-danger-type">
                   <input type="radio" name="attr_danger_1_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="0" class="danger-radio"><span>Risk</span></label>
+                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
                   </div>
                   
                   <div>/</div>
                 
                   <div class="danger-group">
-                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="1" class="danger-radio"><span>Peril</span></label>
+                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
                   </div>
                 </div>
                 <div class="character-danger-input">
@@ -208,13 +202,13 @@
                 <div class="character-danger-type">
                   <input type="radio" name="attr_danger_2_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="0" class="danger-radio"><span>Risk</span></label>
+                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
                   </div>
                   
                   <div>/</div>
                 
                   <div class="danger-group">
-                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="1" class="danger-radio"><span>Peril</span></label>
+                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
                   </div>
                 </div>
                 <div class="character-danger-input">
@@ -229,13 +223,13 @@
                 <div class="character-danger-type">
                   <input type="radio" name="attr_danger_3_radio" value="4" style="display: none;" checked="true" />
                   <div class="danger-group">
-                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="0" class="danger-radio"><span>Risk</span></label>
+                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
                   </div>
                   
                   <div>/</div>
                 
                   <div class="danger-group">
-                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="1" class="danger-radio"><span>Peril</span></label>
+                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
                   </div>
                 </div>
                 <div class="character-danger-input">
@@ -252,7 +246,7 @@
 
           <div class="character-ideals section">
             <!-- Repeating input section. -->
-            <h3>Hooks</h3>
+            <h3 data-i18n="hooks"></h3>
             <div class="section-content">
               <fieldset class="repeating_ideals">
                 <div class="ideal-section">
@@ -273,12 +267,12 @@
 
       <div class="character-lower-section">
         <div class="character-moves section">
-          <h3>Moves</h3>
+          <h3 data-i18n="moves"></h3>
           <div class="section-content">
             <div class="character-moves-container">
 
               <div class="move-list-container">
-                <h4 class="move-list-header">Basic Moves</h4>
+                <h4 class="move-list-header" data-i18n="basic_moves"></h4>
                 <fieldset class="repeating_basicmoves">
                   <div class="move-main">
 
@@ -292,22 +286,22 @@
     
                     <div class="move-expansion">
                       <input type="text" name="attr_move_name_base" />
-                      <label>Move Name</label>
+                      <label data-i18n="move_name_base"></label>
                       
                       <input type="text" name="attr_move_trait" />
-                      <label>Trait (Comma Separate Multiple)</label>
+                      <label data-i18n="move_trait"></label>
                       
                       <input type="text" name="attr_move_success" />
-                      <label>Success (10+)</label>
+                      <label data-i18n="move_success"></label>
     
                       <input type="text" name="attr_move_partial" />
-                      <label>Partial (7-9)</label>
+                      <label data-i18n="move_partial"></label>
     
                       <input type="text" name="attr_move_miss">
-                      <label>Miss (6 or less)</label>
+                      <label data-i18n="move_miss"></label>
     
                       <textarea type="text" name="attr_move_details"></textarea>
-                      <label>Details</label> 
+                      <label data-i18n="move_details"></label> 
     
                     </div>
                   </div>
@@ -315,7 +309,7 @@
               </div>
 
               <div class="move-list-container">
-                <h4 class="move-list-header">Playbook Moves</h4>
+                <h4 class="move-list-header" data-i18n="playbook_moves"></h4>
                 <fieldset class="repeating_moves">
                   <div class="move-main">
 
@@ -329,22 +323,22 @@
     
                     <div class="move-expansion">
                       <input type="text" name="attr_move_name_base" />
-                      <label>Move Name</label>
+                      <label data-i18n="move_name_base"></label>
                       
                       <input type="text" name="attr_move_trait" />
-                      <label>Trait (Comma Separate Multiple)</label>
+                      <label data-i18n="move_trait"></label>
                       
                       <input type="text" name="attr_move_success" />
-                      <label>Success (10+)</label>
+                      <label data-i18n="move_success"></label>
     
                       <input type="text" name="attr_move_partial" />
-                      <label>Partial (7-9)</label>
+                      <label data-i18n="move_partial"></label>
     
                       <input type="text" name="attr_move_miss">
-                      <label>Miss (6 or less)</label>
+                      <label data-i18n="move_miss"></label>
     
                       <textarea type="text" name="attr_move_details"></textarea>
-                      <label>Details</label> 
+                      <label data-i18n="move_details"></label> 
     
                     </div>
                   </div>
@@ -357,11 +351,11 @@
         <div class="character-lower-info">
           
           <div class="character-gear section">
-            <h3>Gear</h3>
+            <h3 data-i18n="gear"></h3>
             <div class="section-content section-gear">
               
               <div class="gearlist-container">
-                <h4>Starting Gear</h4>
+                <h4 data-i18n="starting_gear"></h4>
                 <fieldset class="repeating_gearlist">
                   <div class="gearlist-item">
                     <span name="attr_quantity" value="@{quantity}"></span>
@@ -373,7 +367,7 @@
               </div>
 
               <div class="gearcheck-container">
-                <h4>Playbook Gear</h4>
+                <h4 data-i18n="playbook_gear"></h4>
                 <fieldset class="repeating_gearcheck">
                   <div class="gear-main">
                     <input type="checkbox" name="attr_gear_expanded" class="gear-expandtoggle" />
@@ -387,13 +381,13 @@
                     <div class="gear-expansion">
                       <!-- name -->
                       <input type="text" class="gear-edit" name="attr_gear_name" value="@{gear_name}" />
-                      <label>Name</labeL>
+                      <label data-i18n="gear_name"></labeL>
                       <!-- tier -->
                       <input type="text" class="gear-edit" name="attr_gear_tier" value="@{gear_tier}" />
-                      <label>Tier</label>
+                      <label data-i18n="gear_tier"></label>
                       <!-- tags -->
                       <input type="text" class="gear-edit" name="attr_gear_tags" value="@{gear_tags}" />
-                      <label>Tags (Comma Separated)</label>
+                      <label data-i18n="gear_tags"></label>
                     </div>
   
                   </div>
@@ -411,94 +405,94 @@
       <div class="astir-page-container">
         <div class="section-row">
           <div class="section flex-1"> 
-            <h3>Astir Information</h3>
+            <h3 data-i18n="astir_information"></h3>
             <div class="section-content">
               <div class="info-row">
                 <div class="flex-2 form-input">
                   <input type="text" name="attr_astir_name"/>
-                  <label>Astir Name</label>
+                  <label data-i18n="astir_name"></label>
                 </div>
                 <div class="flex-1 form-input">
                   <input type="text" name="attr_astir_tier"/>
-                  <label>Tier</label>
+                  <label data-i18n="astir_tier"></label>
                 </div>
                 <div class="flex-1 form-input">
-                  <input type="number" name="attr_astir_mana"/>
-                  <label>Mana</label>
+                  <input type="number" name="attr_astir_power"/>
+                  <label data-i18n="astir_power"></label>
                 </div>
               </div>
               <div class="info-row">
                 <div class="flex-1 form-input">
                   <input type="text" name="attr_astir_approach" />
-                  <label>Approach</label>
+                  <label data-i18n="astir_approach"></label>
                 </div>
                 <div class="flex-1 form-input">
                   <input type="text" name="attr_astir_core" />
-                  <label>Core</label>
+                  <label data-i18n="astir_core"></label>
                 </div>
                 <div class="flex-1 form-checkbox">
                   <input type="checkbox" name="attr_astir_overheating" />
-                  <label>Overheating</label>
+                  <label data-i18n="astir_overheating"></label>
                 </div>
               </div>
               <div class="info-row-textarea">
                 <textarea name="attr_astir_description"></textarea>
-                <label>Description</label>
+                <label data-i18n="astir_description"></label>
               </div>
             </div>
           </div>
 
           <div class="section flex-1">
-            <h3>Astir Parts</h3>
+            <h3 data-i18n="astir_parts"></h3>
             <div class="section-content">
               <input type="text" name="attr_part_a_name">
-              <label>Part A</label>
+              <label data-i18n="part_a_name"></label>
 
               <textarea name="attr_part_a_description" class="astir-part-textarea"></textarea>
-              <label>Description</label>
+              <label data-i18n="part_a_description"></label>
               
               <input type="text" name="attr_part_b_name">
-              <label>Part B</label>
+              <label data-i18n="part_b_name"></label>
 
               <textarea name="attr_part_b_description" class="astir-part-textarea"></textarea>
-              <label>Description</label>
+              <label data-i18n="part_b_description"></label>
             </div>
           </div>
         </div>
         
         <div class="section-row">
           <div class="section flex-1">
-            <h3>Astir Move</h3>
+            <h3 data-i18n="astir_move"></h3>
             <div class="section-content">
               <div>
                 <input type="text" name="attr_astir_move_name">
-                <label>Name</label>
+                <label data-i18n="astir_move_name"></label>
               </div>
               <div>
                 <textarea name="attr_astir_move_description"></textarea>
-                <label>Description</label>
+                <label data-i18n="astir_move_description"></label>
               </div>
             </div>
           </div>
 
           <div class="section flex-2">
-            <h3>Weapons</h3>
+            <h3 data-i18n="astir_weapons"></h3>
             <div class="section-content">
               <fieldset class="repeating_astirweapons">
                 <div class="info-row">
                   <div class="flex-1">
                     <input type="text" name="attr_astir_weapon_equip_slot" />
-                    <label>Equip</label>
+                    <label data-i18n="astir_weapon_equip_slot"></label>
                   </div>
                   
                   <div class="flex-1">
                     <input type="text" name="attr_astir_weapon_name" />
-                    <label>Name</label>
+                    <label data-i18n="astir_weapon_name"></label>
                   </div>
     
                   <div class="flex-2">
                     <input type="text" name="attr_astir_weapon_tags" class="italics" />
-                    <label>Tags</label>
+                    <label data-i18n="astir_weapon_tags"></label>
                   </div>
                 </div>
               </fieldset>
@@ -509,43 +503,41 @@
       <div class="carrier-page-container">
         <div class="section-row">
           <div class="section flex-1">
-            <h3>Carrier Information</h3>
+            <h3 data-i18n="carrier_information"></h3>
             <div class="section-content">
               <div class="info-row">
                 <div class="form-input flex-3">
                   <input type="text" name="attr_carrier_name">
-                  <label>Name</labewwl>
+                  <label data-i18n="carrier_name"></labewwl>
                 </div>
                 <div class="form-input flex-1">
                   <input type="text" name="attr_carrier_tier">
-                  <label>Tier</label>
+                  <label data-i18n="carrier_tier"></label>
                 </div>
               </div>
               <div class="info-row">
                 <div class="form-input flex-1">
                   <input type="number" name="attr_carrier_crew">
-                  <label>Crew</label>
+                  <label data-i18n="carrier_crew"></label>
                 </div>
                 <div class="form-input flex-3">
                   <input type="text" name="attr_carrier_type">
-                  <label>Type</label>
+                  <label data-i18n="carrier_type"></label>
                 </div>
               </div>
               <div class="info-row-textarea">
                 <textarea name="attr_carrier_description"></textarea>
-                <label>Description</label>
+                <label data-i18n="carrier_description"></label>
               </div>
             </div>
           </div>
 
           <div class="section-carrier flex-3">
           <div class="section">
-            <h3>Carrier</h3>
+            <h3 data-i18n="carrier_layout"></h3>
             <div class="section-content">
               <div class="carrier-floor">
-                <div class="carrier-level-box info-box">
-                  Level 1
-                </div>
+                <div class="carrier-level-box info-box" data-i18n="carrier_level_1"></div>
                 <div class="carrier-level-box room-box">
                   <input type="checkbox" name="attr_carrier_11_check" />
                   <input type="text" name="attr_carrier_11_text" />
@@ -568,9 +560,7 @@
                 </div>
               </div>
               <div class="carrier-floor">
-                <div class="carrier-level-box info-box">
-                  Level 2
-                </div>
+                <div class="carrier-level-box info-box" data-i18n="carrier_level_2"></div>
                 <div class="carrier-level-box room-box">
                   <input type="checkbox" name="attr_carrier_21_check" />
                   <input type="text" name="attr_carrier_21_text" />
@@ -596,23 +586,23 @@
             </div>
           </div>
           <div class="section flex-2">
-            <h3>Weapons</h3>
+            <h3 data-i18n="carrier_weapons"></h3>
             <div class="section-content">
               <fieldset class="repeating_carrierweapons">
                 <div class="info-row">
                   <div class="flex-2">
                     <input type="text" name="attr_carrier_weapon_name" />
-                    <label>Name</label>
+                    <label data-i18n="carrier_weapon_name"></label>
                   </div>
                   
                   <div class="flex-1">
                     <input type="text" name="attr_carrier_weapon_tier" />
-                    <label>Tier</label>
+                    <label data-i18n="carrier_weapon_tier"></label>
                   </div>
     
                   <div class="flex-3">
                     <input type="text" name="attr_carrier_weapon_tags" class="italics" />
-                    <label>Tags</label>
+                    <label data-i18n="carrier_weapon_tags"></label>
                   </div>
                 </div>
               </fieldset>
@@ -626,7 +616,7 @@
     <div class="misc-page">
       <div class="misc-page-container">
         <div class="section flex-2">
-          <h3>Gravity Clocks</h3>
+          <h3 data-i18n="gravity_clocks"></h3>
           <div class="section-content">
             <div class="clock-container">
               <fieldset class="repeating_gravity">
@@ -639,13 +629,13 @@
                       name="roll_gravity" 
                       type="roll" 
                       value="&{template:move} {{charname=@{character_name}}} {{trait=GRAVITY}} {{result=[[2d6 + @{gravity}]]}}">
-                      <span>+GRAVITY</span>
+                      <span data-i18n="gravity"></span>
                     </button>
                   </div>
                 </div>
                 <div class="description">
                   <input type="text" name="attr_gravity_description" />
-                  <label>Description</label>
+                  <label data-i18n="gravity_description"></label>
                 </div>
                 <div class="ticks">
                   <input name="attr_gravity_tick_1" type="checkbox" />
@@ -662,7 +652,7 @@
       
 
       <div class="section flex-1">
-        <h3>Misc Info</h3>
+        <h3 data-i18n="misc_info"></h3>
         <div class="section-content">
           <div class="spotlight">
           <div class="ticks"></div>
@@ -674,16 +664,16 @@
             <input type="checkbox" name="attr_spotlight_6">
           </div>
 
-          <label>Spotlight</label>
+          <label data-i18n="spotlight"></label>
 
           <div class="additional-gear">
             <textarea name="attr_additional_gear"></textarea>
-            <label>Additional Gear</label>
+            <label data-i18n="additional_gear"></label>
           </div>
           
           <div class="character-description">
-            <textarea name="attr_charater_description"></textarea>
-            <label>Chracter Description</label>
+            <textarea name="attr_character_description"></textarea>
+            <label data-i18n="character_description"></label>
           </div>
         </div>
       </div>
@@ -710,19 +700,19 @@
 
     {{#rollGreater() result 9}}
     {{#success}}
-    <div class="sheet-template-row-move"><span class="sheet-template-success">10+</span>: {{success}}</div>
+    <div class="sheet-template-row-move"><span class="sheet-template-success" data-i18n="roll_ten_plus"></span>: {{success}}</div>
     {{/success}}
     {{/rollGreater() result 9}}
 
     {{#rollBetween() result 7 9}}
     {{#partial}}
-    <div class="sheet-template-row-move"><span class="sheet-template-partial">7-9</span>: {{partial}}</div>
+    <div class="sheet-template-row-move"><span class="sheet-template-partial" data-i18n="roll_seven_to_nine"></span>: {{partial}}</div>
     {{/partial}}
     {{/rollBetween() result 7 9}}
 
     {{#rollLess() result 7}}
     {{#miss}}
-    <div class="sheet-template-row-move"><span class="sheet-template-miss">6-</span>: {{miss}}</div>
+    <div class="sheet-template-row-move"><span class="sheet-template-miss" data-i18n="roll_six_less_than"></span>: {{miss}}</div>
     {{/miss}}
     {{/rollLess() result 7}}
 
@@ -751,7 +741,7 @@
     {
       fullName: 'Weather The Storm',
       rolls: ['DEFY', 'KNOW'],
-      success: 'You mange to make it to safety.',
+      success: 'You manage to make it to safety.',
       partial: 'You succeed, but at some cost - your Director will ask you to settle for less, take a *risk*, or make a difficult choice.',
     },
     {
@@ -795,14 +785,14 @@
       rolls: ['CLASH', 'TALK'],
       success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
       partial: 'You succeed as above, but choose 1.',
-      details: '• You overreach or underestimate - take a *risk*. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
+      details: '• You overreach or underestimate - take a *risk*. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing collateral damage beyond your expectations.'
     },
     {
       fullName: 'Bite the Dust',
       roll: 'DEFY',
       success: 'They miss, hesitate, or you\'re saved by sheer luck - you rally, and clear a *risk* if you have one.',
       partial: 'Retreat from the Sortie safely, or be put in *peril.*',
-      miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? Have hat you lost? Who and what is changed by your defeat?',
+      miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? What have you lost? Who and what is changed by your defeat?',
       details: 'If you survive, you are changed by your defeat. As well as the above, choose one: \n\n • Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher lower than +/- 3)\n • Choose a new playbook. Keep what moves you and the Director agree are truly part of your character, and discard the others. Replace them with the starting moves for your new playbook. You do not gain its starting equipment.',
     }
   ],
@@ -834,7 +824,7 @@
       fullName: 'Expend Ritual',
       details: 'When you disperse the magical energy of a ***ritual*** to re-use that energy in a pinch, '
       + 'choose one of your prepared rituals - you no longer gain its benefit. You may then '
-      + 'choose an option from the ***subsystems*** move without spending Mana.',
+      + 'choose an option from the ***subsystems*** move without spending Power.',
       moveSelected: false,
     },
     {
@@ -891,7 +881,7 @@
   impostor: [
     {
       fullName: 'Arcane Augments',
-      details: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
+      details: 'Impostors control their Astir using magical augmentations, like artificial limbs or '
       + 'organs. These augmentations allow a non-magic user to power and control an Astir, '
       + 'but otherwise do not interfere with your life unless you (the player) decide so. Being '
       + 'bonded to magic in this way often leads to it affecting the body and vice versa, '
@@ -940,7 +930,7 @@
       partial: 'NPCs will leave their Astir to face you, but choose one:\n\n'
       + '• Take the *risk* (entangled)\n\n'
       + '• You have Disadvantage to moves against the other Channeler.\n\n'
-      + '• You are seperated from your Astirs temporarily.\n\n'
+      + '• You are separated from your Astirs temporarily.\n\n'
       + 'PCs may choose whether to leave their Astir or not – if they do, they pick one of the above for you.',
       moveSelected: false,
     },
@@ -964,7 +954,7 @@
       details: 'Instead of Ideals, write three tenets that represent your deity’s will. When you discuss'
       + 'your faith with someone or learn something about how they personally relate to faith'
       + 'and religion, advance a GRAVITY clock with them if you have one. If you ever'
-      + 'sacrifce or break a tenet, it is lost forever; replace it with an Ideal instead of crossing'
+      + 'sacrifice or break a tenet, it is lost forever; replace it with an Ideal instead of crossing'
       + 'it off and taking an advancement. Your CHANNEL Trait is also reduced by 1 until you'
       + 'make amends in whatever way is appropriate for your faith.\n\n'
       + 'Example tenets might be:\n'
@@ -978,13 +968,13 @@
       fullName: 'Divine Guidance',
       details: 'When you consult your deity for information or guidance, you may ***dispel uncertainties***'
         + 'with +CHANNEL. If you do so, on a 7-9 the information is still directly'
-        + 'useful, but it is diffcult to discern if your answer came from the intended deity.',
+        + 'useful, but it is difficult to discern if your answer came from the intended deity.',
       moveSelected: false,
     },
     {
       fullName: 'Inspire Focus',
-      details: 'Once per Sortie, you may take a visible position over the battlefeld and inspire'
-      + 'confdence and clarity in your allies that see you - they each clear a risk and take'
+      details: 'Once per Sortie, you may take a visible position over the battlefield and inspire'
+      + 'confidence and clarity in your allies that see you - they each clear a risk and take'
       + 'advantage to their next roll.',
       moveSelected: false
     },
@@ -1008,7 +998,7 @@
         + 'enough to return themselves (or are summoned) during the same Sortie, they are in'
         + 'peril (turned) as your divine presence sickens them.',
       partial: 'They must flee from your sight and are in *peril* (turned).',
-      details: 'When piloting an Astir you are attuned to, you may project an aura that causes otherwordly creatures to flee.',
+      details: 'When piloting an Astir you are attuned to, you may project an aura that causes otherworldly creatures to flee.',
       roll: 'CHANNEL',
       moveSelected: false,
     },
@@ -1055,13 +1045,13 @@
     },
     {
       fullName: 'Receive Boons',
-      details: 'At each dawn, you recieve ***boons*** from your patron. Roll on the list below two times to discern what powers you receive. They last until the next dawn. \n\n'
+      details: 'At each dawn, you receive ***boons*** from your patron. Roll on the list below two times to discern what powers you receive. They last until the next dawn. \n\n'
       + '***1 · Channelling Boon*** - You may give your patron 1 Influence to make a move with +CHANNEL instead '
       + 'of the usual trait—when you do so, tick \'overheating\' on your Astir. If it\'s already fully ticked, it destroys '
       + 'one of your Astir’s parts—you are in peril (burnout).\n'
       + '***2 · Hexxing Boon*** - You can curse an Astir, locking it out of some of its systems. When you do so, roll'
       + ' +CHANNEL. On a 10+, choose 2. On a 7-9, choose 1:\n'
-      + '• A Player or Rival cannot spend Mana to activate ***subsystems***.\n'
+      + '• A Player or Rival cannot spend Power to activate ***subsystems***.\n'
       + '• A weapon, tool or function stalls, malfunctions, and stops working.\n'
       + '• The Channeler cannot prevent you from communicating with them.\n'
       + '***3 · Masking Boon*** - You can mask yourself or an Astir you are attuned to against detection. When you '
@@ -1076,7 +1066,7 @@
       fullName: 'Occult Lore',
       details: 'When you consult your patron for information, you may ***dispel uncertainties*** with '
         +' +CHANNEL. If you do so, on a 7-9 the information is still directly useful, but using it '
-        + 'would cause some unforeseen complication entertaining or benefcial to your patron.',
+        + 'would cause some unforeseen complication entertaining or beneficial to your patron.',
       moveSelected: false,
       roll: 'CHANNEL'
     },
@@ -1205,7 +1195,7 @@
     },
     {
       fullName: 'Tactical Genius',
-      details: 'When you\'re supervising allies from afar during a Sortie, you can lever your tactical know-how into better positioning. Take 3 hold at the start of a Sortie, '
+      details: 'When you\'re supervising allies from afar during a Sortie, you can level your tactical know-how into better positioning. Take 3 hold at the start of a Sortie, '
       + 'and spend it 1- for-1 to do the following: \n\n'
       + '• Remove one risk from an ally.\n'
       + '• Give an ally Advantage to their next move, describing how you advise or support them.\n'
@@ -1327,9 +1317,9 @@
       details: 'During Downtime, you may also prepare an alias or disguise. Most people will'
       + ' believe you are who you say you are, unless you\'re disguised as someone they\'re'
       + ' very familiar with, or they are given reason to thoroughly check your person or any'
-      + ' identifcation. You may take shore leave to secure 2 of the following:\n\n'
+      + ' identification. You may take shore leave to secure 2 of the following:\n\n'
       + '• You have ID that is either legitimate or so well faked it is impossible to tell the difference.\n'
-      + '• There\'s a reason or expectation for someone ftting your disguise to show up.\n'
+      + '• There\'s a reason or expectation for someone fitting your disguise to show up.\n'
       + '• You\'ve had something useful planted ahead of time - select a weapon or piece of equipment (one you have access to) to be hidden just where you\'ll need it.',
       moveSelected: false,
     }
@@ -1382,7 +1372,7 @@
     },
     {
       fullName: 'It\'s A Prototype',
-      details: 'Once per Sortie, you may reveal what prototype upgrade you’ve made to a Astir that you reasonably had access to recently. When you do so, choose 2:\n\n'
+      details: 'Once per Sortie, you may reveal what prototype upgrade you’ve made to an Astir that you reasonably had access to recently. When you do so, choose 2:\n\n'
       + '• You didn’t have to disassemble anything else for parts.\n'
       + '• Your invention doesn’t draw unwanted attention to you.\n'
       + '• The upgrade burns out at the end of the Sortie, rather than after one use.\n'
@@ -1393,6 +1383,9 @@
       fullName: 'Combat Engineer',
       details: 'You supplement your Artificer training with something more conventional - choose a move from the Scout list instead and a piece of Scout Equipment.',
       moveSelected: false,
+    },
+    {
+      fullName: 'Counterspell',
       details: 'When you get close and use your expertise in magical machinery to try and break a construct or magical mechanism, you may exchange blows and strike decisively with +KNOW using the following profile:\n\n'
       + '• Counterspell III (melee / slow, ruin)',
       moveSelected: false,
@@ -1477,7 +1470,7 @@
       ],
       classGear: [
         {
-          name: 'Mana Focus',
+          name: 'Power Focus',
           tier: 'I',
           tags: ['ranged'],
         },
@@ -1725,7 +1718,7 @@
           quantity: 2,
         },
         {
-          name: 'Transport or Service Golem',
+          name: 'Transport or Service Ardent',
           quantity: 1,
           tier: 'II',
         },
