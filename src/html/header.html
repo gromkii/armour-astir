@@ -1,0 +1,24 @@
+<div class="page-header">
+    <div class="header">
+        <input type="text" data-i18n-placeholder="character_name" name="attr_character_name" />
+    </div>
+    <div class="header">
+        <input type="text" class="playbook" name="attr_playbook" data-18n-placeholder="playbook"/>
+        <!-- TODO: Make this an attr_ and create sheet script. -->
+    </div>
+</div>
+
+<div class="navigation">
+    <input type="hidden" value="character" name="attr_sheet_tab" class="tabstoggle" />
+    <div class="page-tabs">
+        <button type="action" name="act_character" data-i18n="character"></button>
+        <button type="action" name="act_astir" data-i18n="astir"></button>
+        <button type="action" name="act_misc" data-i18n="misc"></button>
+    </div>
+    <div class="show-carrier">
+        <input type="checkbox" name="attr_show_carrier_toggle" value="show">
+        <span data-i18n="carrier_toggle"></span>
+    </div>
+</div>
+
+<input type="hidden" class="tabstoggle" name="attr_sheet_tab" value="character"/>

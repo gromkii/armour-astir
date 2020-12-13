@@ -1,0 +1,67 @@
+<div class="misc-page">
+    <div class="misc-page-container">
+      <div class="section flex-2">
+        <h3 data-i18n="gravity_clocks"></h3>
+        <div class="section-content">
+          <div class="clock-container">
+            <fieldset class="repeating_gravity">
+              <div class="trait">
+                <div class="trait-top">
+                  <input type="number" value="1" name="attr_gravity" />
+                </div>
+                <div class="trait-bottom">  
+                  <button 
+                    name="roll_gravity" 
+                    type="roll" 
+                    value="&{template:move} {{charname=@{character_name}}} {{trait=GRAVITY}} {{result=[[2d6 + @{gravity}]]}}">
+                    <span data-i18n="gravity"></span>
+                  </button>
+                </div>
+              </div>
+              <div class="description">
+                <input type="text" name="attr_gravity_description" />
+                <label data-i18n="gravity_description"></label>
+              </div>
+              <div class="ticks">
+                <input name="attr_gravity_tick_1" type="checkbox" />
+                <input name="attr_gravity_tick_2" type="checkbox" />
+                <input name="attr_gravity_tick_3" type="checkbox" />
+                <input name="attr_gravity_tick_4" type="checkbox" />
+                <input name="attr_gravity_tick_5" type="checkbox" />
+                <input name="attr_gravity_tick_6" type="checkbox" />
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    
+
+    <div class="section flex-1">
+      <h3 data-i18n="misc_info"></h3>
+      <div class="section-content">
+        <div class="spotlight">
+        <div class="ticks"></div>
+          <input type="checkbox" name="attr_spotlight_1">
+          <input type="checkbox" name="attr_spotlight_2">
+          <input type="checkbox" name="attr_spotlight_3">
+          <input type="checkbox" name="attr_spotlight_4">
+          <input type="checkbox" name="attr_spotlight_5">
+          <input type="checkbox" name="attr_spotlight_6">
+        </div>
+
+        <label data-i18n="spotlight"></label>
+
+        <div class="additional-gear">
+          <textarea name="attr_additional_gear"></textarea>
+          <label data-i18n="additional_gear"></label>
+        </div>
+        
+        <div class="character-description">
+          <textarea name="attr_character_description"></textarea>
+          <label data-i18n="character_description"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="version-info">Sheet v0.1.1 - Game v0.6</div>
+</div>

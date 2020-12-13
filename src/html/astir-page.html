@@ -1,0 +1,212 @@
+<div class="astir-page">
+    <input type="hidden" class="show-carrier" name="attr_show_carrier" value="0"/>
+    <div class="astir-page-container">
+      <div class="section-row">
+        <div class="section flex-1"> 
+          <h3 data-i18n="astir_information"></h3>
+          <div class="section-content">
+            <div class="info-row">
+              <div class="flex-2 form-input">
+                <input type="text" name="attr_astir_name"/>
+                <label data-i18n="astir_name"></label>
+              </div>
+              <div class="flex-1 form-input">
+                <input type="text" name="attr_astir_tier"/>
+                <label data-i18n="astir_tier"></label>
+              </div>
+              <div class="flex-1 form-input">
+                <input type="number" name="attr_astir_power"/>
+                <label data-i18n="astir_power"></label>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="flex-1 form-input">
+                <input type="text" name="attr_astir_approach" />
+                <label data-i18n="astir_approach"></label>
+              </div>
+              <div class="flex-1 form-input">
+                <input type="text" name="attr_astir_core" />
+                <label data-i18n="astir_core"></label>
+              </div>
+              <div class="flex-1 form-checkbox">
+                <input type="checkbox" name="attr_astir_overheating" />
+                <label data-i18n="astir_overheating"></label>
+              </div>
+            </div>
+            <div class="info-row-textarea">
+              <textarea name="attr_astir_description"></textarea>
+              <label data-i18n="astir_description"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="section flex-1">
+          <h3 data-i18n="astir_parts"></h3>
+          <div class="section-content">
+            <input type="text" name="attr_part_a_name">
+            <label data-i18n="part_a_name"></label>
+
+            <textarea name="attr_part_a_description" class="astir-part-textarea"></textarea>
+            <label data-i18n="part_a_description"></label>
+            
+            <input type="text" name="attr_part_b_name">
+            <label data-i18n="part_b_name"></label>
+
+            <textarea name="attr_part_b_description" class="astir-part-textarea"></textarea>
+            <label data-i18n="part_b_description"></label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section-row">
+        <div class="section flex-1">
+          <h3 data-i18n="astir_move"></h3>
+          <div class="section-content">
+            <div>
+              <input type="text" name="attr_astir_move_name">
+              <label data-i18n="astir_move_name"></label>
+            </div>
+            <div>
+              <textarea name="attr_astir_move_description"></textarea>
+              <label data-i18n="astir_move_description"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="section flex-2">
+          <h3 data-i18n="astir_weapons"></h3>
+          <div class="section-content">
+            <fieldset class="repeating_astirweapons">
+              <div class="info-row">
+                <div class="flex-1">
+                  <input type="text" name="attr_astir_weapon_equip_slot" />
+                  <label data-i18n="astir_weapon_equip_slot"></label>
+                </div>
+                
+                <div class="flex-1">
+                  <input type="text" name="attr_astir_weapon_name" />
+                  <label data-i18n="astir_weapon_name"></label>
+                </div>
+  
+                <div class="flex-2">
+                  <input type="text" name="attr_astir_weapon_tags" class="italics" />
+                  <label data-i18n="astir_weapon_tags"></label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carrier-page-container">
+      <div class="section-row">
+        <div class="section flex-1">
+          <h3 data-i18n="carrier_information"></h3>
+          <div class="section-content">
+            <div class="info-row">
+              <div class="form-input flex-3">
+                <input type="text" name="attr_carrier_name">
+                <label data-i18n="carrier_name"></labewwl>
+              </div>
+              <div class="form-input flex-1">
+                <input type="text" name="attr_carrier_tier">
+                <label data-i18n="carrier_tier"></label>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="form-input flex-1">
+                <input type="number" name="attr_carrier_crew">
+                <label data-i18n="carrier_crew"></label>
+              </div>
+              <div class="form-input flex-3">
+                <input type="text" name="attr_carrier_type">
+                <label data-i18n="carrier_type"></label>
+              </div>
+            </div>
+            <div class="info-row-textarea">
+              <textarea name="attr_carrier_description"></textarea>
+              <label data-i18n="carrier_description"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-carrier flex-3">
+        <div class="section">
+          <h3 data-i18n="carrier_layout"></h3>
+          <div class="section-content">
+            <div class="carrier-floor">
+              <div class="carrier-level-box info-box" data-i18n="carrier_level_1"></div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_11_check" />
+                <input type="text" name="attr_carrier_11_text" />
+              </div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_12_check" />
+                <input type="text" name="attr_carrier_12_text" />
+              </div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_13_check" />
+                <input type="text" name="attr_carrier_13_text" />
+              </div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_14_check" />
+                <input type="text" name="attr_carrier_14_text" />
+              </div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_15_check" />
+                <input type="text" name="attr_carrier_15_text" />
+              </div>
+            </div>
+            <div class="carrier-floor">
+              <div class="carrier-level-box info-box" data-i18n="carrier_level_2"></div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_21_check" />
+                <input type="text" name="attr_carrier_21_text" />
+              </div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_22_check" />
+                <input type="text" name="attr_carrier_22_text" />
+              </div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_23_check" />
+                <input type="text" name="attr_carrier_23_text" />
+              </div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_24_check" />
+                <input type="text" name="attr_carrier_24_text" />
+              </div>
+              <div class="carrier-level-box room-box">
+                <input type="checkbox" name="attr_carrier_25_check" />
+                <input type="text" name="attr_carrier_25_text" />
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="section flex-2">
+          <h3 data-i18n="carrier_weapons"></h3>
+          <div class="section-content">
+            <fieldset class="repeating_carrierweapons">
+              <div class="info-row">
+                <div class="flex-2">
+                  <input type="text" name="attr_carrier_weapon_name" />
+                  <label data-i18n="carrier_weapon_name"></label>
+                </div>
+                
+                <div class="flex-1">
+                  <input type="text" name="attr_carrier_weapon_tier" />
+                  <label data-i18n="carrier_weapon_tier"></label>
+                </div>
+  
+                <div class="flex-3">
+                  <input type="text" name="attr_carrier_weapon_tags" class="italics" />
+                  <label data-i18n="carrier_weapon_tags"></label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>

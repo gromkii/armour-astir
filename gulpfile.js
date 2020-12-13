@@ -32,5 +32,5 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch( jsGlob , ['jshint']);
+    gulp.watch( jsGlob , ['default']);
 });

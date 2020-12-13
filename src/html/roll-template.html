@@ -1,0 +1,35 @@
+<!-- MOVE TEMPLATE -->
+<rolltemplate class="sheet-rolltemplate-move">
+  <div class="sheet-template-container-move">
+    <div class="sheet-template-header-move">{{charname}}</div>
+
+    <hr class="sheet-template-divider-move" />
+
+    <div class="sheet-template-movename-move">{{movename}}</div>
+
+    {{#result}}<div class="sheet-template-row-move">+{{trait}}: {{result}}</div>{{/result}}
+    
+    <hr class="sheet-template-divider-move" />
+
+    {{#rollGreater() result 9}}
+    {{#success}}
+    <div class="sheet-template-row-move"><span class="sheet-template-success" data-i18n="roll_ten_plus"></span>: {{success}}</div>
+    {{/success}}
+    {{/rollGreater() result 9}}
+
+    {{#rollBetween() result 7 9}}
+    {{#partial}}
+    <div class="sheet-template-row-move"><span class="sheet-template-partial" data-i18n="roll_seven_to_nine"></span>: {{partial}}</div>
+    {{/partial}}
+    {{/rollBetween() result 7 9}}
+
+    {{#rollLess() result 7}}
+    {{#miss}}
+    <div class="sheet-template-row-move"><span class="sheet-template-miss" data-i18n="roll_six_less_than"></span>: {{miss}}</div>
+    {{/miss}}
+    {{/rollLess() result 7}}
+
+
+    {{#details}}<div class="sheet-template-row-move sheet-template-details">{{details}}</div>{{/details}}
+  </div>
+</rolltemplate>

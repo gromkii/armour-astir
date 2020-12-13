@@ -1,39 +1,3 @@
-/*
-    Important note: this file isn't being used in the character sheet directly, but rather is an
-    easier way to keep a consistent source of truth for the data as the sheet is being developed.
-
-    If you would like to contribute, please feel free to do so following these formatting conventions.
-
-    MOVES -----
-    moveName: {               // ! Style note here, use camel case for these names.
-        book:     string,     // Playbook for move.
-        fullName: string,     // Full name for move.
-        roll?:    string,     // If a move has a single trait, use this property.
-        rolls?:   string[],   // If a move can call for different traits, use an array of applicable traits.
-        success?:  string,     // 10+ roll message
-        partial?:  string,     // 7-9 roll message
-        miss?:     string,     // 6 or less roll message.
-        details?:  string,     // Body for context. Formatting for text TBD, but for now try to use \n and • or &bull;
-    }
-
-    GEAR -----
-    playbook: {                     // Name of playbook, lowercase. ie: arcanist
-        startingGear: [             // Array of gear using the following schema.
-            {                       // List of staring gear for playbook.
-                quantity: string,   // Not required.
-                name:     string,   // Required, name of equipment.
-                tier:     string,   // Format note, please use roman numerals for consistency.
-                tags:     string[]  // Array of strings, formatting TBD.
-            }, ... { },
-        ],
-        classGear: [                // Using the same schema as above.
-            {
-                ...
-            }
-        ]
-    }
-*/
-
 const playbookMoves = { // basic moves
   basic: [
     {
