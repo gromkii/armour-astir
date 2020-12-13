@@ -17,7 +17,7 @@ gulp.task('build', function(){
     gulp.src('src/template/*.html')
         .pipe(include())
             .on('error',console.log)
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('./'));
 });
 
 // create a default task and just log a message
