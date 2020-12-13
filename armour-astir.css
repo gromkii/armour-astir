@@ -640,3 +640,11 @@ button [type='action'] {
   flex-direction: row-reverse;
 }
 
+.sheet-dropdown {
+  background-color: transparent;
+  border-style: none none solid none;
+  border-color: black;
+  width: calc(100% - 2px);
+  border-radius: 0;
+}
+
