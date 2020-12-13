@@ -32,142 +32,10 @@ const rollModifiers = [
     roll: '4d6kl2'
   },
 ];
-
-// Set the currently displayed tab on the character sheet.
-const buttonlist = ['character', 'astir', 'misc'];
-buttonlist.forEach(button => {
-    on(`clicked:${button}`, function() {
-        setAttrs({
-            sheet_tab: button
-        });
-    });
-});
-
-// Set the Astir page to either display Astir or Carrier information.
-on('change:show_carrier_toggle', (event) => {
-  setAttrs({
-    show_carrier: event.newValue,
-  });
-});
-
-// Show/Hide 'CHANNEL' Trait based on playbook.
-on(`change:support`, (event) => {
-  setAttrs({
-    channel_hidden: event.newValue == 'on',
-  });
-})
-
-// Set playbook information when the playbook value changes.
-on(`change:playbook`, (event) => {
-  if (event && event.newValue && event.netValue !== event.previousValue) {
-    setPlaybook(event.newValue);
-  }
-});
-
-//#region Gear.
-on('change:repeating_gearcheck:gear_name_edit', () => {
-  getAttrs(['repeating_gearcheck_gear_name_edit'], (values) => {
-    setAttrs({ repeating_gearcheck_gear_name: values.repeating_gearcheck_gear_name_edit });
-  });
-});
-
-on('change:repeating_gearcheck:gear_tier_edit', () => {
-  getAttrs(['repeating_gearcheck_gear_tier_edit'], (values) => {
-    setAttrs({ repeating_gearcheck_gear_tier: values.repeating_gearcheck_gear_tier_edit });
-  });
-});
-
-on('change:repeating_gearcheck:gear_tags_edit', () => {
-  getAttrs(['repeating_gearcheck_gear_tags_edit'], (values) => {
-    const tags = values.repeating_gearcheck_gear_tags_edit;
-    const parsedTags = tags ? `${tags}` : '';
-    setAttrs({ repeating_gearcheck_gear_tags: parsedTags });
-  });
-});
-//#endregion
-
-
-// ----- MOVES EDIT ----- //
-// TODO: Read article about improving performance. This is a lot of event listeners.
-// TODO: It might be helpful to separate plaintext and sanitized/formatted text, ex: success -> success_text
-// When moves are being populated on init, some fields are being filled properly.
-  on('change:repeating_moves:move_name_base', () => {
-    getAttrs(['repeating_moves_move_name_base'], (v) => {
-      setAttrs({
-        repeating_moves_move_name: v.repeating_moves_move_name_base
-      });
-    });
-  });
-  
-  on('change:repeating_basicmoves:move_name_base', () => {
-    getAttrs(['repeating_moves_move_name_base'], (v) => {
-      setAttrs({
-        repeating_basicmovesmoves_move_name: v.repeating_moves_move_name_base
-      });
-    });
-  });
-
-  on('change:repeating_moves:move_trait', (event) => {
-    const prefix = event.sourceAttribute.split('trait')[0];
-    getAttrs(['repeating_moves_move_trait'], (v) => {
-      const traitString = v.repeating_moves_move_trait.toUpperCase();
-      const traits = traitString.replace(' ', '').split(',');
-      const doRoll = traits.length ? 1 : 0;
-      const rollValue = setRollValue(traits, prefix);
-      
-      setAttrs({
-        repeating_moves_move_rollvalue: rollValue,
-        repeating_moves_move_doroll: doRoll,
-      })
-    })
-  })
-
-  on('change:repeating_basicmoves:move_trait', (event) => {
-    const prefix = event.sourceAttribute.split('trait')[0];
-    getAttrs(['repeating_basicmoves_move_trait'], (v) => {
-      const traitString = v.repeating_basicmoves_move_trait.toUpperCase();
-      const traits = traitString.replace(' ', '').split(',');
-      const doRoll = traits.length ? 1 : 0;
-      const rollValue = setRollValue(traits, prefix);
-      
-      setAttrs({
-        repeating_basicmoves_move_rollvalue: rollValue,
-        repeating_basicmoves_move_doroll: doRoll,
-      })
-    })
-  })
-
-  on('change:repeating_moves:move_success', () => {
-    getAttrs(['repeating_moves_move_success'], (v) => {
-      setAttrs({
-        repeating_moves_move_success: v.repeating_moves_move_success
-      }, () => {
-        // ! Set roll value.
-      })
-    })
-  })
-
-  on('change:repeating_moves:move_partial', () => {
-    getAttrs(['repeating_moves_move_partial'], (v) => {
-      setAttrs({
-        repeating_moves_move_partial: v.repeating_moves_move_partial
-      }, () => {
-        // ! Set roll value.
-      })
-    })
-  })
-
-  on('change:repeating_moves:move_miss', () => {
-    getAttrs(['repeating_moves_move_miss'], (v) => {
-      setAttrs({
-        repeating_moves_move_miss: v.repeating_moves_move_miss
-      }, () => {
-        // ! Set roll value.
-      })
-    })
-  })
-
-
+/*=include ./sheetworkers/edit-playbook.js */
+/*=include ./sheetworkers/edit-gear.js */
+/*=include ./sheetworkers/edit-moves.js */
+/*=include ./sheetworkers/dangers.js */
 // ----- HELPER FUNCTIONS ----- //
 function setPlaybook(book) {
   const bookValue = getPlaybookValue(book);
@@ -262,37 +130,6 @@ function addBasicMove(m, basicMove) {
   });
 }
 
-// ----- Dangers ----- //
-// TODO: Consolidate this into single listener.
-on('change:danger_1_radio', (event) => {
-  if (event && event.newValue && event.newValue === "2") {
-    setAttrs({
-      danger_1_radio: '4',
-      danger_1_description: '',
-    });
-  }
-})
-
-on('change:danger_2_radio', (event) => {
-  if (event && event.newValue && event.newValue === "2") {
-    setAttrs({
-      danger_2_radio: '4',
-      danger_2_description: '',
-    });
-  }
-})
-
-on('change:danger_3_radio', (event) => {
-  if (event && event.newValue && event.newValue === "2") {
-    setAttrs({
-      danger_3_radio: '4',
-      danger_3_description: '',
-    });
-  }
-})
-
-
-
 // ---- Gear ----- //
 
 function addGearList(gear, rowid) {
@@ -339,7 +176,6 @@ function setGear(book) {
   }
 }
 
-
 // ----- Tear Down ----- //
 
 function clearGearList() {
@@ -381,9 +217,6 @@ function setRollValue(traits, prefix) {
   return '';
   
 }
-
-
-
 
 // Build the rollValue for a move that contains no trait.
 function buildEmptyRollValue(prefix) {
