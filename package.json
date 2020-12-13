@@ -4,6 +4,7 @@
   "description": "Roll20 character sheet for Armour Astir Advent, by Briar Sovereign.",
   "main": "gulpfile.js",
   "scripts": {
+    "build": "node ./node_modules/gulp/bin/gulp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

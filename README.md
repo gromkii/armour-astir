@@ -1,3 +1,11 @@
+# Building
+Using node 10 (untested in other versions)
+```
+npm i
+npm run build
+
+```
+
 # How to use these sheets.
 * Currently, the only way to use custom sheets in roll20 is with a premium account.
 * Createa a new game, go to settings, and select custom character sheet.
