@@ -1,0 +1,722 @@
+<div class="main">
+  <div class="top-section">
+    <div class="page-header">
+      <div class="header">
+        <input type="text" data-i18n-placeholder="character_name" name="attr_character_name" />
+      </div>
+      <div class="header">
+        <input type="text" class="playbook" name="attr_playbook" data-18n-placeholder="playbook"/>
+        <!-- TODO: Make this an attr_ and create sheet script. -->
+      </div>
+    </div>
+
+    <div class="navigation">
+      <input type="hidden" value="character" name="attr_sheet_tab" class="tabstoggle" />
+      <div class="page-tabs">
+        <button type="action" name="act_character" data-i18n="character"></button>
+        <button type="action" name="act_astir" data-i18n="astir"></button>
+        <button type="action" name="act_misc" data-i18n="misc"></button>
+      </div>
+      <div class="show-carrier">
+        <input type="checkbox" name="attr_show_carrier_toggle" value="show">
+        <span data-i18n="carrier_toggle"></span>
+      </div>
+    </div>
+
+    <input type="hidden" class="tabstoggle" name="attr_sheet_tab" value="character"/>
+
+    <div class="character-page">
+      <div class="character-upper-section">
+        <div class="character-descriptors section">
+          <h3 data-i18n="character_info"></h3>
+          <div class="section-content">
+          <input type="hidden" name="attr_playbook_descriptors" class="descriptors-toggle"/>
+            <div class="descriptor">
+              <input type="text" name="attr_character_pronouns"/>
+              <label data-i18n="pronouns"></label>
+            </div>
+            <div class="descriptor">
+              <input type="text" name="attr_character_looks"/>
+              <label data-i18n="you_look"></label>
+            </div>
+            <div class="descriptor">
+              <input type="text" name="attr_character_wears"/>
+              <label data-i18n="you_wear"></label>
+            </div>
+            
+            <!-- attr_playbook 0-3 -->
+            <div class="descriptor channeler">
+              <input type="text" name="attr_character_magic"/>
+              <label data-i18n="your_magic_is_like"></label>
+            </div>
+
+            <div class="descriptor channeler">
+              <textarea rows="2" name="attr_character_catchphrase" class="launch-phrase"></textarea>
+              <label data-i18n="when_you_launch_your_astir_you_say"></label>
+            </div>
+            
+            <!-- attr_playbook 4 -->
+            <div class="descriptor scout">
+              <input type="text" name="attr_character_fights"/>
+              <label data-i18n="you_fight_with"></label>
+            </div>
+            
+            <!-- attr_playbook 5 -->
+            <div class="descriptor captain">
+              <input type="text" name="attr_character_leads"/>
+              <label data-i18n="you_lead_with"></label>
+            </div>
+            
+            <!-- attr_playbook 6-7 -->
+            <div class="descriptor support">
+              <input type="text" name="attr_character_handiworks"/>
+              <label data-i18n="your_handiwork_looks"></label>
+            </div>
+            
+          </div>
+        </div>
+        <div class="character-info">
+          <div class="character-traits section">
+            <h3  data-i18n="traits"></h3>
+            <div class="section-content">
+              <div class="traits">
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_defy">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_defy" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[2d6 + @{defy}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[3d6kh2 + @{defy}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[4d6kh2 + @{defy}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[3d6kl2 + @{defy}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125 {{result=[[4d6kl2 + @{defy}]]&#125&#125}">
+                      <span data-i18n="defy"></span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_sense">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_sense" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[2d6 + @{sense}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[3d6kh2 + @{sense}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[4d6kh2 + @{sense}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[3d6kl2 + @{sense}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125 {{result=[[4d6kl2 + @{sense}]]&#125&#125}">
+                      <span data-i18n="sense"></span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="`">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_clash">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_clash" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[2d6 + @{clash}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[3d6kh2 + @{clash}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[4d6kh2 + @{clash}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[3d6kl2 + @{clash}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125 {{result=[[4d6kl2 + @{clash}]]&#125&#125}">
+                      <span data-i18n="clash"></span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_talk">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_talk" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[2d6 + @{talk}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[3d6kh2 + @{talk}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[4d6kh2 + @{talk}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[3d6kl2 + @{talk}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125 {{result=[[4d6kl2 + @{talk}]]&#125&#125}">
+                      <span data-i18n="talk"></span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_know">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_know" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[2d6 + @{know}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125}"">
+                      <span data-i18n="know"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Hidden based on playbook. -->
+                <input type="hidden" class="channel_hidden" name="attr_channel_hidden" value="false" />
+                <div class="trait trait-channel">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_channel">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_channel" 
+                      type="roll" 
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[2d6 + @{channel}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kh2 + @{channel}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[4d6kh2 + @{channel}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kl2 + @{channel}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125 {{result=[[4d6kl2 + @{channel}]]&#125&#125}">
+                      <span data-i18n="channel"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="character-dangers section">
+            <h3 data-i18n="dangers"></h3>
+            <div class="section-content">
+              <div class="danger">
+                <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_1_radio" value="4" style="display: none;" checked="true" />
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
+                  </div>
+                  
+                  <div>/</div>
+                
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" name="attr_danger_1_description" />
+                </div>
+
+                <div class="danger-group">
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_1_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
+                </div>
+              </div>
+              <div class="danger">
+                <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_2_radio" value="4" style="display: none;" checked="true" />
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
+                  </div>
+                  
+                  <div>/</div>
+                
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" name="attr_danger_2_description" />
+                </div>
+
+                <div class="danger-group">
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_2_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
+                </div>
+              </div>
+              <div class="danger">
+                <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_3_radio" value="4" style="display: none;" checked="true" />
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
+                  </div>
+                  
+                  <div>/</div>
+                
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" name="attr_danger_3_description" />
+                </div>
+
+                <div class="danger-group">
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_3_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+
+          <div class="character-ideals section">
+            <!-- Repeating input section. -->
+            <h3 data-i18n="hooks"></h3>
+            <div class="section-content">
+              <fieldset class="repeating_ideals">
+                <div class="ideal-section">
+                  <input type="checkbox" name="attr_ideal_used" class="ideal-check"> 
+                  <input type="text" name="attr_ideal" class="ideal-text" />
+                  <select class="dropdown" name="attr_hook-type">
+                    <option>Belief</option>
+                    <option>Goal</option>
+                    <option>Tenet</option>
+                    <option>Burden</option>
+                  </select>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="character-lower-section">
+        <div class="character-moves section">
+          <h3 data-i18n="moves"></h3>
+          <div class="section-content">
+            <div class="character-moves-container">
+
+              <div class="move-list-container">
+                <h4 class="move-list-header" data-i18n="basic_moves"></h4>
+                <fieldset class="repeating_basicmoves">
+                  <div class="move-main">
+
+                    <input type="hidden" name="attr_move_doroll" value="1"/>
+                    <input type="hidden" name="attr_move_rollvalue" value="" />
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                      <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+                    </button>
+
+                    <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
+    
+                    <div class="move-expansion">
+                      <input type="text" name="attr_move_name_base" />
+                      <label data-i18n="move_name_base"></label>
+                      
+                      <input type="text" name="attr_move_trait" />
+                      <label data-i18n="move_trait"></label>
+                      
+                      <input type="text" name="attr_move_success" />
+                      <label data-i18n="move_success"></label>
+    
+                      <input type="text" name="attr_move_partial" />
+                      <label data-i18n="move_partial"></label>
+    
+                      <input type="text" name="attr_move_miss">
+                      <label data-i18n="move_miss"></label>
+    
+                      <textarea type="text" name="attr_move_details"></textarea>
+                      <label data-i18n="move_details"></label> 
+    
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="move-list-container">
+                <h4 class="move-list-header" data-i18n="playbook_moves"></h4>
+                <fieldset class="repeating_moves">
+                  <div class="move-main">
+
+                    <input type="hidden" name="attr_move_doroll" value="1" />
+                    <input type="hidden" name="attr_move_rollvalue" value="" />
+                    <input type="checkbox" name="attr_move_selected" class="move-selected" />
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                      <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+                    </button>
+                    <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
+    
+                    <div class="move-expansion">
+                      <input type="text" name="attr_move_name_base" />
+                      <label data-i18n="move_name_base"></label>
+                      
+                      <input type="text" name="attr_move_trait" />
+                      <label data-i18n="move_trait"></label>
+                      
+                      <input type="text" name="attr_move_success" />
+                      <label data-i18n="move_success"></label>
+    
+                      <input type="text" name="attr_move_partial" />
+                      <label data-i18n="move_partial"></label>
+    
+                      <input type="text" name="attr_move_miss">
+                      <label data-i18n="move_miss"></label>
+    
+                      <textarea type="text" name="attr_move_details"></textarea>
+                      <label data-i18n="move_details"></label> 
+    
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="character-lower-info">
+          
+          <div class="character-gear section">
+            <h3 data-i18n="gear"></h3>
+            <div class="section-content section-gear">
+              
+              <div class="gearlist-container">
+                <h4 data-i18n="starting_gear"></h4>
+                <fieldset class="repeating_gearlist">
+                  <div class="gearlist-item">
+                    <span name="attr_quantity" value="@{quantity}"></span>
+                    <span name="attr_name" value="@{name}"></span>
+                    <span name="attr_tier" value="@{tier}"></span>
+                    <span name="attr_tags" value="@{tags}" class="italics"></span>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="gearcheck-container">
+                <h4 data-i18n="playbook_gear"></h4>
+                <fieldset class="repeating_gearcheck">
+                  <div class="gear-main">
+                    <input type="checkbox" name="attr_gear_expanded" class="gear-expandtoggle" />
+                    <div class="gear-display">
+                      <input type="checkbox" name="attr_gear_equip" class="gear-equip" />
+                      <span name="attr_gear_name" value="@{gear_name}"></span>
+                      <span name="attr_gear_tier" value="@{gear_tier}"></span>
+                      - (<span class="italics" name="attr_gear_tags" value="@{gear_tags}"></span>)
+                    </div>
+                    <!-- <input type="checkbox" class="expander expand-gear"> -->
+                    <div class="gear-expansion">
+                      <!-- name -->
+                      <input type="text" class="gear-edit" name="attr_gear_name" value="@{gear_name}" />
+                      <label data-i18n="gear_name"></labeL>
+                      <!-- tier -->
+                      <input type="text" class="gear-edit" name="attr_gear_tier" value="@{gear_tier}" />
+                      <label data-i18n="gear_tier"></label>
+                      <!-- tags -->
+                      <input type="text" class="gear-edit" name="attr_gear_tags" value="@{gear_tags}" />
+                      <label data-i18n="gear_tags"></label>
+                    </div>
+  
+                  </div>
+                </fieldset>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="astir-page">
+      <input type="hidden" class="show-carrier" name="attr_show_carrier" value="0"/>
+      <div class="astir-page-container">
+        <div class="section-row">
+          <div class="section flex-1"> 
+            <h3 data-i18n="astir_information"></h3>
+            <div class="section-content">
+              <div class="info-row">
+                <div class="flex-2 form-input">
+                  <input type="text" name="attr_astir_name"/>
+                  <label data-i18n="astir_name"></label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_tier"/>
+                  <label data-i18n="astir_tier"></label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="number" name="attr_astir_power"/>
+                  <label data-i18n="astir_power"></label>
+                </div>
+              </div>
+              <div class="info-row">
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_approach" />
+                  <label data-i18n="astir_approach"></label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_core" />
+                  <label data-i18n="astir_core"></label>
+                </div>
+                <div class="flex-1 form-checkbox">
+                  <input type="checkbox" name="attr_astir_overheating" />
+                  <label data-i18n="astir_overheating"></label>
+                </div>
+              </div>
+              <div class="info-row-textarea">
+                <textarea name="attr_astir_description"></textarea>
+                <label data-i18n="astir_description"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="section flex-1">
+            <h3 data-i18n="astir_parts"></h3>
+            <div class="section-content">
+              <input type="text" name="attr_part_a_name">
+              <label data-i18n="part_a_name"></label>
+
+              <textarea name="attr_part_a_description" class="astir-part-textarea"></textarea>
+              <label data-i18n="part_a_description"></label>
+              
+              <input type="text" name="attr_part_b_name">
+              <label data-i18n="part_b_name"></label>
+
+              <textarea name="attr_part_b_description" class="astir-part-textarea"></textarea>
+              <label data-i18n="part_b_description"></label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-row">
+          <div class="section flex-1">
+            <h3 data-i18n="astir_move"></h3>
+            <div class="section-content">
+              <div>
+                <input type="text" name="attr_astir_move_name">
+                <label data-i18n="astir_move_name"></label>
+              </div>
+              <div>
+                <textarea name="attr_astir_move_description"></textarea>
+                <label data-i18n="astir_move_description"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="section flex-2">
+            <h3 data-i18n="astir_weapons"></h3>
+            <div class="section-content">
+              <fieldset class="repeating_astirweapons">
+                <div class="info-row">
+                  <div class="flex-1">
+                    <input type="text" name="attr_astir_weapon_equip_slot" />
+                    <label data-i18n="astir_weapon_equip_slot"></label>
+                  </div>
+                  
+                  <div class="flex-1">
+                    <input type="text" name="attr_astir_weapon_name" />
+                    <label data-i18n="astir_weapon_name"></label>
+                  </div>
+    
+                  <div class="flex-2">
+                    <input type="text" name="attr_astir_weapon_tags" class="italics" />
+                    <label data-i18n="astir_weapon_tags"></label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carrier-page-container">
+        <div class="section-row">
+          <div class="section flex-1">
+            <h3 data-i18n="carrier_information"></h3>
+            <div class="section-content">
+              <div class="info-row">
+                <div class="form-input flex-3">
+                  <input type="text" name="attr_carrier_name">
+                  <label data-i18n="carrier_name"></labewwl>
+                </div>
+                <div class="form-input flex-1">
+                  <input type="text" name="attr_carrier_tier">
+                  <label data-i18n="carrier_tier"></label>
+                </div>
+              </div>
+              <div class="info-row">
+                <div class="form-input flex-1">
+                  <input type="number" name="attr_carrier_crew">
+                  <label data-i18n="carrier_crew"></label>
+                </div>
+                <div class="form-input flex-3">
+                  <input type="text" name="attr_carrier_type">
+                  <label data-i18n="carrier_type"></label>
+                </div>
+              </div>
+              <div class="info-row-textarea">
+                <textarea name="attr_carrier_description"></textarea>
+                <label data-i18n="carrier_description"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-carrier flex-3">
+          <div class="section">
+            <h3 data-i18n="carrier_layout"></h3>
+            <div class="section-content">
+              <div class="carrier-floor">
+                <div class="carrier-level-box info-box" data-i18n="carrier_level_1"></div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_11_check" />
+                  <input type="text" name="attr_carrier_11_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_12_check" />
+                  <input type="text" name="attr_carrier_12_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_13_check" />
+                  <input type="text" name="attr_carrier_13_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_14_check" />
+                  <input type="text" name="attr_carrier_14_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_15_check" />
+                  <input type="text" name="attr_carrier_15_text" />
+                </div>
+              </div>
+              <div class="carrier-floor">
+                <div class="carrier-level-box info-box" data-i18n="carrier_level_2"></div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_21_check" />
+                  <input type="text" name="attr_carrier_21_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_22_check" />
+                  <input type="text" name="attr_carrier_22_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_23_check" />
+                  <input type="text" name="attr_carrier_23_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_24_check" />
+                  <input type="text" name="attr_carrier_24_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_25_check" />
+                  <input type="text" name="attr_carrier_25_text" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="section flex-2">
+            <h3 data-i18n="carrier_weapons"></h3>
+            <div class="section-content">
+              <fieldset class="repeating_carrierweapons">
+                <div class="info-row">
+                  <div class="flex-2">
+                    <input type="text" name="attr_carrier_weapon_name" />
+                    <label data-i18n="carrier_weapon_name"></label>
+                  </div>
+                  
+                  <div class="flex-1">
+                    <input type="text" name="attr_carrier_weapon_tier" />
+                    <label data-i18n="carrier_weapon_tier"></label>
+                  </div>
+    
+                  <div class="flex-3">
+                    <input type="text" name="attr_carrier_weapon_tags" class="italics" />
+                    <label data-i18n="carrier_weapon_tags"></label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="misc-page">
+      <div class="misc-page-container">
+        <div class="section flex-2">
+          <h3 data-i18n="gravity_clocks"></h3>
+          <div class="section-content">
+            <div class="clock-container">
+              <fieldset class="repeating_gravity">
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_gravity" />
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_gravity" 
+                      type="roll" 
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=GRAVITY}} {{result=[[2d6 + @{gravity}]]}}">
+                      <span data-i18n="gravity"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="description">
+                  <input type="text" name="attr_gravity_description" />
+                  <label data-i18n="gravity_description"></label>
+                </div>
+                <div class="ticks">
+                  <input name="attr_gravity_tick_1" type="checkbox" />
+                  <input name="attr_gravity_tick_2" type="checkbox" />
+                  <input name="attr_gravity_tick_3" type="checkbox" />
+                  <input name="attr_gravity_tick_4" type="checkbox" />
+                  <input name="attr_gravity_tick_5" type="checkbox" />
+                  <input name="attr_gravity_tick_6" type="checkbox" />
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      
+
+      <div class="section flex-1">
+        <h3 data-i18n="misc_info"></h3>
+        <div class="section-content">
+          <div class="spotlight">
+          <div class="ticks"></div>
+            <input type="checkbox" name="attr_spotlight_1">
+            <input type="checkbox" name="attr_spotlight_2">
+            <input type="checkbox" name="attr_spotlight_3">
+            <input type="checkbox" name="attr_spotlight_4">
+            <input type="checkbox" name="attr_spotlight_5">
+            <input type="checkbox" name="attr_spotlight_6">
+          </div>
+
+          <label data-i18n="spotlight"></label>
+
+          <div class="additional-gear">
+            <textarea name="attr_additional_gear"></textarea>
+            <label data-i18n="additional_gear"></label>
+          </div>
+          
+          <div class="character-description">
+            <textarea name="attr_character_description"></textarea>
+            <label data-i18n="character_description"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="version-info">Sheet v0.1.1 - Game v0.6</div>
+  </div>
+
+  
+</div>
+
+
+<!-- MOVE TEMPLATE -->
+<rolltemplate class="sheet-rolltemplate-move">
+  <div class="sheet-template-container-move">
+    <div class="sheet-template-header-move">{{charname}}</div>
+
+    <hr class="sheet-template-divider-move" />
+
+    <div class="sheet-template-movename-move">{{movename}}</div>
+
+    {{#result}}<div class="sheet-template-row-move">+{{trait}}: {{result}}</div>{{/result}}
+    
+    <hr class="sheet-template-divider-move" />
+
+    {{#rollGreater() result 9}}
+    {{#success}}
+    <div class="sheet-template-row-move"><span class="sheet-template-success" data-i18n="roll_ten_plus"></span>: {{success}}</div>
+    {{/success}}
+    {{/rollGreater() result 9}}
+
+    {{#rollBetween() result 7 9}}
+    {{#partial}}
+    <div class="sheet-template-row-move"><span class="sheet-template-partial" data-i18n="roll_seven_to_nine"></span>: {{partial}}</div>
+    {{/partial}}
+    {{/rollBetween() result 7 9}}
+
+    {{#rollLess() result 7}}
+    {{#miss}}
+    <div class="sheet-template-row-move"><span class="sheet-template-miss" data-i18n="roll_six_less_than"></span>: {{miss}}</div>
+    {{/miss}}
+    {{/rollLess() result 7}}
+
+
+    {{#details}}<div class="sheet-template-row-move sheet-template-details">{{details}}</div>{{/details}}
+  </div>
+</rolltemplate>

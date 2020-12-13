@@ -1,0 +1,2626 @@
+<div class="main">
+  <div class="top-section">
+    <div class="page-header">
+      <div class="header">
+        <input type="text" data-i18n-placeholder="character_name" name="attr_character_name" />
+      </div>
+      <div class="header">
+        <input type="text" class="playbook" name="attr_playbook" data-18n-placeholder="playbook"/>
+        <!-- TODO: Make this an attr_ and create sheet script. -->
+      </div>
+    </div>
+
+    <div class="navigation">
+      <input type="hidden" value="character" name="attr_sheet_tab" class="tabstoggle" />
+      <div class="page-tabs">
+        <button type="action" name="act_character" data-i18n="character"></button>
+        <button type="action" name="act_astir" data-i18n="astir"></button>
+        <button type="action" name="act_misc" data-i18n="misc"></button>
+      </div>
+      <div class="show-carrier">
+        <input type="checkbox" name="attr_show_carrier_toggle" value="show">
+        <span data-i18n="carrier_toggle"></span>
+      </div>
+    </div>
+
+    <input type="hidden" class="tabstoggle" name="attr_sheet_tab" value="character"/>
+
+    <div class="character-page">
+      <div class="character-upper-section">
+        <div class="character-descriptors section">
+          <h3 data-i18n="character_info"></h3>
+          <div class="section-content">
+          <input type="hidden" name="attr_playbook_descriptors" class="descriptors-toggle"/>
+            <div class="descriptor">
+              <input type="text" name="attr_character_pronouns"/>
+              <label data-i18n="pronouns"></label>
+            </div>
+            <div class="descriptor">
+              <input type="text" name="attr_character_looks"/>
+              <label data-i18n="you_look"></label>
+            </div>
+            <div class="descriptor">
+              <input type="text" name="attr_character_wears"/>
+              <label data-i18n="you_wear"></label>
+            </div>
+            
+            <!-- attr_playbook 0-3 -->
+            <div class="descriptor channeler">
+              <input type="text" name="attr_character_magic"/>
+              <label data-i18n="your_magic_is_like"></label>
+            </div>
+
+            <div class="descriptor channeler">
+              <textarea rows="2" name="attr_character_catchphrase" class="launch-phrase"></textarea>
+              <label data-i18n="when_you_launch_your_astir_you_say"></label>
+            </div>
+            
+            <!-- attr_playbook 4 -->
+            <div class="descriptor scout">
+              <input type="text" name="attr_character_fights"/>
+              <label data-i18n="you_fight_with"></label>
+            </div>
+            
+            <!-- attr_playbook 5 -->
+            <div class="descriptor captain">
+              <input type="text" name="attr_character_leads"/>
+              <label data-i18n="you_lead_with"></label>
+            </div>
+            
+            <!-- attr_playbook 6-7 -->
+            <div class="descriptor support">
+              <input type="text" name="attr_character_handiworks"/>
+              <label data-i18n="your_handiwork_looks"></label>
+            </div>
+            
+          </div>
+        </div>
+        <div class="character-info">
+          <div class="character-traits section">
+            <h3  data-i18n="traits"></h3>
+            <div class="section-content">
+              <div class="traits">
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_defy">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_defy" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[2d6 + @{defy}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[3d6kh2 + @{defy}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[4d6kh2 + @{defy}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125{{result=[[3d6kl2 + @{defy}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=DEFY&#125&#125 {{result=[[4d6kl2 + @{defy}]]&#125&#125}">
+                      <span data-i18n="defy"></span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_sense">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_sense" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[2d6 + @{sense}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[3d6kh2 + @{sense}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[4d6kh2 + @{sense}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125{{result=[[3d6kl2 + @{sense}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=SENSE&#125&#125 {{result=[[4d6kl2 + @{sense}]]&#125&#125}">
+                      <span data-i18n="sense"></span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="`">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_clash">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_clash" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[2d6 + @{clash}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[3d6kh2 + @{clash}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[4d6kh2 + @{clash}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125{{result=[[3d6kl2 + @{clash}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CLASH&#125&#125 {{result=[[4d6kl2 + @{clash}]]&#125&#125}">
+                      <span data-i18n="clash"></span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_talk">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_talk" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[2d6 + @{talk}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[3d6kh2 + @{talk}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[4d6kh2 + @{talk}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125{{result=[[3d6kl2 + @{talk}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=TALK&#125&#125 {{result=[[4d6kl2 + @{talk}]]&#125&#125}">
+                      <span data-i18n="talk"></span>
+                    </button>
+                  </div>
+                </div>
+                 
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_know">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_know" 
+                      type="roll" 
+                      class="move-button"
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[2d6 + @{know}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kh2 + @{know}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[4d6kh2 + @{know}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125{{result=[[3d6kl2 + @{know}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=KNOW&#125&#125 {{result=[[4d6kl2 + @{know}]]&#125&#125}"">
+                      <span data-i18n="know"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Hidden based on playbook. -->
+                <input type="hidden" class="channel_hidden" name="attr_channel_hidden" value="false" />
+                <div class="trait trait-channel">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_channel">
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_channel" 
+                      type="roll" 
+                      value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[2d6 + @{channel}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kh2 + @{channel}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[4d6kh2 + @{channel}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kl2 + @{channel}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125 {{result=[[4d6kl2 + @{channel}]]&#125&#125}">
+                      <span data-i18n="channel"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="character-dangers section">
+            <h3 data-i18n="dangers"></h3>
+            <div class="section-content">
+              <div class="danger">
+                <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_1_radio" value="4" style="display: none;" checked="true" />
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
+                  </div>
+                  
+                  <div>/</div>
+                
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_1_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" name="attr_danger_1_description" />
+                </div>
+
+                <div class="danger-group">
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_1_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
+                </div>
+              </div>
+              <div class="danger">
+                <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_2_radio" value="4" style="display: none;" checked="true" />
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
+                  </div>
+                  
+                  <div>/</div>
+                
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_2_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" name="attr_danger_2_description" />
+                </div>
+
+                <div class="danger-group">
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_2_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
+                </div>
+              </div>
+              <div class="danger">
+                <div class="character-danger-type">
+                  <input type="radio" name="attr_danger_3_radio" value="4" style="display: none;" checked="true" />
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="0" class="danger-radio"><span data-i18n="risk"></span></label>
+                  </div>
+                  
+                  <div>/</div>
+                
+                  <div class="danger-group">
+                    <label class="danger-label"><input type="radio" name="attr_danger_3_radio" value="1" class="danger-radio"><span data-i18n="peril"></span></label>
+                  </div>
+                </div>
+                <div class="character-danger-input">
+                  <input type="text" class="input-full" name="attr_danger_3_description" />
+                </div>
+
+                <div class="danger-group">
+                  <label class="danger-label danger-clear"><input type="radio" name="attr_danger_3_radio" value="2" class="danger-radio"/><span class="clear-button">*</span></label>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+
+          <div class="character-ideals section">
+            <!-- Repeating input section. -->
+            <h3 data-i18n="hooks"></h3>
+            <div class="section-content">
+              <fieldset class="repeating_ideals">
+                <div class="ideal-section">
+                  <input type="checkbox" name="attr_ideal_used" class="ideal-check"> 
+                  <input type="text" name="attr_ideal" class="ideal-text" />
+                  <select class="dropdown" name="attr_hook-type">
+                    <option>Belief</option>
+                    <option>Goal</option>
+                    <option>Tenet</option>
+                    <option>Burden</option>
+                  </select>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="character-lower-section">
+        <div class="character-moves section">
+          <h3 data-i18n="moves"></h3>
+          <div class="section-content">
+            <div class="character-moves-container">
+
+              <div class="move-list-container">
+                <h4 class="move-list-header" data-i18n="basic_moves"></h4>
+                <fieldset class="repeating_basicmoves">
+                  <div class="move-main">
+
+                    <input type="hidden" name="attr_move_doroll" value="1"/>
+                    <input type="hidden" name="attr_move_rollvalue" value="" />
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                      <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+                    </button>
+
+                    <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
+    
+                    <div class="move-expansion">
+                      <input type="text" name="attr_move_name_base" />
+                      <label data-i18n="move_name_base"></label>
+                      
+                      <input type="text" name="attr_move_trait" />
+                      <label data-i18n="move_trait"></label>
+                      
+                      <input type="text" name="attr_move_success" />
+                      <label data-i18n="move_success"></label>
+    
+                      <input type="text" name="attr_move_partial" />
+                      <label data-i18n="move_partial"></label>
+    
+                      <input type="text" name="attr_move_miss">
+                      <label data-i18n="move_miss"></label>
+    
+                      <textarea type="text" name="attr_move_details"></textarea>
+                      <label data-i18n="move_details"></label> 
+    
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="move-list-container">
+                <h4 class="move-list-header" data-i18n="playbook_moves"></h4>
+                <fieldset class="repeating_moves">
+                  <div class="move-main">
+
+                    <input type="hidden" name="attr_move_doroll" value="1" />
+                    <input type="hidden" name="attr_move_rollvalue" value="" />
+                    <input type="checkbox" name="attr_move_selected" class="move-selected" />
+                    <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                      <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+                    </button>
+                    <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
+    
+                    <div class="move-expansion">
+                      <input type="text" name="attr_move_name_base" />
+                      <label data-i18n="move_name_base"></label>
+                      
+                      <input type="text" name="attr_move_trait" />
+                      <label data-i18n="move_trait"></label>
+                      
+                      <input type="text" name="attr_move_success" />
+                      <label data-i18n="move_success"></label>
+    
+                      <input type="text" name="attr_move_partial" />
+                      <label data-i18n="move_partial"></label>
+    
+                      <input type="text" name="attr_move_miss">
+                      <label data-i18n="move_miss"></label>
+    
+                      <textarea type="text" name="attr_move_details"></textarea>
+                      <label data-i18n="move_details"></label> 
+    
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="character-lower-info">
+          
+          <div class="character-gear section">
+            <h3 data-i18n="gear"></h3>
+            <div class="section-content section-gear">
+              
+              <div class="gearlist-container">
+                <h4 data-i18n="starting_gear"></h4>
+                <fieldset class="repeating_gearlist">
+                  <div class="gearlist-item">
+                    <span name="attr_quantity" value="@{quantity}"></span>
+                    <span name="attr_name" value="@{name}"></span>
+                    <span name="attr_tier" value="@{tier}"></span>
+                    <span name="attr_tags" value="@{tags}" class="italics"></span>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="gearcheck-container">
+                <h4 data-i18n="playbook_gear"></h4>
+                <fieldset class="repeating_gearcheck">
+                  <div class="gear-main">
+                    <input type="checkbox" name="attr_gear_expanded" class="gear-expandtoggle" />
+                    <div class="gear-display">
+                      <input type="checkbox" name="attr_gear_equip" class="gear-equip" />
+                      <span name="attr_gear_name" value="@{gear_name}"></span>
+                      <span name="attr_gear_tier" value="@{gear_tier}"></span>
+                      - (<span class="italics" name="attr_gear_tags" value="@{gear_tags}"></span>)
+                    </div>
+                    <!-- <input type="checkbox" class="expander expand-gear"> -->
+                    <div class="gear-expansion">
+                      <!-- name -->
+                      <input type="text" class="gear-edit" name="attr_gear_name" value="@{gear_name}" />
+                      <label data-i18n="gear_name"></labeL>
+                      <!-- tier -->
+                      <input type="text" class="gear-edit" name="attr_gear_tier" value="@{gear_tier}" />
+                      <label data-i18n="gear_tier"></label>
+                      <!-- tags -->
+                      <input type="text" class="gear-edit" name="attr_gear_tags" value="@{gear_tags}" />
+                      <label data-i18n="gear_tags"></label>
+                    </div>
+  
+                  </div>
+                </fieldset>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="astir-page">
+      <input type="hidden" class="show-carrier" name="attr_show_carrier" value="0"/>
+      <div class="astir-page-container">
+        <div class="section-row">
+          <div class="section flex-1"> 
+            <h3 data-i18n="astir_information"></h3>
+            <div class="section-content">
+              <div class="info-row">
+                <div class="flex-2 form-input">
+                  <input type="text" name="attr_astir_name"/>
+                  <label data-i18n="astir_name"></label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_tier"/>
+                  <label data-i18n="astir_tier"></label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="number" name="attr_astir_power"/>
+                  <label data-i18n="astir_power"></label>
+                </div>
+              </div>
+              <div class="info-row">
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_approach" />
+                  <label data-i18n="astir_approach"></label>
+                </div>
+                <div class="flex-1 form-input">
+                  <input type="text" name="attr_astir_core" />
+                  <label data-i18n="astir_core"></label>
+                </div>
+                <div class="flex-1 form-checkbox">
+                  <input type="checkbox" name="attr_astir_overheating" />
+                  <label data-i18n="astir_overheating"></label>
+                </div>
+              </div>
+              <div class="info-row-textarea">
+                <textarea name="attr_astir_description"></textarea>
+                <label data-i18n="astir_description"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="section flex-1">
+            <h3 data-i18n="astir_parts"></h3>
+            <div class="section-content">
+              <input type="text" name="attr_part_a_name">
+              <label data-i18n="part_a_name"></label>
+
+              <textarea name="attr_part_a_description" class="astir-part-textarea"></textarea>
+              <label data-i18n="part_a_description"></label>
+              
+              <input type="text" name="attr_part_b_name">
+              <label data-i18n="part_b_name"></label>
+
+              <textarea name="attr_part_b_description" class="astir-part-textarea"></textarea>
+              <label data-i18n="part_b_description"></label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-row">
+          <div class="section flex-1">
+            <h3 data-i18n="astir_move"></h3>
+            <div class="section-content">
+              <div>
+                <input type="text" name="attr_astir_move_name">
+                <label data-i18n="astir_move_name"></label>
+              </div>
+              <div>
+                <textarea name="attr_astir_move_description"></textarea>
+                <label data-i18n="astir_move_description"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="section flex-2">
+            <h3 data-i18n="astir_weapons"></h3>
+            <div class="section-content">
+              <fieldset class="repeating_astirweapons">
+                <div class="info-row">
+                  <div class="flex-1">
+                    <input type="text" name="attr_astir_weapon_equip_slot" />
+                    <label data-i18n="astir_weapon_equip_slot"></label>
+                  </div>
+                  
+                  <div class="flex-1">
+                    <input type="text" name="attr_astir_weapon_name" />
+                    <label data-i18n="astir_weapon_name"></label>
+                  </div>
+    
+                  <div class="flex-2">
+                    <input type="text" name="attr_astir_weapon_tags" class="italics" />
+                    <label data-i18n="astir_weapon_tags"></label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carrier-page-container">
+        <div class="section-row">
+          <div class="section flex-1">
+            <h3 data-i18n="carrier_information"></h3>
+            <div class="section-content">
+              <div class="info-row">
+                <div class="form-input flex-3">
+                  <input type="text" name="attr_carrier_name">
+                  <label data-i18n="carrier_name"></labewwl>
+                </div>
+                <div class="form-input flex-1">
+                  <input type="text" name="attr_carrier_tier">
+                  <label data-i18n="carrier_tier"></label>
+                </div>
+              </div>
+              <div class="info-row">
+                <div class="form-input flex-1">
+                  <input type="number" name="attr_carrier_crew">
+                  <label data-i18n="carrier_crew"></label>
+                </div>
+                <div class="form-input flex-3">
+                  <input type="text" name="attr_carrier_type">
+                  <label data-i18n="carrier_type"></label>
+                </div>
+              </div>
+              <div class="info-row-textarea">
+                <textarea name="attr_carrier_description"></textarea>
+                <label data-i18n="carrier_description"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-carrier flex-3">
+          <div class="section">
+            <h3 data-i18n="carrier_layout"></h3>
+            <div class="section-content">
+              <div class="carrier-floor">
+                <div class="carrier-level-box info-box" data-i18n="carrier_level_1"></div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_11_check" />
+                  <input type="text" name="attr_carrier_11_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_12_check" />
+                  <input type="text" name="attr_carrier_12_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_13_check" />
+                  <input type="text" name="attr_carrier_13_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_14_check" />
+                  <input type="text" name="attr_carrier_14_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_15_check" />
+                  <input type="text" name="attr_carrier_15_text" />
+                </div>
+              </div>
+              <div class="carrier-floor">
+                <div class="carrier-level-box info-box" data-i18n="carrier_level_2"></div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_21_check" />
+                  <input type="text" name="attr_carrier_21_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_22_check" />
+                  <input type="text" name="attr_carrier_22_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_23_check" />
+                  <input type="text" name="attr_carrier_23_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_24_check" />
+                  <input type="text" name="attr_carrier_24_text" />
+                </div>
+                <div class="carrier-level-box room-box">
+                  <input type="checkbox" name="attr_carrier_25_check" />
+                  <input type="text" name="attr_carrier_25_text" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="section flex-2">
+            <h3 data-i18n="carrier_weapons"></h3>
+            <div class="section-content">
+              <fieldset class="repeating_carrierweapons">
+                <div class="info-row">
+                  <div class="flex-2">
+                    <input type="text" name="attr_carrier_weapon_name" />
+                    <label data-i18n="carrier_weapon_name"></label>
+                  </div>
+                  
+                  <div class="flex-1">
+                    <input type="text" name="attr_carrier_weapon_tier" />
+                    <label data-i18n="carrier_weapon_tier"></label>
+                  </div>
+    
+                  <div class="flex-3">
+                    <input type="text" name="attr_carrier_weapon_tags" class="italics" />
+                    <label data-i18n="carrier_weapon_tags"></label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="misc-page">
+      <div class="misc-page-container">
+        <div class="section flex-2">
+          <h3 data-i18n="gravity_clocks"></h3>
+          <div class="section-content">
+            <div class="clock-container">
+              <fieldset class="repeating_gravity">
+                <div class="trait">
+                  <div class="trait-top">
+                    <input type="number" value="1" name="attr_gravity" />
+                  </div>
+                  <div class="trait-bottom">  
+                    <button 
+                      name="roll_gravity" 
+                      type="roll" 
+                      value="&{template:move} {{charname=@{character_name}}} {{trait=GRAVITY}} {{result=[[2d6 + @{gravity}]]}}">
+                      <span data-i18n="gravity"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="description">
+                  <input type="text" name="attr_gravity_description" />
+                  <label data-i18n="gravity_description"></label>
+                </div>
+                <div class="ticks">
+                  <input name="attr_gravity_tick_1" type="checkbox" />
+                  <input name="attr_gravity_tick_2" type="checkbox" />
+                  <input name="attr_gravity_tick_3" type="checkbox" />
+                  <input name="attr_gravity_tick_4" type="checkbox" />
+                  <input name="attr_gravity_tick_5" type="checkbox" />
+                  <input name="attr_gravity_tick_6" type="checkbox" />
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      
+
+      <div class="section flex-1">
+        <h3 data-i18n="misc_info"></h3>
+        <div class="section-content">
+          <div class="spotlight">
+          <div class="ticks"></div>
+            <input type="checkbox" name="attr_spotlight_1">
+            <input type="checkbox" name="attr_spotlight_2">
+            <input type="checkbox" name="attr_spotlight_3">
+            <input type="checkbox" name="attr_spotlight_4">
+            <input type="checkbox" name="attr_spotlight_5">
+            <input type="checkbox" name="attr_spotlight_6">
+          </div>
+
+          <label data-i18n="spotlight"></label>
+
+          <div class="additional-gear">
+            <textarea name="attr_additional_gear"></textarea>
+            <label data-i18n="additional_gear"></label>
+          </div>
+          
+          <div class="character-description">
+            <textarea name="attr_character_description"></textarea>
+            <label data-i18n="character_description"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="version-info">Sheet v0.1.1 - Game v0.6</div>
+  </div>
+
+  
+</div>
+
+
+<!-- MOVE TEMPLATE -->
+<rolltemplate class="sheet-rolltemplate-move">
+  <div class="sheet-template-container-move">
+    <div class="sheet-template-header-move">{{charname}}</div>
+
+    <hr class="sheet-template-divider-move" />
+
+    <div class="sheet-template-movename-move">{{movename}}</div>
+
+    {{#result}}<div class="sheet-template-row-move">+{{trait}}: {{result}}</div>{{/result}}
+    
+    <hr class="sheet-template-divider-move" />
+
+    {{#rollGreater() result 9}}
+    {{#success}}
+    <div class="sheet-template-row-move"><span class="sheet-template-success" data-i18n="roll_ten_plus"></span>: {{success}}</div>
+    {{/success}}
+    {{/rollGreater() result 9}}
+
+    {{#rollBetween() result 7 9}}
+    {{#partial}}
+    <div class="sheet-template-row-move"><span class="sheet-template-partial" data-i18n="roll_seven_to_nine"></span>: {{partial}}</div>
+    {{/partial}}
+    {{/rollBetween() result 7 9}}
+
+    {{#rollLess() result 7}}
+    {{#miss}}
+    <div class="sheet-template-row-move"><span class="sheet-template-miss" data-i18n="roll_six_less_than"></span>: {{miss}}</div>
+    {{/miss}}
+    {{/rollLess() result 7}}
+
+
+    {{#details}}<div class="sheet-template-row-move sheet-template-details">{{details}}</div>{{/details}}
+  </div>
+</rolltemplate>
+<script type="text/worker">
+/*
+    Important note: this file isn't being used in the character sheet directly, but rather is an
+    easier way to keep a consistent source of truth for the data as the sheet is being developed.
+
+    If you would like to contribute, please feel free to do so following these formatting conventions.
+
+    MOVES -----
+    moveName: {               // ! Style note here, use camel case for these names.
+        book:     string,     // Playbook for move.
+        fullName: string,     // Full name for move.
+        roll?:    string,     // If a move has a single trait, use this property.
+        rolls?:   string[],   // If a move can call for different traits, use an array of applicable traits.
+        success?:  string,     // 10+ roll message
+        partial?:  string,     // 7-9 roll message
+        miss?:     string,     // 6 or less roll message.
+        details?:  string,     // Body for context. Formatting for text TBD, but for now try to use \n and • or &bull;
+    }
+
+    GEAR -----
+    playbook: {                     // Name of playbook, lowercase. ie: arcanist
+        startingGear: [             // Array of gear using the following schema.
+            {                       // List of staring gear for playbook.
+                quantity: string,   // Not required.
+                name:     string,   // Required, name of equipment.
+                tier:     string,   // Format note, please use roman numerals for consistency.
+                tags:     string[]  // Array of strings, formatting TBD.
+            }, ... { },
+        ],
+        classGear: [                // Using the same schema as above.
+            {
+                ...
+            }
+        ]
+    }
+*/
+
+const playbookMoves = { // basic moves
+  basic: [
+    {
+      fullName: 'Weather The Storm',
+      rolls: ['DEFY', 'KNOW'],
+      success: 'You mange to make it to safety.',
+      partial: 'You succeed, but at some cost - your Director will ask you to settle for less, take a *risk*, or make a difficult choice.',
+    },
+    {
+      fullName: 'Read The Room',
+      roll: 'SENSE',
+      success: 'Hold 3',
+      partial: 'Hold 1',
+      miss: 'On a failure, you may ask one of the below questions, but the answer creates a problem or puts you in danger.',
+      details: 'Spend your hold 1-for-1 to ask the following questions. Your hold lasts until you leave the current situation or it changes significantly. \n\n • Who has the upper hand here?\n • What is being overlooked here?\n • How does x really feel?\n • What are x\'s real intentions?\n • How is x at risk or in peril? \n\n Roll with Advantage when you act on the answers to what you\'ve asked',
+    },
+    {
+      fullName: 'Dispel Uncertainties',
+      roll: 'KNOW',
+      success: 'The Director will tell you something directly useful you know about the situation or subject at hand.',
+      partial: 'The Director will tell you something potentially useful, but it is up to you to discern how. The Director might ask you to explain how you know that information, or where you learned it.',
+    },
+    {
+      fullName: 'Help or Hinder',
+      details: 'Roll +GRAVITY. On a 10+, they take Advantage (help) or Disadvantage to their roll. On a 7-9, as 10+, but you become entangled. in the consequences of their actions.'
+    },
+    {
+      fullName: 'Weave Magic',
+      roll: 'CHANNEL',
+      success: 'You manage to channel power the way you desired without ill effect.',
+      partial: 'You succeed, but your invocation is twisted in an unexpected and dangerous way.'
+    },
+    {
+      fullName: 'Cool Off',
+      rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK', 'CHANNEL'],
+      success: 'You/they erase a *risk* or untick \'overheating\' from an Astir.',
+      partial: 'As above, but your moment of safety is interrupted.'
+    },
+    {
+      fullName: 'Exchange Blows',
+      rolls: ['CLASH', 'TALK'],
+      success: 'Either your opponent takes a *risk*, or you take a *risk* and put your opponent in *peril.*',
+      partial: 'Both you and your target are forced to take a *risk*',
+    },
+    {
+      fullName: 'Strike Decisively',
+      rolls: ['CLASH', 'TALK'],
+      success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
+      partial: 'You succeed as above, but choose 1.',
+      details: '• You overreach or underestimate - take a *risk*. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
+    },
+    {
+      fullName: 'Bite the Dust',
+      roll: 'DEFY',
+      success: 'They miss, hesitate, or you\'re saved by sheer luck - you rally, and clear a *risk* if you have one.',
+      partial: 'Retreat from the Sortie safely, or be put in *peril.*',
+      miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? Have hat you lost? Who and what is changed by your defeat?',
+      details: 'If you survive, you are changed by your defeat. As well as the above, choose one: \n\n • Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher lower than +/- 3)\n • Choose a new playbook. Keep what moves you and the Director agree are truly part of your character, and discard the others. Replace them with the starting moves for your new playbook. You do not gain its starting equipment.',
+    },
+    {
+      fullName: 'Lead a Sortie',
+      rolls: ''
+    }
+  ],
+  arcanist: [
+    {
+      fullName:'Prepare Rituals',
+      details: 'You have a practiced set of **rituals** you use to enhance'
+      + 'your piloting talents. Discuss what they are with your GM and where you perform them. When someone'
+      + '**leads a sortie**, choose 2 **rituals** you had time to perform:\n\n'
+      + '• A **realigning ritual** - Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher or lower than -/+3)\n\n'
+      + '• A **contingency ritual** - Specify three specific situations: if you find yourself in one of them, increase your level of success on your next move and this ritual expires.\n\n'
+      + '• An **adaptation ritual** - when you fail a roll, take Advantage on your next one.\n\n'
+      + '• A **clarity ritual** - When you **read the room**, you may ask questions of a broader situation than here and now.\n\n'
+      + 'All rituals expire after the Sortie, and you lose their effects when that happens.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Plans',
+      details: 'Arcanists are educated in the art of war, and fight according to preordained tactics in ' 
+      + 'order to perform at their best. Unexpected situations are the bane of a good arcanist. '
+      + 'Whenever the party enters a dangerous situation, declare your plan to resolve it.\n\n'
+      + 'If your plan is interfered with or prevented at any point, take the risk (perturbed, '
+      + 'irritated, vexed, confounded).\n\n'
+      + 'If your plan succeeds, even accidentally, advance a GRAVITY clock with someone '
+      + 'who didn\'t think it would.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Expend Ritual',
+      details: 'When you disperse the magical energy of a ***ritual*** to re-use that energy in a pinch, '
+      + 'choose one of your prepared rituals - you no longer gain its benefit. You may then '
+      + 'choose an option from the ***subsystems*** move without spending Mana.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Diverse Channeling',
+      details: 'When you make a move while piloting an Astir, you can roll +CHANNEL instead of the usual '
+      + 'Trait - if you do so, tick \'overheating\' on your Astir. If it\'s already fully ticked, it '
+      + 'destroys one of your Astir\'s parts — you are in *peril* (burnout).',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Consult Literature',
+      details: 'You have a store of books and scrolls on various subjects that you can consult for '
+      + 'information when given time. Choose 1 subject you have almost perfect records of, '
+      + 'and 2 you have extensive information on:\n\n'
+      + '• Construct models and design\n\n'
+      + '• Magical beasts and monsters\n\n'
+      + '• Enchantment and spell-craft\n\n'
+      + '• Mundane craft and building\n\n'
+      + '• Natural flora and fauna\n\n'
+      + '• Military tactics\n\n'
+      + '• A specific nation/faction\n\n'
+      + '• General world history',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Combat Spells',
+      details: 'If you are outside your Astir and fighting on foot, you can ***exchange blows*** and '
+      + '***strike decisively*** with +CHANNEL when attempting to cause physical harm, using '
+      + 'the following profile:\n\n'
+      + '• Hand-casting II (*ranged / area, bane*)',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Tactical Illusions',
+      details: 'When you distract your foes with magic, roll +CHANNEL.',
+      roll: 'CHANNEL',
+      success: 'Choose 2:\n\n'
+      + '• The illusions last until you stop sustaining them (otherwise they last up to a minute)\n\n'
+      + '• Your illusions affect anyone you intend to perceive them, rather than a single person.\n\n'
+      + '• You can create illusions that affect all the senses, rather than just sight.',
+      partial: 'Choose 1, but your illusions also distract an unintended audience:\n\n'
+      + '• The illusions last until you stop sustaining them (otherwise they last up to a minute)\n\n'
+      + '• Your illusions affect anyone you intend to perceive them, rather than a single person.\n\n'
+      + '• You can create illusions that affect all the senses, rather than just sight.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Archivist [Requires: *Consult Literature*]',
+      details: 'You aquire a new source of knowledge, and choose 2 more subjects you have extensive information '
+      + 'of to your ***consult literature*** move. ',
+      moveSelected: false,
+    }
+  ],
+  impostor: [
+    {
+      fullName: 'Arcane Augments',
+      details: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
+      + 'organs. These augmentations allow a non-magic user to power and control an Astir, '
+      + 'but otherwise do not interfere with your life unless you (the player) decide so. Being '
+      + 'bonded to magic in this way often leads to it affecting the body and vice versa, '
+      + 'irreversibly tying their magic to their emotional and physical state.\n\n'
+      + 'Your CHANNEL is increased by 1 for each danger you have (upto a max of +3). '
+      + 'When someone you have GRAVITY with sees you be put in peril, advance it.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Vent Wrath',
+      details: 'If you are outside your Astir and fighting on foot, you can ***exchange blows*** and ***strike decisively*** with +CHANNEL when attempting to cause physical harm, using the following profile:\n\n• Hand-casting II (ranged / area, bane)',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Scour Existence',
+      details: 'You can ***exchange blows*** and strike decisively with +CHANNEL when attempting to cause physical harm with Astir-mounted weapons. If you do so, tick \'overheating\' on your Astir. If it\'s already ticked, it destroys one of your Astir’s parts—you are in peril (burnout).',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Don\'t Follow Me',
+      details: 'When you ***lead a Sortie*** with +DEFY, give everyone that follows Advantage to their next roll.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Resonance',
+      details: 'When you would weave magic to form a clear empathic bond with another, sharing your true feelings and ideals, choose 2 instead of rolling;\n\n'
+      + '• Your connection lasts a single, precious moment—time for little more than a short exchange.'
+      + '• They or someone else view it as a breach of trust or some kind of trick, and will hold it against you.'
+      + '• You miss something important while you\'re together.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Let Loose',
+      moveSelected: false,
+      details: 'Whenever you gain a *peril*, ***exchange blows*** and ***strike decisively*** with Advantage until the end of the Sortie.'
+    },
+    {
+      fullName: 'Bullheaded',
+      moveSelected: false,
+      details: 'You may take a *risk* to take Advantage on your next roll.'
+    },
+    {
+      fullName: 'Face to Face',
+      roll: 'TALK',
+      success: 'NPCs will leave their Astir to face you. PCs must weather the storm to refuse.',
+      partial: 'NPCs will leave their Astir to face you, but choose one:\n\n'
+      + '• Take the *risk* (entangled)\n\n'
+      + '• You have Disadvantage to moves against the other Channeler.\n\n'
+      + '• You are seperated from your Astirs temporarily.\n\n'
+      + 'PCs may choose whether to leave their Astir or not – if they do, they pick one of the above for you.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Realignment',
+      moveSelected: false,
+      details: 'You undergo deeper alteration and enhancement to your body. Discuss what it is with your GM, and either choose a move from another playbook to represent its effects, or work with your GM to create a new one.'
+    }
+  ],
+  paradigm: [
+    { 
+      fullName: 'Evangelise',
+      details: 'You are in service of a deity or faith and are responsible for the spiritual well-being of'
+      +'your Carrier’s crew. You gain an additional action during Downtime that can only be'
+      +'used to give formal service or privately consult with a crew-member, both using the'
+      +'talk it out move',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Tenets',
+      details: 'Instead of Ideals, write three tenets that represent your deity’s will. When you discuss'
+      + 'your faith with someone or learn something about how they personally relate to faith'
+      + 'and religion, advance a GRAVITY clock with them if you have one. If you ever'
+      + 'sacrifce or break a tenet, it is lost forever; replace it with an Ideal instead of crossing'
+      + 'it off and taking an advancement. Your CHANNEL Trait is also reduced by 1 until you'
+      + 'make amends in whatever way is appropriate for your faith.\n\n'
+      + 'Example tenets might be:\n'
+      + '• Violence is a road taken when all others are closed.\n'
+      + '• Share your faith freely, that it might spread.\n'
+      + '• Scepticism is an affront to the divine.\n'
+      + '• From each according to his ability, to each according to his needs.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Divine Guidance',
+      details: 'When you consult your deity for information or guidance, you may ***dispel uncertainties***'
+        + 'with +CHANNEL. If you do so, on a 7-9 the information is still directly'
+        + 'useful, but it is diffcult to discern if your answer came from the intended deity.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Inspire Focus',
+      details: 'Once per Sortie, you may take a visible position over the battlefeld and inspire'
+      + 'confdence and clarity in your allies that see you - they each clear a risk and take'
+      + 'advantage to their next roll.',
+      moveSelected: false
+    },
+    {
+      fullName: 'Bless',
+      details: 'When you enter battle with a group of allies, give up to four people (including'
+      + 'yourself) advantage when they next ***bite the dust***.',
+      moveSelected: false
+    },
+    {
+      fullName: 'Safeguard',
+      details: 'When you ***exchange blows*** and someone ***helps or hinders*** you, you can protect'
+      + 'them from any harm they might suffer as a result. When you ***help or hinder***'
+      + 'someone who is ***exchanging blows***, you can suffer any harm taken in their place.',
+      moveSelected: false
+    },
+    {
+      fullName: 'Turn Unearthly',
+      success: 'Any creature not native to'
+        + 'this plane of existence is sent back to their home plane instantly. If they are powerful'
+        + 'enough to return themselves (or are summoned) during the same Sortie, they are in'
+        + 'peril (turned) as your divine presence sickens them.',
+      partial: 'They must flee from your sight and are in *peril* (turned).',
+      details: 'When piloting an Astir you are attuned to, you may project an aura that causes otherwordly creatures to flee.',
+      roll: 'CHANNEL',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Firebrand',
+      rolls: ['TALK', 'CHANNEL'],
+      success: 'Choose 2',
+      partial: 'Choose 1',
+      miss: 'Your words are misinterpreted, co-opted, or misrepresented in a terrible way.',
+      details: 'When you openly and loudly advocate for something related to one of your tenets, roll the highest of +TALK or +CHANNEL.\n\n'
+        + '• Your words reach people far beyond where your voice is heard.\n'
+        + '• Even those not of your faith connect to your message.\n'
+        + '• You are not targeted immediately for what you preach.',
+      moveSelected: 'false'
+    },
+    {
+      fullName: 'Consecrate Ground',
+      success: 'Choose 2',
+      partial: 'Choose 1',
+      roll: 'CHANNEL',
+      details: 'When you attempt to imbue an area or building with your divine power and presence, roll +CHANNEL.\n\n'
+        + '• Creatures opposed by your deity cannot enter the consecrated area.\n'
+        + '• Creatures within your consecrated area cannot take violent action against each other.\n'
+        + '• Creatures within the consecrated area cool off with Advantage.\n'
+        + '• Creatures within your consecrated area cannot knowingly lie.',
+      moveSelected: false,
+    }
+  ],
+  witch: [
+    {
+      fullName: 'Patron',
+      details: 'You receive your magic from an otherworldly patron or benefactor, whose motivations '
+      + ' are typically not something you can discern. While they are often content to let you '
+      + ' run free with their power, they will sometimes require things of you - and when they'
+      + ' can, they will exert their Inﬂuence to make sure their bidding is done. You have a'
+      + ' GRAVITY clock with your patron, representing the tenuous bond between you.'
+      + ' Your patron may spend their Inﬂuence like hold in order to do the following:\n\n'
+      + '• Help or hinder you, succeeding as if they had rolled a 10+.\n'
+      + '• Attempt to force you to do something; you may weather the storm to resist.\n'
+      + '• Re-roll your boons for the day.\n\n'
+      + 'Whenever your Patron spends Inﬂuence, advance your GRAVITY clock with them. '
+      + 'As long as you Patron has at least 1 Inﬂuence, your CHANNEL Trait is set to +3.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Receive Boons',
+      details: 'At each dawn, you recieve ***boons*** from your patron. Roll on the list below two times to discern what powers you receive. They last until the next dawn. \n\n'
+      + '***1 · Channelling Boon*** - You may give your patron 1 Influence to make a move with +CHANNEL instead '
+      + 'of the usual trait—when you do so, tick \'overheating\' on your Astir. If it\'s already fully ticked, it destroys '
+      + 'one of your Astir’s parts—you are in peril (burnout).\n'
+      + '***2 · Hexxing Boon*** - You can curse an Astir, locking it out of some of its systems. When you do so, roll'
+      + ' +CHANNEL. On a 10+, choose 2. On a 7-9, choose 1:\n'
+      + '• A Player or Rival cannot spend Mana to activate ***subsystems***.\n'
+      + '• A weapon, tool or function stalls, malfunctions, and stops working.\n'
+      + '• The Channeler cannot prevent you from communicating with them.\n'
+      + '***3 · Masking Boon*** - You can mask yourself or an Astir you are attuned to against detection. When you '
+      + 'do so, roll +CHANNEL. On a 10+, you are disguised or cloaked in a fashion appropriate to your ***patron***. '
+      + 'On a 7-9, the Director will tell you a flaw with your disguise.\n'
+      + '***4 · Shielding Boon*** - You may give your ***patron*** 1 Influence to have Advantage when facing harm.\n'
+      + '***5 · Vigorous Boon*** - You may give your ***patron*** 1 Influence to make the ***subsystems*** move for free.\n'
+      + '***6 · Trickster’s Boon*** - When you use the ***subsystems*** to use an Artifact, instead of taking Advantage '
+      + 'you may roll a d6 and replace either or both of your regular dice results with it.'
+    },
+    {
+      fullName: 'Occult Lore',
+      details: 'When you consult your patron for information, you may ***dispel uncertainties*** with '
+        +' +CHANNEL. If you do so, on a 7-9 the information is still directly useful, but using it '
+        + 'would cause some unforeseen complication entertaining or benefcial to your patron.',
+      moveSelected: false,
+      roll: 'CHANNEL'
+    },
+    {
+      fullName: 'Whims',
+      details: 'Your patron is unfathomable, and their interests obscure. Your GM should, once per '
+        + 'Sortie, give you some minor goal or abstract requirement your patron demands of '
+        + 'you - it should be doable within the session. If you complete it, at the next dawn you '
+        + 'may choose your boons instead of rolling. If you don\'t, give your patron 1 Inﬂuence.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Embrace Chaos',
+      details: 'Whenever you roll a 10+, you may opt to instead take a partial success as if you had '
+      + 'rolled a 7-9. If you do so, hold 1, which you may spend at any point before the end of'
+      + 'the Sortie to do one of the following:\n\n'
+      + '• Swap two of your Traits.\n'
+      + '• Increase the level of success on your next roll by one.\n',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Re-weave Reality',
+      details: 'When you use a piece of equipment to make a move, e.g using a weapon to ***strike decisively***,'
+      + ' you can ignore one of its tags OR act as if it had an additional one of'
+      + ' your choice. When you do so, give your patron 1 Inﬂuence',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Relinquish',
+      details: 'If a part of your Astir is damaged or destroyed and you take a peril as a result, you '
+      + 'may relinquish your boons; losing them until you receive boons again but fixing '
+      + 'that part and losing the peril. You cannot re-roll relinquished boons.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Share the Burden',
+      details: 'When you cool off, you may choose to succeed as you had rolled a 1+. If you do so, give your patron 1 Influence',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Borrowed Power',
+      success: 'Hold 3',
+      partial: 'Hold 1, or be in peril and hold 3',
+      roll: 'CHANNEL',
+      details: 'When you request help from your patron, roll +CHANNEL and give your patron 1 Influence. You may spend your hold at any point during '
+      + 'the Sortie 1-for-1 to use any ***boon*** you don\'t currently have, or you may spend 2 hold to make any move from another playbook.',
+      moveSelected: false,
+    }
+  ],
+  scout: [
+    {
+      fullName: 'Field Scout',
+      details: 'You\'re an expert at managing operations in the field and supporting your allies. You’re agile and strong, you tend to notice things those in Astirs don\'t, '
+      + 'and your size allows you access to spaces too small for them \n\n.'
+      + 'You can wield tier II weapons without much difficulty, can reload weapons easily while on the move or under fire, and don’t need to ***bite the dust*** when threatened by harm from a higher tier than you.\n\n'
+      + 'When you hold your own against Astirs or show yourself completely above the rank- and-file, advance a GRAVITY clock with someone who sees you and is impressed.',
+      moveSelected: true,
+    }, {
+      fullName: 'Team Player',
+      details: 'When you ***read the room***, you may pass the information you gain along and allow an ally to act with Advantage instead of you. When you do so, you may advance a GRAVITY clock with them if you have one.',
+      moveSelected: false,
+    }, {
+      fullName: 'Mobility',
+      roll: 'DEFY',
+      success: 'Hold 3',
+      partial: 'Hold 1',
+      details: 'When you\'re fighting somewhere with the room to be acrobatic and mobile, roll +DEFY.\n\n'
+      + '• Escape from something that binds, traps or impedes you\n'
+      + '• Acquire high ground or a defensible position\n'
+      + '• Get to somewhere or something before others can\n'
+      + '• Avoid an incoming source of physical harm',
+      moveSelected: false,
+    }, {
+      fullName: 'Improvisation',
+      details: 'At the beginning of a Sortie, hold 3. You may spend 1 hold to change your approach for a single move. Explain to your Director what you did or used to do this.',
+      moveSelected: false,
+    }, {
+      fullName: 'Natural Leader',
+      details: 'When participating in a group move, you can always make the roll in place of whoever has the lowest relevant trait.',
+      moveSelected: false,
+    }, {
+      fullName: 'Strong As Hell',
+      details: 'You can carry and wield tier III weapons by taking a risk.',
+      moveSelected: false,
+    }, {
+      fullName: 'Patch Job',
+      details: 'When you ***cool off*** to remove a risk or the ‘overheating’ tick from an Astir, you can do it in a few moments rather than minutes, even while the Astir is still moving. ' 
+      + 'Instead of the usual result, on a 7-9 you attract unwanted attention.',
+      moveSelected: false,
+    }, {
+      fullName: 'Guerilla',
+      roll: 'KNOW',
+      success: 'Choose 2',
+      partial: 'Choose 1',
+      details: 'When you attempt to evade detection or sneak past others, roll +KNOW. \n\n'
+      + '• You avoid detection.\n'
+      + '• You find something hidden or forgotten.\n'
+      + '• You can set up for an ambush.\n'
+      + '• You find a way to allow others to follow you without being detected.',
+      moveSelected: false,
+    }, {
+      fullName: 'Pathfinding',
+      details: 'When you\'re leading a group that is travelling a long distance, hold 3, and spend it 1- for-1 on the following options while you travel:\n\n'
+      + '• You lead the group past an area of difficult terrain without issue.\n'
+      + '• You find a comfortable, sheltered place to set up camp.\n'
+      + '• You\'re familiar with the area: ***dispel uncertainties*** regarding it or the things in it with Advantage during the journey.\n'
+      + '• You find a shortcut, reducing the length of your journey but adding complications.\n'
+    }
+  ],
+  captain: [
+    {
+      fullName: 'Coordinator',
+      details: 'When you roll a 10+ to ***help or hinder*** and choose to help, give increased success instead of Advantage.\n\n'
+      + 'When you roll a 6 or below while rolling +CREW, advance a GRAVITY clock with someone who has put their trust in you.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'In Command',
+      details: 'You are the Carrier’s captain, and naturally have command of its crew. While at the helm of the Carrier, you may order the crew to:\n\n'
+      + '• ***Exchange blows*** and ***strike decisively*** with +CREW, using the Carrier’s weaponry.\n'
+      + '• ***Weather the storm*** with +CREW to perform evasive actions.\n'
+      + '• ***Read the room*** with +CREW to assess the battlefield.\n\n'
+      + 'Additionally, both Carrier and crew are part of your character as far as risks and perils are concerned, just like an Astir is an extension of its channeler. To reflect the many minds '
+      + 'and hands at work for you, you are defenceless at 4 dangers while at the helm of your Carrier, rather than 3.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Tactical Genius',
+      details: 'When you\'re supervising allies from afar during a Sortie, you can lever your tactical know-how into better positioning. Take 3 hold at the start of a Sortie, '
+      + 'and spend it 1- for-1 to do the following: \n\n'
+      + '• Remove one risk from an ally.\n'
+      + '• Give an ally Advantage to their next move, describing how you advise or support them.\n'
+      + '• Have an ally appear somehow in a place they are needed.\n',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Force Multiplier',
+      details: 'You acquire something - a tool, ship upgrade, a caged malevolent sentience, etc - that allows the Carrier and it’s staff to operate far better than usual, but it has a downside. '
+      + 'Once per Sortie you may increase your level of success on a move, but choose 1\n\n'
+      + '• It whispers in your ear - change one of your Ideals to represent its demands.\n'
+      + '• It’s fragile and needs protecting. It grants no benefit while damaged or destroyed.\n'
+      + '• It takes up a lot of resources - spend 1 SUPPLY on it when someone ***leads a Sortie***, or it stops working until you reawaken it by spending 3.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Surprise Requisition',
+      details: 'When you dispatch supplies to another character or reveal something extra you had them deployed with all along, roll +CREW. On a 10+, choose 1 for free. On a 7-9, you had to '
+      + 'requisition that gear personally - pay 1 SUPPLY, or drop 1 Stake from a Faction as they spread themselves thin to help you.\n\n'
+      + '• A weapon rendered unusable by damage or lack of ammo is replaced/rearmed.\n'
+      + '• A weapon gains the bane tag until the end of the scene.\n'
+      + '• A weapon gains the ruin tag for one shot or strike.\n'
+      + '• An Astir changes it’s approach until the end of the scene.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Fire Support',
+      details: 'When you provide instruction and call shots for the Carrier’s crew, you may ***exchange harm*** and ***strike decisively*** using +KNOW and the Carrier’s weaponry.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Information Network',
+      details: 'When you have your crew search for information, you may ***dispel uncertainties*** with +CREW.\n\n'
+      + 'When you contact your superiors for relevant intel, you may ***dispel uncertainties*** with +TALK.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Resupply Priority',
+      details: 'Your Carrier gains 1 SUPPLY whenever you start Downtime.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Human Resources',
+      details: 'When you read the room, you may also choose from the following questions: \n\n'
+      + '• What is the crew’s mood like?\n'
+      + '• Who is responsible for a problem on-board the Carrier?\n'
+      + '• What could be a problem for the crew in the immediate future?',
+      moveSelected: false,
+    }
+  ],
+  diplomat: [
+    {
+      fullName: 'Negotiator',
+      details: 'You may ***read the room*** with +TALK when mediating or taking part in a conversation/discussion. When you successfully negotiate or advocate for something important '
+      + 'to you, advance a GRAVITY clock with another party in the discussion.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Under The Table',
+      details: 'When you set up a clandestine meeting, choose 2: \n\n'
+      + '• There’s no risk of an ambush or interference.\n'
+      + '• Third parties aren’t privy to the contents of the meeting.\n'
+      + '• All parties are willing to discuss in good faith.\n'
+    },
+    {
+      fullName: 'Sharp Tongue',
+      details: 'When you ***exchange blows*** with +TALK, on a roll of 12+ your opponent is put in *peril*.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Sharper Knives',
+      details: 'Daggers and other small weapons are your forte; you can always keep at least one'
+      + ' concealed on your person, no matter how well checked, and you ***strike decisively***'
+      + ' with Advantage while using one to cause harm. This might extend to improvised'
+      +  'weapons, also. You probably struggle not to show off or toy around with knives in'
+      + ' casual situations. It\'s unsettling',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Stir The Crowd',
+      roll: 'TALK',
+      success: 'Choose 1',
+      partial: 'Choose 2, or let your Director choose 1.',
+      details: 'When you attempt to inspire dissent against the Authority, roll +TALK.\n\n'
+      + '• It takes a tragedy to truly galvanise people.\n'
+      + '• In doing so, you become known and targeted.\n'
+      + '• You have no control or inﬂuence over any acts of protest.\n'
+      + '• People feel better, but nothing really changes\n',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Bureaucrat',
+      details: 'When you would ***exchange blows*** with +TALK to slow someone down or distract'
+      + ' them with regulations, bylaws, or whatever piece of red tape you can think of, you'
+      + ' also choose one from the below even on a fail.'
+      + '• You\'re not lying - they’ll really be in trouble if they don’t listen to you.'
+      + '• You can hold them up for more than a brief moment.'
+      + '• They won\'t remember or recognise you.'
+      + '• You don\'t need to take a *risk*.',
+      moveSelected: false,
+    }, 
+    {
+      fullName: 'Irrefutable',
+      details: 'When you argue or advocate for something and back up your point of view with hard'
+      + ' evidence or facts, hold 1. When you reach 3 hold, you may spend them to strike'
+      + ' decisively with +TALK against someone who isn\'t defenceless.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Connected',
+      roll: 'TALK',
+      details: 'When you meet someone, roll +TALK.',
+      success: 'You\'re familiar with them, and you may choose whether their view of you is positive or negative.',
+      partial: 'You\'re familiar with them, but the director decides how they think of you.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Shree Klime',
+      details: 'During Downtime, you may also prepare an alias or disguise. Most people will'
+      + ' believe you are who you say you are, unless you\'re disguised as someone they\'re'
+      + ' very familiar with, or they are given reason to thoroughly check your person or any'
+      + ' identifcation. You may take shore leave to secure 2 of the following:\n\n'
+      + '• You have ID that is either legitimate or so well faked it is impossible to tell the difference.\n'
+      + '• There\'s a reason or expectation for someone ftting your disguise to show up.\n'
+      + '• You\'ve had something useful planted ahead of time - select a weapon or piece of equipment (one you have access to) to be hidden just where you\'ll need it.',
+      moveSelected: false,
+    }
+  ],
+  artificer: [
+    {
+      fullName: 'Expert Repairs',
+      details: 'You\'re an expert at fixing broken constructs, and gain an additional Downtime move which you can only spend to ***mend something***. Additionally, you may ***mend something*** with +KNOW. When you tend to someone’s body or Astir, advance a GRAVITY clock with them if you have one.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Jury-Rigger',
+      success: 'Choose 3',
+      partial: 'Choose 2',
+      details: 'When you take random parts or objects and attempt to create something useful out of them, roll +KNOW.\n\n'
+      + '• It fits the purpose you had in mind.\n'
+      + '• It stops working after hours, not minutes.\n'
+      + '• It doesn’t explode when it stops working.\n'
+      + '• It doesn’t look like garbage stuck together.',
+      moveSelected: true,
+    },
+    {
+      fullName: 'Augmenter',
+      details: 'When you ***work on a project*** during Downtime, you may fill an additional clock segment on a result of 10+ or 7-9.\n\n'
+      + 'You may ***work on a project*** to create and install magical enhancements or alterations to living creatures.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Arcane Generator',
+      roll: 'KNOW',
+      success: 'You are considered to have CHANNEL at +2 until the end of the Sortie.',
+      partial: 'You are considered to have CHANNEL at +1 until the end of the Sortie.',
+      details: 'You\'ve built a magical device, small enough to be worn on your back or at your hip, that generates arcane power for you. When you start it up, roll +KNOW.\n\n'
+      + 'Should the generator be broken or damaged you lose your CHANNEL trait, and if you are currently attuned to an Astir the connection is severed (meaning it shuts down). '
+      + 'It has the *magic* and *distinct* tags.',
+      moveSelected: false
+    },
+    {
+      fullName: 'From Scratch [Req: Arcane Generator]',
+      details: 'When you tap into magical power to create something long-lasting quickly, roll +CHANNEL. On a 10+, you can create something as big as a tower or as complex as a lock, and it takes but a few minutes of work. On a 7-9, choose 1:\n\n'
+      + '• You must overclock your generator to do so - reduce your CHANNEL to -1.\n'
+      + '• You are unable to conjure any sturdy materials, and everything you have built has the fragile tag.\n'
+      + '• The work is taxing - take the *peril* (exhausted).',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Field Testing',
+      details: 'You\'re used to testing out new equipment, and can easily get to grips with new tech. You have Advantage when trying to use, analyse, or figure out something about unfamiliar equipment, constructs, or similar magical machinery.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'It\'s A Prototype',
+      details: 'Once per Sortie, you may reveal what prototype upgrade you’ve made to a Astir that you reasonably had access to recently. When you do so, choose 2:\n\n'
+      + '• You didn’t have to disassemble anything else for parts.\n'
+      + '• Your invention doesn’t draw unwanted attention to you.\n'
+      + '• The upgrade burns out at the end of the Sortie, rather than after one use.\n'
+      + '• Using the upgrade isn’t dangerous is any way.',
+      moveSelected: false,
+    },
+    {
+      fullName: 'Combat Engineer',
+      details: 'You supplement your Artificer training with something more conventional - choose a move from the Scout list instead and a piece of Scout Equipment.',
+      moveSelected: false,
+      details: 'When you get close and use your expertise in magical machinery to try and break a construct or magical mechanism, you may exchange blows and strike decisively with +KNOW using the following profile:\n\n'
+      + '• Counterspell III (melee / slow, ruin)',
+      moveSelected: false,
+    }
+  ]
+};
+
+const playbookGear = {
+  arcanist: {
+      startingGear: [
+          {
+              name: 'Astir',
+              tier: 'III',
+              quantity: 1
+          },
+          {
+              name: 'Touch Spells',
+              tier: 'I',
+              tags: ['melee', 'bane'],
+          },
+          {
+              name: 'Arcanist Gear',
+              quantity: 2
+          },
+          {
+              name: 'Clothing appropriate for your look.'
+          }
+      ],
+      classGear: [
+          {
+              name: 'Telescoping Staff',
+              tier: 'I',
+              tags: [
+                  'ranged'
+              ],
+              checked: false
+          },
+          {
+              name: 'Reagent Knife',
+              tier: 'I',
+              tags: [
+                  'melee',
+                  'mundane'
+              ]
+          },
+          {
+            name: 'Sidearm',
+            tier: 'I',
+            tags: [
+              'ranged',
+              'defensive',
+            ],
+          },
+          {
+            name: 'Shield Broach',
+            tier: 'I',
+            tags: [
+              'ward'
+            ]
+          }
+      ]
+  },
+  impostor: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1
+      },
+      {
+        name: 'Augments',
+        tier: 1,
+        tags: ['melee', 'bane'],
+      },
+      {
+        name: 'Impostor Gear',
+        quantity: 2
+      },
+      {
+        name: 'Clothes that match your look',
+      }
+    ],
+    classGear: [
+      {
+        name: 'Mana Focus',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Shortsword',
+        tier: 'I',
+        tags: ['melee', 'mundane'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive'],
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
+    ]
+  },
+  paradigm: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1,
+      },
+      {
+        name: 'Divine Touch',
+        tier: 'I',
+        tags: ['melee', 'bane'],
+      }, 
+      {
+        name: 'Paradigm Gear',
+        quantity: 2,
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Holy Symbol',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Sacred Weapon',
+        tier: 'I',
+        tags: ['melee', 'mundane'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive']
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
+    ]
+  },
+  witch: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1,
+      },
+      {
+        name: 'Pact Weapon',
+        tier: 'I',
+        tags: ['melee', 'bane'],
+      },
+      {
+        name: 'Witch Gear',
+        quantity: 2
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Patron\'s Icon',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Ritual Dagger',
+        tier: 'I',
+        tags: ['melee', 'mundane']
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive']
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward'],
+      }
+    ]
+  },
+  scout: {
+    startingGear: [
+      {
+        name: 'Scout Weapon',
+        quantity: 1
+      },
+      {
+        name: 'Scout Equipment',
+        quantity: 2
+      },
+      {
+        name: 'Any Tier I weapons that feel appropriate'
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Astircleaver',
+        tier: 'II',
+        tags: [
+          'melee / bane',
+          'area',
+          '2H'
+        ],
+      }, {
+        name: 'Crossbow+',
+        tier: 'II',
+        tags: [
+          'ranged / infinite',
+          'blitz',
+          '2H'
+        ]
+      }, {
+        name: 'Force Ballista',
+        tier: 'II',
+        tags: [
+          'sniper / reloading',
+          'ruin',
+          '2H'
+        ]
+      }
+    ]
+  },
+  captain: {
+    startingGear: [
+      {
+        name: 'Ornate Gear',
+        quantity: 2,
+      },
+      {
+        name: 'Bonus Carrier Module',
+        quantity: 1,
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Gilded Sidearm',
+        tier: 'I',
+        tags: [
+          'ranged / blitz',
+          'distinct'
+        ]
+      },
+      {
+        name: 'Ruinlock',
+        tier: 'I',
+        tags: [
+          'ranged / profane',
+          'reloading',
+          'ruin'
+        ]
+      },
+      {
+        name: 'Duelist\'s Blade',
+        tier: 'I',
+        tags: [
+          'melee / bane',
+          'distinct',
+        ]
+      },
+      {
+        name: 'Arcane Mantle',
+        tier: 'I',
+        tags: ['melee / arcane']
+      }
+    ]
+  },
+  diplomat: {
+    startingGear: [
+      {
+        name: 'Diplomacy \'Tool\'',
+        quantity: 1
+      },
+      {
+        name: '\'Diplomacy\' Tool',
+        quantity: 3,
+      },
+      {
+        name: 'Clothing that matches your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Frost Charms',
+        tier: 'I',
+        tags: [
+          'ranged / restraining',
+          'elemental'
+        ]
+      },
+      {
+        name: 'Fencing Blade',
+        tier: 'I',
+        tags: [
+          'melee / decisive',
+          'distinct'
+        ]
+      },
+      {
+        name: 'Arcane Dagger',
+        tier: 'I',
+        tags: [
+          'melee / bane',
+          'small',
+          'arcane'
+        ]
+      }
+    ],
+  },
+  artificer: {
+    startingGear: [
+      {
+        name: 'Artificer Tools',
+        quantity: 2,
+      },
+      {
+        name: 'Transport or Service Golem',
+        quantity: 1,
+        tier: 'II',
+      },
+      {
+        name: 'Construct Manuals, (dispel uncertainty regarding Construct and Astir design with Advantage)'
+      },
+      {
+        name: 'Clothing that matches your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Heavy Wrench',
+        tier: 'I',
+        tags: [
+          'melee / bane'
+        ]
+      },
+      {
+        name: 'Beam Cutter',
+        tier: 'I',
+        tags: [
+          'melee / reloading',
+          'ruin',
+          'decisive'
+        ]
+      },
+      {
+        name: 'Steelfuser',
+        tier: 'I',
+        tags: [
+          'ranged / elemental'
+        ]
+      },
+      {
+        name: 'Alchemical Gel',
+        tier: 'I',
+        tags: [
+          'Adv. for Cool Off repairs'
+        ]
+      }
+    ]
+  },
+}
+
+const bookName = {
+  0: 'arcanist',
+  1: 'impostor',
+  2: 'paradigm',
+  3: 'witch',
+  4: 'scout',
+  5: 'captain',
+  6: 'artificer',
+  7: 'diplomat'
+};
+
+const playbookGear = {
+  arcanist: {
+      startingGear: [
+          {
+              name: 'Astir',
+              tier: 'III',
+              quantity: 1
+          },
+          {
+              name: 'Touch Spells',
+              tier: 'I',
+              tags: ['melee', 'bane'],
+          },
+          {
+              name: 'Arcanist Gear',
+              quantity: 2
+          },
+          {
+              name: 'Clothing appropriate for your look.'
+          }
+      ],
+      classGear: [
+          {
+              name: 'Telescoping Staff',
+              tier: 'I',
+              tags: [
+                  'ranged'
+              ],
+              checked: false
+          },
+          {
+              name: 'Reagent Knife',
+              tier: 'I',
+              tags: [
+                  'melee',
+                  'mundane'
+              ]
+          },
+          {
+            name: 'Sidearm',
+            tier: 'I',
+            tags: [
+              'ranged',
+              'defensive',
+            ],
+          },
+          {
+            name: 'Shield Broach',
+            tier: 'I',
+            tags: [
+              'ward'
+            ]
+          }
+      ]
+  },
+  impostor: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1
+      },
+      {
+        name: 'Augments',
+        tier: 1,
+        tags: ['melee', 'bane'],
+      },
+      {
+        name: 'Impostor Gear',
+        quantity: 2
+      },
+      {
+        name: 'Clothes that match your look',
+      }
+    ],
+    classGear: [
+      {
+        name: 'Power Focus',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Shortsword',
+        tier: 'I',
+        tags: ['melee', 'mundane'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive'],
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
+    ]
+  },
+  paradigm: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1,
+      },
+      {
+        name: 'Divine Touch',
+        tier: 'I',
+        tags: ['melee', 'bane'],
+      }, 
+      {
+        name: 'Paradigm Gear',
+        quantity: 2,
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Holy Symbol',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Sacred Weapon',
+        tier: 'I',
+        tags: ['melee', 'mundane'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive']
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
+    ]
+  },
+  witch: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1,
+      },
+      {
+        name: 'Pact Weapon',
+        tier: 'I',
+        tags: ['melee', 'bane'],
+      },
+      {
+        name: 'Witch Gear',
+        quantity: 2
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Patron\'s Icon',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Ritual Dagger',
+        tier: 'I',
+        tags: ['melee', 'mundane']
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive']
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward'],
+      }
+    ]
+  },
+  scout: {
+    startingGear: [
+      {
+        name: 'Scout Weapon',
+        quantity: 1
+      },
+      {
+        name: 'Scout Equipment',
+        quantity: 2
+      },
+      {
+        name: 'Any Tier I weapons that feel appropriate'
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Astircleaver',
+        tier: 'II',
+        tags: [
+          'melee / bane',
+          'area',
+          '2H'
+        ],
+      }, {
+        name: 'Crossbow+',
+        tier: 'II',
+        tags: [
+          'ranged / infinite',
+          'blitz',
+          '2H'
+        ]
+      }, {
+        name: 'Force Ballista',
+        tier: 'II',
+        tags: [
+          'sniper / reloading',
+          'ruin',
+          '2H'
+        ]
+      }
+    ]
+  },
+  captain: {
+    startingGear: [
+      {
+        name: 'Ornate Gear',
+        quantity: 2,
+      },
+      {
+        name: 'Bonus Carrier Module',
+        quantity: 1,
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Gilded Sidearm',
+        tier: 'I',
+        tags: [
+          'ranged / blitz',
+          'distinct'
+        ]
+      },
+      {
+        name: 'Ruinlock',
+        tier: 'I',
+        tags: [
+          'ranged / profane',
+          'reloading',
+          'ruin'
+        ]
+      },
+      {
+        name: 'Duelist\'s Blade',
+        tier: 'I',
+        tags: [
+          'melee / bane',
+          'distinct',
+        ]
+      },
+      {
+        name: 'Arcane Mantle',
+        tier: 'I',
+        tags: ['melee / arcane']
+      }
+    ]
+  },
+  diplomat: {
+    startingGear: [
+      {
+        name: 'Diplomacy \'Tool\'',
+        quantity: 1
+      },
+      {
+        name: '\'Diplomacy\' Tool',
+        quantity: 3,
+      },
+      {
+        name: 'Clothing that matches your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Frost Charms',
+        tier: 'I',
+        tags: [
+          'ranged / restraining',
+          'elemental'
+        ]
+      },
+      {
+        name: 'Fencing Blade',
+        tier: 'I',
+        tags: [
+          'melee / decisive',
+          'distinct'
+        ]
+      },
+      {
+        name: 'Arcane Dagger',
+        tier: 'I',
+        tags: [
+          'melee / bane',
+          'small',
+          'arcane'
+        ]
+      }
+    ],
+  },
+  artificer: {
+    startingGear: [
+      {
+        name: 'Artificer Tools',
+        quantity: 2,
+      },
+      {
+        name: 'Transport or Service Ardent',
+        quantity: 1,
+        tier: 'II',
+      },
+      {
+        name: 'Construct Manuals, (dispel uncertainty regarding Construct and Astir design with Advantage)'
+      },
+      {
+        name: 'Clothing that matches your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Heavy Wrench',
+        tier: 'I',
+        tags: [
+          'melee / bane'
+        ]
+      },
+      {
+        name: 'Beam Cutter',
+        tier: 'I',
+        tags: [
+          'melee / reloading',
+          'ruin',
+          'decisive'
+        ]
+      },
+      {
+        name: 'Steelfuser',
+        tier: 'I',
+        tags: [
+          'ranged / elemental'
+        ]
+      },
+      {
+        name: 'Alchemical Gel',
+        tier: 'I',
+        tags: [
+          'Adv. for Cool Off repairs'
+        ]
+      }
+    ]
+  },
+}
+
+// END PLAYBOOKS
+
+// Used for building rollValues.
+const rollModifiers = [
+  {
+    key: 'None',
+    roll: '2d6'
+  },
+  {
+    key: 'Advantage (+1)',
+    roll: '3d6kh2'
+  },
+  {
+    key: 'Confidence (+2)',
+    roll: '4d6kh2'
+  },
+  {
+    key: 'Disadvantage (-1)',
+    roll: '3d6kl2'
+  },
+  {
+    key: 'Desperate (-2)',
+    roll: '4d6kl2'
+  },
+];
+
+// Set the currently displayed tab on the character sheet.
+const buttonlist = ['character', 'astir', 'misc'];
+buttonlist.forEach(button => {
+    on(`clicked:${button}`, function() {
+        setAttrs({
+            sheet_tab: button
+        });
+    });
+});
+
+// Set the Astir page to either display Astir or Carrier information.
+on('change:show_carrier_toggle', (event) => {
+  setAttrs({
+    show_carrier: event.newValue,
+  });
+});
+
+// Show/Hide 'CHANNEL' Trait based on playbook.
+on(`change:support`, (event) => {
+  setAttrs({
+    channel_hidden: event.newValue == 'on',
+  });
+})
+
+// Set playbook information when the playbook value changes.
+on(`change:playbook`, (event) => {
+  if (event && event.newValue && event.netValue !== event.previousValue) {
+    setPlaybook(event.newValue);
+  }
+});
+
+//#region Gear.
+on('change:repeating_gearcheck:gear_name_edit', () => {
+  getAttrs(['repeating_gearcheck_gear_name_edit'], (values) => {
+    setAttrs({ repeating_gearcheck_gear_name: values.repeating_gearcheck_gear_name_edit });
+  });
+});
+
+on('change:repeating_gearcheck:gear_tier_edit', () => {
+  getAttrs(['repeating_gearcheck_gear_tier_edit'], (values) => {
+    setAttrs({ repeating_gearcheck_gear_tier: values.repeating_gearcheck_gear_tier_edit });
+  });
+});
+
+on('change:repeating_gearcheck:gear_tags_edit', () => {
+  getAttrs(['repeating_gearcheck_gear_tags_edit'], (values) => {
+    const tags = values.repeating_gearcheck_gear_tags_edit;
+    const parsedTags = tags ? `${tags}` : '';
+    setAttrs({ repeating_gearcheck_gear_tags: parsedTags });
+  });
+});
+//#endregion
+
+
+// ----- MOVES EDIT ----- //
+// TODO: Read article about improving performance. This is a lot of event listeners.
+// TODO: It might be helpful to separate plaintext and sanitized/formatted text, ex: success -> success_text
+// When moves are being populated on init, some fields are being filled properly.
+  on('change:repeating_moves:move_name_base', () => {
+    getAttrs(['repeating_moves_move_name_base'], (v) => {
+      setAttrs({
+        repeating_moves_move_name: v.repeating_moves_move_name_base
+      });
+    });
+  });
+  
+  on('change:repeating_basicmoves:move_name_base', () => {
+    getAttrs(['repeating_moves_move_name_base'], (v) => {
+      setAttrs({
+        repeating_basicmovesmoves_move_name: v.repeating_moves_move_name_base
+      });
+    });
+  });
+
+  on('change:repeating_moves:move_trait', (event) => {
+    const prefix = event.sourceAttribute.split('trait')[0];
+    getAttrs(['repeating_moves_move_trait'], (v) => {
+      const traitString = v.repeating_moves_move_trait.toUpperCase();
+      const traits = traitString.replace(' ', '').split(',');
+      const doRoll = traits.length ? 1 : 0;
+      const rollValue = setRollValue(traits, prefix);
+      
+      setAttrs({
+        repeating_moves_move_rollvalue: rollValue,
+        repeating_moves_move_doroll: doRoll,
+      })
+    })
+  })
+
+  on('change:repeating_basicmoves:move_trait', (event) => {
+    const prefix = event.sourceAttribute.split('trait')[0];
+    getAttrs(['repeating_basicmoves_move_trait'], (v) => {
+      const traitString = v.repeating_basicmoves_move_trait.toUpperCase();
+      const traits = traitString.replace(' ', '').split(',');
+      const doRoll = traits.length ? 1 : 0;
+      const rollValue = setRollValue(traits, prefix);
+      
+      setAttrs({
+        repeating_basicmoves_move_rollvalue: rollValue,
+        repeating_basicmoves_move_doroll: doRoll,
+      })
+    })
+  })
+
+  on('change:repeating_moves:move_success', () => {
+    getAttrs(['repeating_moves_move_success'], (v) => {
+      setAttrs({
+        repeating_moves_move_success: v.repeating_moves_move_success
+      }, () => {
+        // ! Set roll value.
+      })
+    })
+  })
+
+  on('change:repeating_moves:move_partial', () => {
+    getAttrs(['repeating_moves_move_partial'], (v) => {
+      setAttrs({
+        repeating_moves_move_partial: v.repeating_moves_move_partial
+      }, () => {
+        // ! Set roll value.
+      })
+    })
+  })
+
+  on('change:repeating_moves:move_miss', () => {
+    getAttrs(['repeating_moves_move_miss'], (v) => {
+      setAttrs({
+        repeating_moves_move_miss: v.repeating_moves_move_miss
+      }, () => {
+        // ! Set roll value.
+      })
+    })
+  })
+
+
+// ----- HELPER FUNCTIONS ----- //
+function setPlaybook(book) {
+  const bookValue = getPlaybookValue(book);
+  const playbook = bookName[bookValue];
+  setPlaybookValue(bookValue);
+  setMoves(playbook);
+  setGear(playbook);
+  setBasicMoves();
+}
+
+function getPlaybookValue(book) {
+  const value = book.toLowerCase().replace('the ', '');
+  switch(value) {
+    case 'arcanist' : return 0;
+    case 'impostor' : return 1;
+    case 'paradigm' : return 2;
+    case 'witch'    : return 3;
+    case 'scout'    : return 4;
+    case 'captain'  : return 5;
+    case 'artificer': return 6;
+    case 'diplomat' : return 7;
+    default         : return 0; // ? Setup error handling case?
+  }
+}
+
+function setPlaybookValue(book) {
+  setAttrs({
+    playbook_descriptors: `${book}`,
+    channel_hidden: book > 3,
+  });
+}
+
+function setBasicMoves() {
+  clearBasicMoveList();
+
+  playbookMoves.basic.forEach((move) => {
+    addBasicMove(move, true);
+  });
+}
+
+function setMoves(book) {
+  if (!playbookMoves[book]) {
+    console.log('Error, playbook not found.')
+    return;
+  }
+  
+  clearMoveList();
+
+  const moves = playbookMoves[book];
+  moves.forEach((move) => {
+    addBasicMove(move, false);
+  })
+}
+
+// Add Moves from SRD (defined in playbook.js, copy/pasted here. Doesn't actually pull them in.)
+function addBasicMove(m, basicMove) {
+  const newRowId = generateRowID();
+  const moves =  basicMove ? 'basicmoves' : 'moves';
+  const prefix = `repeating_${moves}_${newRowId}_move_`;
+  const attrs = {};
+
+  attrs[prefix + 'name'] = m.fullName;
+  attrs[prefix + 'name_base'] = m.fullName;
+
+  let replaceChar = ',';
+  if (m.roll) { replaceChar = '&#44;' }
+  if (m.rolls) { 
+    replaceChar = '&amp;#44;' 
+  }
+
+  // Parsing nested drop-down roll queries are not great in roll20, so we use the code instead of commas.
+  // This might be dependant on if there is a roll, rolls, or no roll. Rework based on m.roll || m.rolls
+  if (m.success) attrs[prefix + 'success'] = m.success.replace(/,/g, replaceChar);
+  if (m.partial) attrs[prefix + 'partial'] = m.partial.replace(/,/g, replaceChar);
+  if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, replaceChar);
+  if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, replaceChar);
+
+  // Check to see if the move has a roll component, makes the roll template play nicer.
+  attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
+
+  setAttrs(attrs, () => {
+    rollAttrs = {};
+    if (m.rolls) {
+      rollAttrs[prefix + 'rollvalue'] = buildRollValue(m.rolls, prefix);
+    } else if (m.roll) {
+      rollAttrs[prefix + 'rollvalue'] = buildSingleRollValue(m.roll, prefix);
+    } else {
+      rollAttrs[prefix + 'rollvalue'] = buildEmptyRollValue(prefix);
+    }
+    
+    setAttrs(rollAttrs);
+  });
+}
+
+// ----- Dangers ----- //
+// TODO: Consolidate this into single listener.
+on('change:danger_1_radio', (event) => {
+  if (event && event.newValue && event.newValue === "2") {
+    setAttrs({
+      danger_1_radio: '4',
+      danger_1_description: '',
+    });
+  }
+})
+
+on('change:danger_2_radio', (event) => {
+  if (event && event.newValue && event.newValue === "2") {
+    setAttrs({
+      danger_2_radio: '4',
+      danger_2_description: '',
+    });
+  }
+})
+
+on('change:danger_3_radio', (event) => {
+  if (event && event.newValue && event.newValue === "2") {
+    setAttrs({
+      danger_3_radio: '4',
+      danger_3_description: '',
+    });
+  }
+})
+
+
+
+// ---- Gear ----- //
+
+function addGearList(gear, rowid) {
+  const newRowId = rowid || generateRowID();
+
+  const tags = gear.tags && gear.tags.length ? `${gear.tags.join(', ')}` : '';
+
+  setAttrs({
+    [`repeating_gearlist_${newRowId}_name`]: gear.name || '',
+    [`repeating_gearlist_${newRowId}_quantity`]: gear.quantity || '',
+    [`repeating_gearlist_${newRowId}_tier`]: gear.tier || '',
+    [`repeating_gearlist_${newRowId}_tags`]: tags,
+  });
+}
+
+function addGear(gear, rowid) {
+  const newRowId = rowid || generateRowID();
+  const tags = gear.tags && gear.tags.length ? `${gear.tags.join(', ')}` : '';
+
+  setAttrs({
+    [`repeating_gearcheck_${newRowId}_gear_name`]: gear.name || '',
+    [`repeating_gearcheck_${newRowId}_gear_tier`]: gear.tier || '',
+    [`repeating_gearcheck_${newRowId}_gear_tags`]: tags,
+  })
+
+}
+
+function setGear(book) {
+  clearGearList();
+
+  if (!playbookGear[book]) {
+    return;
+  }
+
+  const gearList = playbookGear[book].startingGear;
+  const gear = playbookGear[book].classGear;
+
+  for (let i = 0; i < gearList.length; i++) {
+    addGearList(gearList[i]);
+  }
+
+  for (let i = 0; i < gear.length; i++) {
+    addGear(gear[i]);
+  }
+}
+
+
+// ----- Tear Down ----- //
+
+function clearGearList() {
+  getSectionIDs('repeating_gearlist', (idArray) => {
+    _.forEach(idArray, (id) => {
+      removeRepeatingRow(`repeating_gearlist_${id}`);
+    });
+  })
+
+  getSectionIDs('repeating_gearcheck', (idArray) => {
+    _.forEach(idArray, (id) => removeRepeatingRow(`repeating_gearcheck_${id}`));
+  })
+}
+
+function clearBasicMoveList() {
+  getSectionIDs('repeating_basicmoves', (idArray) => {
+    _.forEach(idArray, (id) => {
+      removeRepeatingRow(`repeating_basicmoves_${id}`);
+    });
+  })
+}
+
+function clearMoveList() {
+  getSectionIDs('repeating_moves', (idArray) => {
+    _.forEach(idArray, (id) => {
+      removeRepeatingRow(`repeating_moves_${id}`);
+    });
+  })
+}
+
+function setRollValue(traits, prefix) {
+
+  if (traits && traits.length === 1) {
+    return buildSingleRollValue(traits[0], prefix);
+  } else if (traits && traits.length > 1) {
+    return buildRollValue(traits, prefix);
+  }
+
+  return '';
+  
+}
+
+
+
+
+// Build the rollValue for a move that contains no trait.
+function buildEmptyRollValue(prefix) {
+  return '&{template:move} '
+        +'{{charname=@{character_name}}}'
+        +'{{movename=@{' + prefix + 'name}}} '
+        +'{{success=@{' + prefix + 'success}}} '
+        +'{{partial=@{'+ prefix + 'partial}}} '
+        +'{{miss=@{'+ prefix + 'miss}}} '
+        +'{{doroll=@{' + prefix + 'doroll}}} '
+        +'{{details=@{' + prefix + 'details}}}';
+}
+
+// Build the rollValue for a move with a single trait.
+function buildSingleRollValue(roll, prefix) {
+  
+  let rollValue = '';
+  rollValue += '?{Modifiers|'
+  _.forEach(rollModifiers, (mod, index) => {
+    const last = index === rollModifiers.length - 1;
+    const lastChar = last ? '}' : '|';
+
+    rollValue += mod.key
+    + ',&{template:move&#125 '
+    +'{{charname=@{character_name}&#125&#125'
+    +'{{movename=@{' + prefix + 'name}&#125&#125 '
+    +'{{details=@{' + prefix + 'details}&#125&#125'
+    +'{{trait='+ roll +'&#125&#125 '
+    +'{{result=[[ '+ mod.roll +' + @{' + roll.toLowerCase() + '}]]&#125&#125 '
+    +'{{success=@{' + prefix + 'success}&#125&#125 '
+    +'{{partial=@{'+ prefix + 'partial}&#125&#125 '
+    +'{{miss=@{'+ prefix + 'miss}&#125&#125 '
+    +'{{doroll=@{' + prefix + 'doroll}&#125 '
+    + lastChar;
+  });
+
+  return rollValue;
+  
+}
+
+// Build the rollValue for a move that has multiple traits to choose from.
+function buildRollValue(rolls, prefix) {
+
+  if (!rolls.length) {
+    return '';
+  }
+
+  let rollValue = '?{Choose a Trait|';
+
+  _.forEach(rolls, (roll, index) => {
+    const last = index === rolls.length - 1;
+    const lastChar = last ? '}' : '|';      
+    
+    rollValue += '+' + roll + ', ?{Modifiers&#124'
+    
+    _.forEach(rollModifiers, (mod, modIndex) => {
+      const modLast = modIndex === rollModifiers.length - 1;
+      const modLastChar = modLast ? '&#125' : '&#124';
+      
+      rollValue += mod.key
+      +'&#44; &{template:move&amp;#125 '
+      +'{{details=@{' + prefix + 'details}&amp;#125&amp;#125'
+      +'{{charname=@{character_name}&amp;#125&amp;#125 '
+      +'{{miss=@{'+ prefix + 'miss}&amp;#125&amp;#125 '
+      +'{{movename=@{' + prefix + 'name}&amp;#125&amp;#125 '
+      +'{{trait='+ roll +'&amp;#125&amp;#125'
+      +'{{result=[[' + mod.roll  + ' + @{' + roll.toLowerCase() + '}]]&amp;#125&amp;#125 '
+      +'{{partial=@{'+ prefix + 'partial}&amp;#125&amp;#125 '
+      +'{{success=@{' + prefix + 'success}&amp;#125&amp;#125 '
+      +'{{doroll=@{' + prefix + 'doroll}&amp;#125 '
+      + modLastChar;
+    });
+
+    rollValue += lastChar;
+  });
+
+  return rollValue;
+}
+</script>
