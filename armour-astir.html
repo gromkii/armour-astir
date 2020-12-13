@@ -165,6 +165,7 @@
                     <button 
                       name="roll_channel" 
                       type="roll" 
+                      class="move-button"
                       value="?{Modifiers|None,&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[2d6 + @{channel}]]&#125&#125|Advantage (+1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kh2 + @{channel}]]&#125&#125|Confidence (+2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[4d6kh2 + @{channel}]]&#125&#125|Disadvantage (-1),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125{{result=[[3d6kl2 + @{channel}]]&#125&#125|Desperation (-2),&{template:move&#125 {{charname=@{character_name}&#125&#125 {{trait=CHANNEL&#125&#125 {{result=[[4d6kl2 + @{channel}]]&#125&#125}">
                       <span data-i18n="channel"></span>
                     </button>
@@ -678,7 +679,7 @@
         </div>
       </div>
     </div>
-    <div class="version-info">Sheet v0.0.3 - Game v0.6</div>
+    <div class="version-info">Sheet v0.1.1 - Game v0.6</div>
   </div>
 
   
@@ -720,28 +721,50 @@
     {{#details}}<div class="sheet-template-row-move sheet-template-details">{{details}}</div>{{/details}}
   </div>
 </rolltemplate>
-
+change
 <script type="text/worker">
+/*
+    Important note: this file isn't being used in the character sheet directly, but rather is an
+    easier way to keep a consistent source of truth for the data as the sheet is being developed.
 
-  const bookName = {
-    0: 'arcanist',
-    1: 'impostor',
-    2: 'paradigm',
-    3: 'witch',
-    4: 'scout',
-    5: 'captain',
-    6: 'artificer',
-    7: 'diplomat'
-  };
+    If you would like to contribute, please feel free to do so following these formatting conventions.
 
-  // START PLAYBOOKS
+    MOVES -----
+    moveName: {               // ! Style note here, use camel case for these names.
+        book:     string,     // Playbook for move.
+        fullName: string,     // Full name for move.
+        roll?:    string,     // If a move has a single trait, use this property.
+        rolls?:   string[],   // If a move can call for different traits, use an array of applicable traits.
+        success?:  string,     // 10+ roll message
+        partial?:  string,     // 7-9 roll message
+        miss?:     string,     // 6 or less roll message.
+        details?:  string,     // Body for context. Formatting for text TBD, but for now try to use \n and • or &bull;
+    }
 
-  const playbookMoves = { // basic moves
+    GEAR -----
+    playbook: {                     // Name of playbook, lowercase. ie: arcanist
+        startingGear: [             // Array of gear using the following schema.
+            {                       // List of staring gear for playbook.
+                quantity: string,   // Not required.
+                name:     string,   // Required, name of equipment.
+                tier:     string,   // Format note, please use roman numerals for consistency.
+                tags:     string[]  // Array of strings, formatting TBD.
+            }, ... { },
+        ],
+        classGear: [                // Using the same schema as above.
+            {
+                ...
+            }
+        ]
+    }
+*/
+
+const playbookMoves = { // basic moves
   basic: [
     {
       fullName: 'Weather The Storm',
       rolls: ['DEFY', 'KNOW'],
-      success: 'You manage to make it to safety.',
+      success: 'You mange to make it to safety.',
       partial: 'You succeed, but at some cost - your Director will ask you to settle for less, take a *risk*, or make a difficult choice.',
     },
     {
@@ -770,7 +793,7 @@
     },
     {
       fullName: 'Cool Off',
-      rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK'],
+      rolls: ['DEFY', 'SENSE', 'KNOW', 'CLASH', 'TALK', 'CHANNEL'],
       success: 'You/they erase a *risk* or untick \'overheating\' from an Astir.',
       partial: 'As above, but your moment of safety is interrupted.'
     },
@@ -785,16 +808,16 @@
       rolls: ['CLASH', 'TALK'],
       success: 'You strike true. Director characters are killed, forced to retreat, or otherwise removed as a threat as per the fiction. Player characters should <b>bite the dust</b>.',
       partial: 'You succeed as above, but choose 1.',
-      details: '• You overreach or underestimate - take a *risk*. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing collateral damage beyond your expectations.'
+      details: '• You overreach or underestimate - take a *risk*. \n •You waste ammo or words, losing use of a weapon until you can re-arm, or losing the weight of some bargaining chip or piece of leverage. \n • You strike carelessly, causing colateral damage beyond your expectations.'
     },
     {
       fullName: 'Bite the Dust',
       roll: 'DEFY',
       success: 'They miss, hesitate, or you\'re saved by sheer luck - you rally, and clear a *risk* if you have one.',
       partial: 'Retreat from the Sortie safely, or be put in *peril.*',
-      miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? What have you lost? Who and what is changed by your defeat?',
+      miss: 'On a fail, that strike was sure decisive. Decide with your Director the consequences of what has happened to you - what was damaged? Have hat you lost? Who and what is changed by your defeat?',
       details: 'If you survive, you are changed by your defeat. As well as the above, choose one: \n\n • Increase one of your Traits by 1 and reduce another by 1 (no Trait may be higher lower than +/- 3)\n • Choose a new playbook. Keep what moves you and the Director agree are truly part of your character, and discard the others. Replace them with the starting moves for your new playbook. You do not gain its starting equipment.',
-    }
+    },
   ],
   arcanist: [
     {
@@ -824,7 +847,7 @@
       fullName: 'Expend Ritual',
       details: 'When you disperse the magical energy of a ***ritual*** to re-use that energy in a pinch, '
       + 'choose one of your prepared rituals - you no longer gain its benefit. You may then '
-      + 'choose an option from the ***subsystems*** move without spending Power.',
+      + 'choose an option from the ***subsystems*** move without spending Mana.',
       moveSelected: false,
     },
     {
@@ -881,7 +904,7 @@
   impostor: [
     {
       fullName: 'Arcane Augments',
-      details: 'Impostors control their Astir using magical augmentations, like artificial limbs or '
+      details: 'Impostors control their Astir using magical augmentations, like artifcial limbs or '
       + 'organs. These augmentations allow a non-magic user to power and control an Astir, '
       + 'but otherwise do not interfere with your life unless you (the player) decide so. Being '
       + 'bonded to magic in this way often leads to it affecting the body and vice versa, '
@@ -930,7 +953,7 @@
       partial: 'NPCs will leave their Astir to face you, but choose one:\n\n'
       + '• Take the *risk* (entangled)\n\n'
       + '• You have Disadvantage to moves against the other Channeler.\n\n'
-      + '• You are separated from your Astirs temporarily.\n\n'
+      + '• You are seperated from your Astirs temporarily.\n\n'
       + 'PCs may choose whether to leave their Astir or not – if they do, they pick one of the above for you.',
       moveSelected: false,
     },
@@ -954,7 +977,7 @@
       details: 'Instead of Ideals, write three tenets that represent your deity’s will. When you discuss'
       + 'your faith with someone or learn something about how they personally relate to faith'
       + 'and religion, advance a GRAVITY clock with them if you have one. If you ever'
-      + 'sacrifice or break a tenet, it is lost forever; replace it with an Ideal instead of crossing'
+      + 'sacrifce or break a tenet, it is lost forever; replace it with an Ideal instead of crossing'
       + 'it off and taking an advancement. Your CHANNEL Trait is also reduced by 1 until you'
       + 'make amends in whatever way is appropriate for your faith.\n\n'
       + 'Example tenets might be:\n'
@@ -968,13 +991,13 @@
       fullName: 'Divine Guidance',
       details: 'When you consult your deity for information or guidance, you may ***dispel uncertainties***'
         + 'with +CHANNEL. If you do so, on a 7-9 the information is still directly'
-        + 'useful, but it is difficult to discern if your answer came from the intended deity.',
+        + 'useful, but it is diffcult to discern if your answer came from the intended deity.',
       moveSelected: false,
     },
     {
       fullName: 'Inspire Focus',
-      details: 'Once per Sortie, you may take a visible position over the battlefield and inspire'
-      + 'confidence and clarity in your allies that see you - they each clear a risk and take'
+      details: 'Once per Sortie, you may take a visible position over the battlefeld and inspire'
+      + 'confdence and clarity in your allies that see you - they each clear a risk and take'
       + 'advantage to their next roll.',
       moveSelected: false
     },
@@ -998,7 +1021,7 @@
         + 'enough to return themselves (or are summoned) during the same Sortie, they are in'
         + 'peril (turned) as your divine presence sickens them.',
       partial: 'They must flee from your sight and are in *peril* (turned).',
-      details: 'When piloting an Astir you are attuned to, you may project an aura that causes otherworldly creatures to flee.',
+      details: 'When piloting an Astir you are attuned to, you may project an aura that causes otherwordly creatures to flee.',
       roll: 'CHANNEL',
       moveSelected: false,
     },
@@ -1045,13 +1068,13 @@
     },
     {
       fullName: 'Receive Boons',
-      details: 'At each dawn, you receive ***boons*** from your patron. Roll on the list below two times to discern what powers you receive. They last until the next dawn. \n\n'
+      details: 'At each dawn, you recieve ***boons*** from your patron. Roll on the list below two times to discern what powers you receive. They last until the next dawn. \n\n'
       + '***1 · Channelling Boon*** - You may give your patron 1 Influence to make a move with +CHANNEL instead '
       + 'of the usual trait—when you do so, tick \'overheating\' on your Astir. If it\'s already fully ticked, it destroys '
       + 'one of your Astir’s parts—you are in peril (burnout).\n'
       + '***2 · Hexxing Boon*** - You can curse an Astir, locking it out of some of its systems. When you do so, roll'
       + ' +CHANNEL. On a 10+, choose 2. On a 7-9, choose 1:\n'
-      + '• A Player or Rival cannot spend Power to activate ***subsystems***.\n'
+      + '• A Player or Rival cannot spend Mana to activate ***subsystems***.\n'
       + '• A weapon, tool or function stalls, malfunctions, and stops working.\n'
       + '• The Channeler cannot prevent you from communicating with them.\n'
       + '***3 · Masking Boon*** - You can mask yourself or an Astir you are attuned to against detection. When you '
@@ -1066,7 +1089,7 @@
       fullName: 'Occult Lore',
       details: 'When you consult your patron for information, you may ***dispel uncertainties*** with '
         +' +CHANNEL. If you do so, on a 7-9 the information is still directly useful, but using it '
-        + 'would cause some unforeseen complication entertaining or beneficial to your patron.',
+        + 'would cause some unforeseen complication entertaining or benefcial to your patron.',
       moveSelected: false,
       roll: 'CHANNEL'
     },
@@ -1195,7 +1218,7 @@
     },
     {
       fullName: 'Tactical Genius',
-      details: 'When you\'re supervising allies from afar during a Sortie, you can level your tactical know-how into better positioning. Take 3 hold at the start of a Sortie, '
+      details: 'When you\'re supervising allies from afar during a Sortie, you can lever your tactical know-how into better positioning. Take 3 hold at the start of a Sortie, '
       + 'and spend it 1- for-1 to do the following: \n\n'
       + '• Remove one risk from an ally.\n'
       + '• Give an ally Advantage to their next move, describing how you advise or support them.\n'
@@ -1317,9 +1340,9 @@
       details: 'During Downtime, you may also prepare an alias or disguise. Most people will'
       + ' believe you are who you say you are, unless you\'re disguised as someone they\'re'
       + ' very familiar with, or they are given reason to thoroughly check your person or any'
-      + ' identification. You may take shore leave to secure 2 of the following:\n\n'
+      + ' identifcation. You may take shore leave to secure 2 of the following:\n\n'
       + '• You have ID that is either legitimate or so well faked it is impossible to tell the difference.\n'
-      + '• There\'s a reason or expectation for someone fitting your disguise to show up.\n'
+      + '• There\'s a reason or expectation for someone ftting your disguise to show up.\n'
       + '• You\'ve had something useful planted ahead of time - select a weapon or piece of equipment (one you have access to) to be hidden just where you\'ll need it.',
       moveSelected: false,
     }
@@ -1372,7 +1395,7 @@
     },
     {
       fullName: 'It\'s A Prototype',
-      details: 'Once per Sortie, you may reveal what prototype upgrade you’ve made to an Astir that you reasonably had access to recently. When you do so, choose 2:\n\n'
+      details: 'Once per Sortie, you may reveal what prototype upgrade you’ve made to a Astir that you reasonably had access to recently. When you do so, choose 2:\n\n'
       + '• You didn’t have to disassemble anything else for parts.\n'
       + '• Your invention doesn’t draw unwanted attention to you.\n'
       + '• The upgrade burns out at the end of the Sortie, rather than after one use.\n'
@@ -1383,9 +1406,6 @@
       fullName: 'Combat Engineer',
       details: 'You supplement your Artificer training with something more conventional - choose a move from the Scout list instead and a piece of Scout Equipment.',
       moveSelected: false,
-    },
-    {
-      fullName: 'Counterspell',
       details: 'When you get close and use your expertise in magical machinery to try and break a construct or magical mechanism, you may exchange blows and strike decisively with +KNOW using the following profile:\n\n'
       + '• Counterspell III (melee / slow, ruin)',
       moveSelected: false,
@@ -1393,831 +1413,839 @@
   ]
 };
 
-  const playbookGear = {
-    arcanist: {
-        startingGear: [
-            {
-                name: 'Astir',
-                tier: 'III',
-                quantity: 1
-            },
-            {
-                name: 'Touch Spells',
-                tier: 'I',
-                tags: ['melee', 'bane'],
-            },
-            {
-                name: 'Arcanist Gear',
-                quantity: 2
-            },
-            {
-                name: 'Clothing appropriate for your look.'
-            }
-        ],
-        classGear: [
-            {
-                name: 'Telescoping Staff',
-                tier: 'I',
-                tags: [
-                    'ranged'
-                ],
-                checked: false
-            },
-            {
-                name: 'Reagent Knife',
-                tier: 'I',
-                tags: [
-                    'melee',
-                    'mundane'
-                ]
-            },
-            {
-              name: 'Sidearm',
+const playbookGear = {
+  arcanist: {
+      startingGear: [
+          {
+              name: 'Astir',
+              tier: 'III',
+              quantity: 1
+          },
+          {
+              name: 'Touch Spells',
+              tier: 'I',
+              tags: ['melee', 'bane'],
+          },
+          {
+              name: 'Arcanist Gear',
+              quantity: 2
+          },
+          {
+              name: 'Clothing appropriate for your look.'
+          }
+      ],
+      classGear: [
+          {
+              name: 'Telescoping Staff',
               tier: 'I',
               tags: [
-                'ranged',
-                'defensive',
+                  'ranged'
               ],
-            },
-            {
-              name: 'Shield Broach',
+              checked: false
+          },
+          {
+              name: 'Reagent Knife',
               tier: 'I',
               tags: [
-                'ward'
+                  'melee',
+                  'mundane'
               ]
-            }
-        ]
-    },
-    impostor: {
-      startingGear: [
-        {
-          name: 'Astir',
-          tier: 'III',
-          quantity: 1
-        },
-        {
-          name: 'Augments',
-          tier: 1,
-          tags: ['melee', 'bane'],
-        },
-        {
-          name: 'Impostor Gear',
-          quantity: 2
-        },
-        {
-          name: 'Clothes that match your look',
-        }
-      ],
-      classGear: [
-        {
-          name: 'Power Focus',
-          tier: 'I',
-          tags: ['ranged'],
-        },
-        {
-          name: 'Shortsword',
-          tier: 'I',
-          tags: ['melee', 'mundane'],
-        },
-        {
-          name: 'Sidearm',
-          tier: 'I',
-          tags: ['ranged', 'defensive'],
-        },
-        {
-          name: 'Shield Broach',
-          tier: 'I',
-          tags: ['ward']
-        }
+          },
+          {
+            name: 'Sidearm',
+            tier: 'I',
+            tags: [
+              'ranged',
+              'defensive',
+            ],
+          },
+          {
+            name: 'Shield Broach',
+            tier: 'I',
+            tags: [
+              'ward'
+            ]
+          }
       ]
-    },
-    paradigm: {
-      startingGear: [
-        {
-          name: 'Astir',
-          tier: 'III',
-          quantity: 1,
-        },
-        {
-          name: 'Divine Touch',
-          tier: 'I',
-          tags: ['melee', 'bane'],
-        }, 
-        {
-          name: 'Paradigm Gear',
-          quantity: 2,
-        },
-        {
-          name: 'Clothes that match your look'
-        }
-      ],
-      classGear: [
-        {
-          name: 'Holy Symbol',
-          tier: 'I',
-          tags: ['ranged'],
-        },
-        {
-          name: 'Sacred Weapon',
-          tier: 'I',
-          tags: ['melee', 'mundane'],
-        },
-        {
-          name: 'Sidearm',
-          tier: 'I',
-          tags: ['ranged', 'defensive']
-        },
-        {
-          name: 'Shield Broach',
-          tier: 'I',
-          tags: ['ward']
-        }
-      ]
-    },
-    witch: {
-      startingGear: [
-        {
-          name: 'Astir',
-          tier: 'III',
-          quantity: 1,
-        },
-        {
-          name: 'Pact Weapon',
-          tier: 'I',
-          tags: ['melee', 'bane'],
-        },
-        {
-          name: 'Witch Gear',
-          quantity: 2
-        },
-        {
-          name: 'Clothes that match your look'
-        }
-      ],
-      classGear: [
-        {
-          name: 'Patron\'s Icon',
-          tier: 'I',
-          tags: ['ranged'],
-        },
-        {
-          name: 'Ritual Dagger',
-          tier: 'I',
-          tags: ['melee', 'mundane']
-        },
-        {
-          name: 'Sidearm',
-          tier: 'I',
-          tags: ['ranged', 'defensive']
-        },
-        {
-          name: 'Shield Broach',
-          tier: 'I',
-          tags: ['ward'],
-        }
-      ]
-    },
-    scout: {
-      startingGear: [
-        {
-          name: 'Scout Weapon',
-          quantity: 1
-        },
-        {
-          name: 'Scout Equipment',
-          quantity: 2
-        },
-        {
-          name: 'Any Tier I weapons that feel appropriate'
-        },
-        {
-          name: 'Clothes that match your look'
-        }
-      ],
-      classGear: [
-        {
-          name: 'Astircleaver',
-          tier: 'II',
-          tags: [
-            'melee / bane',
-            'area',
-            '2H'
-          ],
-        }, {
-          name: 'Crossbow+',
-          tier: 'II',
-          tags: [
-            'ranged / infinite',
-            'blitz',
-            '2H'
-          ]
-        }, {
-          name: 'Force Ballista',
-          tier: 'II',
-          tags: [
-            'sniper / reloading',
-            'ruin',
-            '2H'
-          ]
-        }
-      ]
-    },
-    captain: {
-      startingGear: [
-        {
-          name: 'Ornate Gear',
-          quantity: 2,
-        },
-        {
-          name: 'Bonus Carrier Module',
-          quantity: 1,
-        },
-        {
-          name: 'Clothes that match your look'
-        }
-      ],
-      classGear: [
-        {
-          name: 'Gilded Sidearm',
-          tier: 'I',
-          tags: [
-            'ranged / blitz',
-            'distinct'
-          ]
-        },
-        {
-          name: 'Ruinlock',
-          tier: 'I',
-          tags: [
-            'ranged / profane',
-            'reloading',
-            'ruin'
-          ]
-        },
-        {
-          name: 'Duelist\'s Blade',
-          tier: 'I',
-          tags: [
-            'melee / bane',
-            'distinct',
-          ]
-        },
-        {
-          name: 'Arcane Mantle',
-          tier: 'I',
-          tags: ['melee / arcane']
-        }
-      ]
-    },
-    diplomat: {
-      startingGear: [
-        {
-          name: 'Diplomacy \'Tool\'',
-          quantity: 1
-        },
-        {
-          name: '\'Diplomacy\' Tool',
-          quantity: 3,
-        },
-        {
-          name: 'Clothing that matches your look'
-        }
-      ],
-      classGear: [
-        {
-          name: 'Frost Charms',
-          tier: 'I',
-          tags: [
-            'ranged / restraining',
-            'elemental'
-          ]
-        },
-        {
-          name: 'Fencing Blade',
-          tier: 'I',
-          tags: [
-            'melee / decisive',
-            'distinct'
-          ]
-        },
-        {
-          name: 'Arcane Dagger',
-          tier: 'I',
-          tags: [
-            'melee / bane',
-            'small',
-            'arcane'
-          ]
-        }
-      ],
-    },
-    artificer: {
-      startingGear: [
-        {
-          name: 'Artificer Tools',
-          quantity: 2,
-        },
-        {
-          name: 'Transport or Service Ardent',
-          quantity: 1,
-          tier: 'II',
-        },
-        {
-          name: 'Construct Manuals, (dispel uncertainty regarding Construct and Astir design with Advantage)'
-        },
-        {
-          name: 'Clothing that matches your look'
-        }
-      ],
-      classGear: [
-        {
-          name: 'Heavy Wrench',
-          tier: 'I',
-          tags: [
-            'melee / bane'
-          ]
-        },
-        {
-          name: 'Beam Cutter',
-          tier: 'I',
-          tags: [
-            'melee / reloading',
-            'ruin',
-            'decisive'
-          ]
-        },
-        {
-          name: 'Steelfuser',
-          tier: 'I',
-          tags: [
-            'ranged / elemental'
-          ]
-        },
-        {
-          name: 'Alchemical Gel',
-          tier: 'I',
-          tags: [
-            'Adv. for Cool Off repairs'
-          ]
-        }
-      ]
-    },
-  }
-
-  // END PLAYBOOKS
-
-  // Used for building rollValues.
-  const rollModifiers = [
-    {
-      key: 'None',
-      roll: '2d6'
-    },
-    {
-      key: 'Advantage (+1)',
-      roll: '3d6kh2'
-    },
-    {
-      key: 'Confidence (+2)',
-      roll: '4d6kh2'
-    },
-    {
-      key: 'Disadvantage (-1)',
-      roll: '3d6kl2'
-    },
-    {
-      key: 'Desperate (-2)',
-      roll: '4d6kl2'
-    },
-  ];
-
-  // Set the currently displayed tab on the character sheet.
-  const buttonlist = ['character', 'astir', 'misc'];
-  buttonlist.forEach(button => {
-      on(`clicked:${button}`, function() {
-          setAttrs({
-              sheet_tab: button
-          });
-      });
-  });
-
-  // Set the Astir page to either display Astir or Carrier information.
-  on('change:show_carrier_toggle', (event) => {
-    setAttrs({
-      show_carrier: event.newValue,
-    });
-  });
-
-  // Show/Hide 'CHANNEL' Trait based on playbook.
-  on(`change:support`, (event) => {
-    setAttrs({
-      channel_hidden: event.newValue == 'on',
-    });
-  })
-
-  // Set playbook information when the playbook value changes.
-  on(`change:playbook`, (event) => {
-    if (event && event.newValue && event.netValue !== event.previousValue) {
-      setPlaybook(event.newValue);
-    }
-  });
-
-  //#region Gear.
-  on('change:repeating_gearcheck:gear_name_edit', () => {
-    getAttrs(['repeating_gearcheck_gear_name_edit'], (values) => {
-      setAttrs({ repeating_gearcheck_gear_name: values.repeating_gearcheck_gear_name_edit });
-    });
-  });
-
-  on('change:repeating_gearcheck:gear_tier_edit', () => {
-    getAttrs(['repeating_gearcheck_gear_tier_edit'], (values) => {
-      setAttrs({ repeating_gearcheck_gear_tier: values.repeating_gearcheck_gear_tier_edit });
-    });
-  });
-
-  on('change:repeating_gearcheck:gear_tags_edit', () => {
-    getAttrs(['repeating_gearcheck_gear_tags_edit'], (values) => {
-      const tags = values.repeating_gearcheck_gear_tags_edit;
-      const parsedTags = tags ? `${tags}` : '';
-      setAttrs({ repeating_gearcheck_gear_tags: parsedTags });
-    });
-  });
-  //#endregion
-
-
-  // ----- MOVES EDIT ----- //
-  // TODO: Read article about improving performance. This is a lot of event listeners.
-  // TODO: It might be helpful to separate plaintext and sanitized/formatted text, ex: success -> success_text
-  // When moves are being populated on init, some fields are being filled properly.
-    on('change:repeating_moves:move_name_base', () => {
-      getAttrs(['repeating_moves_move_name_base'], (v) => {
-        setAttrs({
-          repeating_moves_move_name: v.repeating_moves_move_name_base
-        });
-      });
-    });
-    
-    on('change:repeating_basicmoves:move_name_base', () => {
-      getAttrs(['repeating_moves_move_name_base'], (v) => {
-        setAttrs({
-          repeating_basicmovesmoves_move_name: v.repeating_moves_move_name_base
-        });
-      });
-    });
-
-    on('change:repeating_moves:move_trait', (event) => {
-      const prefix = event.sourceAttribute.split('trait')[0];
-      getAttrs(['repeating_moves_move_trait'], (v) => {
-        const traitString = v.repeating_moves_move_trait.toUpperCase();
-        const traits = traitString.replace(' ', '').split(',');
-        const doRoll = traits.length ? 1 : 0;
-        const rollValue = setRollValue(traits, prefix);
-        
-        setAttrs({
-          repeating_moves_move_rollvalue: rollValue,
-          repeating_moves_move_doroll: doRoll,
-        })
-      })
-    })
-
-    on('change:repeating_basicmoves:move_trait', (event) => {
-      const prefix = event.sourceAttribute.split('trait')[0];
-      getAttrs(['repeating_basicmoves_move_trait'], (v) => {
-        const traitString = v.repeating_basicmoves_move_trait.toUpperCase();
-        const traits = traitString.replace(' ', '').split(',');
-        const doRoll = traits.length ? 1 : 0;
-        const rollValue = setRollValue(traits, prefix);
-        
-        setAttrs({
-          repeating_basicmoves_move_rollvalue: rollValue,
-          repeating_basicmoves_move_doroll: doRoll,
-        })
-      })
-    })
-
-    on('change:repeating_moves:move_success', () => {
-      getAttrs(['repeating_moves_move_success'], (v) => {
-        setAttrs({
-          repeating_moves_move_success: v.repeating_moves_move_success
-        }, () => {
-          // ! Set roll value.
-        })
-      })
-    })
-
-    on('change:repeating_moves:move_partial', () => {
-      getAttrs(['repeating_moves_move_partial'], (v) => {
-        setAttrs({
-          repeating_moves_move_partial: v.repeating_moves_move_partial
-        }, () => {
-          // ! Set roll value.
-        })
-      })
-    })
-
-    on('change:repeating_moves:move_miss', () => {
-      getAttrs(['repeating_moves_move_miss'], (v) => {
-        setAttrs({
-          repeating_moves_move_miss: v.repeating_moves_move_miss
-        }, () => {
-          // ! Set roll value.
-        })
-      })
-    })
-
-
-  // ----- HELPER FUNCTIONS ----- //
-  function setPlaybook(book) {
-    const bookValue = getPlaybookValue(book);
-    const playbook = bookName[bookValue];
-    setPlaybookValue(bookValue);
-    setMoves(playbook);
-    setGear(playbook);
-    setBasicMoves();
-  }
-
-  function getPlaybookValue(book) {
-    const value = book.toLowerCase().replace('the ', '');
-    switch(value) {
-      case 'arcanist' : return 0;
-      case 'impostor' : return 1;
-      case 'paradigm' : return 2;
-      case 'witch'    : return 3;
-      case 'scout'    : return 4;
-      case 'captain'  : return 5;
-      case 'artificer': return 6;
-      case 'diplomat' : return 7;
-      default         : return 0; // ? Setup error handling case?
-    }
-  }
-
-  function setPlaybookValue(book) {
-    setAttrs({
-      playbook_descriptors: `${book}`,
-      channel_hidden: book > 3,
-    });
-  }
-
-  function setBasicMoves() {
-    clearBasicMoveList();
-
-    playbookMoves.basic.forEach((move) => {
-      addBasicMove(move, true);
-    });
-  }
-
-  function setMoves(book) {
-    if (!playbookMoves[book]) {
-      console.log('Error, playbook not found.')
-      return;
-    }
-    
-    clearMoveList();
-
-    const moves = playbookMoves[book];
-    moves.forEach((move) => {
-      addBasicMove(move, false);
-    })
-  }
-
-  // Add Moves from SRD (defined in playbook.js, copy/pasted here. Doesn't actually pull them in.)
-  function addBasicMove(m, basicMove) {
-    const newRowId = generateRowID();
-    const moves =  basicMove ? 'basicmoves' : 'moves';
-    const prefix = `repeating_${moves}_${newRowId}_move_`;
-    const attrs = {};
-
-    attrs[prefix + 'name'] = m.fullName;
-    attrs[prefix + 'name_base'] = m.fullName;
-
-    let replaceChar = ',';
-    if (m.roll) { replaceChar = '&#44;' }
-    if (m.rolls) { 
-      replaceChar = '&amp;#44;' 
-    }
-
-    // Parsing nested drop-down roll queries are not great in roll20, so we use the code instead of commas.
-    // This might be dependant on if there is a roll, rolls, or no roll. Rework based on m.roll || m.rolls
-    if (m.success) attrs[prefix + 'success'] = m.success.replace(/,/g, replaceChar);
-    if (m.partial) attrs[prefix + 'partial'] = m.partial.replace(/,/g, replaceChar);
-    if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, replaceChar);
-    if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, replaceChar);
-
-    // Check to see if the move has a roll component, makes the roll template play nicer.
-    attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
-
-    setAttrs(attrs, () => {
-      rollAttrs = {};
-      if (m.rolls) {
-        rollAttrs[prefix + 'rollvalue'] = buildRollValue(m.rolls, prefix);
-      } else if (m.roll) {
-        rollAttrs[prefix + 'rollvalue'] = buildSingleRollValue(m.roll, prefix);
-      } else {
-        rollAttrs[prefix + 'rollvalue'] = buildEmptyRollValue(prefix);
+  },
+  impostor: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1
+      },
+      {
+        name: 'Augments',
+        tier: 1,
+        tags: ['melee', 'bane'],
+      },
+      {
+        name: 'Impostor Gear',
+        quantity: 2
+      },
+      {
+        name: 'Clothes that match your look',
       }
+    ],
+    classGear: [
+      {
+        name: 'Mana Focus',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Shortsword',
+        tier: 'I',
+        tags: ['melee', 'mundane'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive'],
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
+    ]
+  },
+  paradigm: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1,
+      },
+      {
+        name: 'Divine Touch',
+        tier: 'I',
+        tags: ['melee', 'bane'],
+      }, 
+      {
+        name: 'Paradigm Gear',
+        quantity: 2,
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Holy Symbol',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Sacred Weapon',
+        tier: 'I',
+        tags: ['melee', 'mundane'],
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive']
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward']
+      }
+    ]
+  },
+  witch: {
+    startingGear: [
+      {
+        name: 'Astir',
+        tier: 'III',
+        quantity: 1,
+      },
+      {
+        name: 'Pact Weapon',
+        tier: 'I',
+        tags: ['melee', 'bane'],
+      },
+      {
+        name: 'Witch Gear',
+        quantity: 2
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Patron\'s Icon',
+        tier: 'I',
+        tags: ['ranged'],
+      },
+      {
+        name: 'Ritual Dagger',
+        tier: 'I',
+        tags: ['melee', 'mundane']
+      },
+      {
+        name: 'Sidearm',
+        tier: 'I',
+        tags: ['ranged', 'defensive']
+      },
+      {
+        name: 'Shield Broach',
+        tier: 'I',
+        tags: ['ward'],
+      }
+    ]
+  },
+  scout: {
+    startingGear: [
+      {
+        name: 'Scout Weapon',
+        quantity: 1
+      },
+      {
+        name: 'Scout Equipment',
+        quantity: 2
+      },
+      {
+        name: 'Any Tier I weapons that feel appropriate'
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Astircleaver',
+        tier: 'II',
+        tags: [
+          'melee / bane',
+          'area',
+          '2H'
+        ],
+      }, {
+        name: 'Crossbow+',
+        tier: 'II',
+        tags: [
+          'ranged / infinite',
+          'blitz',
+          '2H'
+        ]
+      }, {
+        name: 'Force Ballista',
+        tier: 'II',
+        tags: [
+          'sniper / reloading',
+          'ruin',
+          '2H'
+        ]
+      }
+    ]
+  },
+  captain: {
+    startingGear: [
+      {
+        name: 'Ornate Gear',
+        quantity: 2,
+      },
+      {
+        name: 'Bonus Carrier Module',
+        quantity: 1,
+      },
+      {
+        name: 'Clothes that match your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Gilded Sidearm',
+        tier: 'I',
+        tags: [
+          'ranged / blitz',
+          'distinct'
+        ]
+      },
+      {
+        name: 'Ruinlock',
+        tier: 'I',
+        tags: [
+          'ranged / profane',
+          'reloading',
+          'ruin'
+        ]
+      },
+      {
+        name: 'Duelist\'s Blade',
+        tier: 'I',
+        tags: [
+          'melee / bane',
+          'distinct',
+        ]
+      },
+      {
+        name: 'Arcane Mantle',
+        tier: 'I',
+        tags: ['melee / arcane']
+      }
+    ]
+  },
+  diplomat: {
+    startingGear: [
+      {
+        name: 'Diplomacy \'Tool\'',
+        quantity: 1
+      },
+      {
+        name: '\'Diplomacy\' Tool',
+        quantity: 3,
+      },
+      {
+        name: 'Clothing that matches your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Frost Charms',
+        tier: 'I',
+        tags: [
+          'ranged / restraining',
+          'elemental'
+        ]
+      },
+      {
+        name: 'Fencing Blade',
+        tier: 'I',
+        tags: [
+          'melee / decisive',
+          'distinct'
+        ]
+      },
+      {
+        name: 'Arcane Dagger',
+        tier: 'I',
+        tags: [
+          'melee / bane',
+          'small',
+          'arcane'
+        ]
+      }
+    ],
+  },
+  artificer: {
+    startingGear: [
+      {
+        name: 'Artificer Tools',
+        quantity: 2,
+      },
+      {
+        name: 'Transport or Service Golem',
+        quantity: 1,
+        tier: 'II',
+      },
+      {
+        name: 'Construct Manuals, (dispel uncertainty regarding Construct and Astir design with Advantage)'
+      },
+      {
+        name: 'Clothing that matches your look'
+      }
+    ],
+    classGear: [
+      {
+        name: 'Heavy Wrench',
+        tier: 'I',
+        tags: [
+          'melee / bane'
+        ]
+      },
+      {
+        name: 'Beam Cutter',
+        tier: 'I',
+        tags: [
+          'melee / reloading',
+          'ruin',
+          'decisive'
+        ]
+      },
+      {
+        name: 'Steelfuser',
+        tier: 'I',
+        tags: [
+          'ranged / elemental'
+        ]
+      },
+      {
+        name: 'Alchemical Gel',
+        tier: 'I',
+        tags: [
+          'Adv. for Cool Off repairs'
+        ]
+      }
+    ]
+  },
+}
+
+const bookName = {
+  0: 'arcanist',
+  1: 'impostor',
+  2: 'paradigm',
+  3: 'witch',
+  4: 'scout',
+  5: 'captain',
+  6: 'artificer',
+  7: 'diplomat'
+};
+
+// Used for building rollValues.
+const rollModifiers = [
+  {
+    key: 'None',
+    roll: '2d6'
+  },
+  {
+    key: 'Advantage (+1)',
+    roll: '3d6kh2'
+  },
+  {
+    key: 'Advantage (+2)',
+    roll: '4d6kh2'
+  },
+  {
+    key: 'Disadvantage (-1)',
+    roll: '3d6kl2'
+  },
+  {
+    key: 'Disadvantage (-2)',
+    roll: '4d6kl2'
+  },
+];
+
+// Set the currently displayed tab on the character sheet.
+const buttonlist = ['character', 'astir', 'misc'];
+buttonlist.forEach(button => {
+    on(`clicked:${button}`, function() {
+        setAttrs({
+            sheet_tab: button
+        });
+    });
+});
+
+// Set the Astir page to either display Astir or Carrier information.
+on('change:show_carrier_toggle', (event) => {
+  setAttrs({
+    show_carrier: event.newValue,
+  });
+});
+
+// Show/Hide 'CHANNEL' Trait based on playbook.
+on(`change:support`, (event) => {
+  setAttrs({
+    channel_hidden: event.newValue == 'on',
+  });
+})
+
+// Set playbook information when the playbook value changes.
+on(`change:playbook`, (event) => {
+  if (event && event.newValue && event.netValue !== event.previousValue) {
+    setPlaybook(event.newValue);
+  }
+});
+
+//#region Gear.
+on('change:repeating_gearcheck:gear_name_edit', () => {
+  getAttrs(['repeating_gearcheck_gear_name_edit'], (values) => {
+    setAttrs({ repeating_gearcheck_gear_name: values.repeating_gearcheck_gear_name_edit });
+  });
+});
+
+on('change:repeating_gearcheck:gear_tier_edit', () => {
+  getAttrs(['repeating_gearcheck_gear_tier_edit'], (values) => {
+    setAttrs({ repeating_gearcheck_gear_tier: values.repeating_gearcheck_gear_tier_edit });
+  });
+});
+
+on('change:repeating_gearcheck:gear_tags_edit', () => {
+  getAttrs(['repeating_gearcheck_gear_tags_edit'], (values) => {
+    const tags = values.repeating_gearcheck_gear_tags_edit;
+    const parsedTags = tags ? `${tags}` : '';
+    setAttrs({ repeating_gearcheck_gear_tags: parsedTags });
+  });
+});
+//#endregion
+
+
+// ----- MOVES EDIT ----- //
+// TODO: Read article about improving performance. This is a lot of event listeners.
+// TODO: It might be helpful to separate plaintext and sanitized/formatted text, ex: success -> success_text
+// When moves are being populated on init, some fields are being filled properly.
+  on('change:repeating_moves:move_name_base', () => {
+    getAttrs(['repeating_moves_move_name_base'], (v) => {
+      setAttrs({
+        repeating_moves_move_name: v.repeating_moves_move_name_base
+      });
+    });
+  });
+  
+  on('change:repeating_basicmoves:move_name_base', () => {
+    getAttrs(['repeating_moves_move_name_base'], (v) => {
+      setAttrs({
+        repeating_basicmovesmoves_move_name: v.repeating_moves_move_name_base
+      });
+    });
+  });
+
+  on('change:repeating_moves:move_trait', (event) => {
+    const prefix = event.sourceAttribute.split('trait')[0];
+    getAttrs(['repeating_moves_move_trait'], (v) => {
+      const traitString = v.repeating_moves_move_trait.toUpperCase();
+      const traits = traitString.replace(' ', '').split(',');
+      const doRoll = traits.length ? 1 : 0;
+      const rollValue = setRollValue(traits, prefix);
       
-      setAttrs(rollAttrs);
+      setAttrs({
+        repeating_moves_move_rollvalue: rollValue,
+        repeating_moves_move_doroll: doRoll,
+      })
+    })
+  })
+
+  on('change:repeating_basicmoves:move_trait', (event) => {
+    const prefix = event.sourceAttribute.split('trait')[0];
+    getAttrs(['repeating_basicmoves_move_trait'], (v) => {
+      const traitString = v.repeating_basicmoves_move_trait.toUpperCase();
+      const traits = traitString.replace(' ', '').split(',');
+      const doRoll = traits.length ? 1 : 0;
+      const rollValue = setRollValue(traits, prefix);
+      
+      setAttrs({
+        repeating_basicmoves_move_rollvalue: rollValue,
+        repeating_basicmoves_move_doroll: doRoll,
+      })
+    })
+  })
+
+  on('change:repeating_moves:move_success', () => {
+    getAttrs(['repeating_moves_move_success'], (v) => {
+      setAttrs({
+        repeating_moves_move_success: v.repeating_moves_move_success
+      }, () => {
+        // ! Set roll value.
+      })
+    })
+  })
+
+  on('change:repeating_moves:move_partial', () => {
+    getAttrs(['repeating_moves_move_partial'], (v) => {
+      setAttrs({
+        repeating_moves_move_partial: v.repeating_moves_move_partial
+      }, () => {
+        // ! Set roll value.
+      })
+    })
+  })
+
+  on('change:repeating_moves:move_miss', () => {
+    getAttrs(['repeating_moves_move_miss'], (v) => {
+      setAttrs({
+        repeating_moves_move_miss: v.repeating_moves_move_miss
+      }, () => {
+        // ! Set roll value.
+      })
+    })
+  })
+
+
+// ----- HELPER FUNCTIONS ----- //
+function setPlaybook(book) {
+  const bookValue = getPlaybookValue(book);
+  const playbook = bookName[bookValue];
+  setPlaybookValue(bookValue);
+  setMoves(playbook);
+  setGear(playbook);
+  setBasicMoves();
+}
+
+function getPlaybookValue(book) {
+  const value = book.toLowerCase().replace('the ', '');
+  switch(value) {
+    case 'arcanist' : return 0;
+    case 'impostor' : return 1;
+    case 'paradigm' : return 2;
+    case 'witch'    : return 3;
+    case 'scout'    : return 4;
+    case 'captain'  : return 5;
+    case 'artificer': return 6;
+    case 'diplomat' : return 7;
+    default         : return 0; // ? Setup error handling case?
+  }
+}
+
+function setPlaybookValue(book) {
+  setAttrs({
+    playbook_descriptors: `${book}`,
+    channel_hidden: book > 3,
+  });
+}
+
+function setBasicMoves() {
+  clearBasicMoveList();
+
+  playbookMoves.basic.forEach((move) => {
+    addBasicMove(move, true);
+  });
+}
+
+function setMoves(book) {
+  if (!playbookMoves[book]) {
+    console.log('Error, playbook not found.')
+    return;
+  }
+  
+  clearMoveList();
+
+  const moves = playbookMoves[book];
+  moves.forEach((move) => {
+    addBasicMove(move, false);
+  })
+}
+
+// Add Moves from SRD (defined in playbook.js, copy/pasted here. Doesn't actually pull them in.)
+function addBasicMove(m, basicMove) {
+  const newRowId = generateRowID();
+  const moves =  basicMove ? 'basicmoves' : 'moves';
+  const prefix = `repeating_${moves}_${newRowId}_move_`;
+  const attrs = {};
+
+  attrs[prefix + 'name'] = m.fullName;
+  attrs[prefix + 'name_base'] = m.fullName;
+
+  let replaceChar = ',';
+  if (m.roll) { replaceChar = '&#44;' }
+  if (m.rolls) { 
+    replaceChar = '&amp;#44;' 
+  }
+
+  // Parsing nested drop-down roll queries are not great in roll20, so we use the code instead of commas.
+  // This might be dependant on if there is a roll, rolls, or no roll. Rework based on m.roll || m.rolls
+  if (m.success) attrs[prefix + 'success'] = m.success.replace(/,/g, replaceChar);
+  if (m.partial) attrs[prefix + 'partial'] = m.partial.replace(/,/g, replaceChar);
+  if (m.miss) attrs[prefix + 'miss'] = m.miss.replace(/,/g, replaceChar);
+  if (m.details) attrs[prefix + 'details'] = m.details.replace(/,/g, replaceChar);
+
+  // Check to see if the move has a roll component, makes the roll template play nicer.
+  attrs[prefix + 'doroll'] = (m.roll || m.rolls) ? 1 : 0;
+
+  setAttrs(attrs, () => {
+    rollAttrs = {};
+    if (m.rolls) {
+      rollAttrs[prefix + 'rollvalue'] = buildRollValue(m.rolls, prefix);
+    } else if (m.roll) {
+      rollAttrs[prefix + 'rollvalue'] = buildSingleRollValue(m.roll, prefix);
+    } else {
+      rollAttrs[prefix + 'rollvalue'] = buildEmptyRollValue(prefix);
+    }
+    
+    setAttrs(rollAttrs);
+  });
+}
+
+// ----- Dangers ----- //
+// TODO: Consolidate this into single listener.
+on('change:danger_1_radio', (event) => {
+  if (event && event.newValue && event.newValue === "2") {
+    setAttrs({
+      danger_1_radio: '4',
+      danger_1_description: '',
     });
   }
+})
 
-  // ----- Dangers ----- //
-  // TODO: Consolidate this into single listener.
-  on('change:danger_1_radio', (event) => {
-    if (event && event.newValue && event.newValue === "2") {
-      setAttrs({
-        danger_1_radio: '4',
-        danger_1_description: '',
-      });
-    }
-  })
-
-  on('change:danger_2_radio', (event) => {
-    if (event && event.newValue && event.newValue === "2") {
-      setAttrs({
-        danger_2_radio: '4',
-        danger_2_description: '',
-      });
-    }
-  })
-
-  on('change:danger_3_radio', (event) => {
-    if (event && event.newValue && event.newValue === "2") {
-      setAttrs({
-        danger_3_radio: '4',
-        danger_3_description: '',
-      });
-    }
-  })
-
-
-
-  // ---- Gear ----- //
-  
-  function addGearList(gear, rowid) {
-    const newRowId = rowid || generateRowID();
-
-    const tags = gear.tags && gear.tags.length ? `${gear.tags.join(', ')}` : '';
- 
+on('change:danger_2_radio', (event) => {
+  if (event && event.newValue && event.newValue === "2") {
     setAttrs({
-      [`repeating_gearlist_${newRowId}_name`]: gear.name || '',
-      [`repeating_gearlist_${newRowId}_quantity`]: gear.quantity || '',
-      [`repeating_gearlist_${newRowId}_tier`]: gear.tier || '',
-      [`repeating_gearlist_${newRowId}_tags`]: tags,
+      danger_2_radio: '4',
+      danger_2_description: '',
     });
   }
+})
 
-  function addGear(gear, rowid) {
-    const newRowId = rowid || generateRowID();
-    const tags = gear.tags && gear.tags.length ? `${gear.tags.join(', ')}` : '';
-
+on('change:danger_3_radio', (event) => {
+  if (event && event.newValue && event.newValue === "2") {
     setAttrs({
-      [`repeating_gearcheck_${newRowId}_gear_name`]: gear.name || '',
-      [`repeating_gearcheck_${newRowId}_gear_tier`]: gear.tier || '',
-      [`repeating_gearcheck_${newRowId}_gear_tags`]: tags,
-    })
+      danger_3_radio: '4',
+      danger_3_description: '',
+    });
+  }
+})
 
+
+
+// ---- Gear ----- //
+
+function addGearList(gear, rowid) {
+  const newRowId = rowid || generateRowID();
+
+  const tags = gear.tags && gear.tags.length ? `${gear.tags.join(', ')}` : '';
+
+  setAttrs({
+    [`repeating_gearlist_${newRowId}_name`]: gear.name || '',
+    [`repeating_gearlist_${newRowId}_quantity`]: gear.quantity || '',
+    [`repeating_gearlist_${newRowId}_tier`]: gear.tier || '',
+    [`repeating_gearlist_${newRowId}_tags`]: tags,
+  });
+}
+
+function addGear(gear, rowid) {
+  const newRowId = rowid || generateRowID();
+  const tags = gear.tags && gear.tags.length ? `${gear.tags.join(', ')}` : '';
+
+  setAttrs({
+    [`repeating_gearcheck_${newRowId}_gear_name`]: gear.name || '',
+    [`repeating_gearcheck_${newRowId}_gear_tier`]: gear.tier || '',
+    [`repeating_gearcheck_${newRowId}_gear_tags`]: tags,
+  })
+
+}
+
+function setGear(book) {
+  clearGearList();
+
+  if (!playbookGear[book]) {
+    return;
   }
 
-  function setGear(book) {
-    clearGearList();
+  const gearList = playbookGear[book].startingGear;
+  const gear = playbookGear[book].classGear;
 
-    if (!playbookGear[book]) {
-      return;
-    }
-
-    const gearList = playbookGear[book].startingGear;
-    const gear = playbookGear[book].classGear;
-
-    for (let i = 0; i < gearList.length; i++) {
-      addGearList(gearList[i]);
-    }
-
-    for (let i = 0; i < gear.length; i++) {
-      addGear(gear[i]);
-    }
+  for (let i = 0; i < gearList.length; i++) {
+    addGearList(gearList[i]);
   }
+
+  for (let i = 0; i < gear.length; i++) {
+    addGear(gear[i]);
+  }
+}
+
+
+// ----- Tear Down ----- //
+
+function clearGearList() {
+  getSectionIDs('repeating_gearlist', (idArray) => {
+    _.forEach(idArray, (id) => {
+      removeRepeatingRow(`repeating_gearlist_${id}`);
+    });
+  })
+
+  getSectionIDs('repeating_gearcheck', (idArray) => {
+    _.forEach(idArray, (id) => removeRepeatingRow(`repeating_gearcheck_${id}`));
+  })
+}
+
+function clearBasicMoveList() {
+  getSectionIDs('repeating_basicmoves', (idArray) => {
+    _.forEach(idArray, (id) => {
+      removeRepeatingRow(`repeating_basicmoves_${id}`);
+    });
+  })
+}
+
+function clearMoveList() {
+  getSectionIDs('repeating_moves', (idArray) => {
+    _.forEach(idArray, (id) => {
+      removeRepeatingRow(`repeating_moves_${id}`);
+    });
+  })
+}
+
+function setRollValue(traits, prefix) {
+
+  if (traits && traits.length === 1) {
+    return buildSingleRollValue(traits[0], prefix);
+  } else if (traits && traits.length > 1) {
+    return buildRollValue(traits, prefix);
+  }
+
+  return '';
   
+}
 
-  // ----- Tear Down ----- //
 
-  function clearGearList() {
-    getSectionIDs('repeating_gearlist', (idArray) => {
-      _.forEach(idArray, (id) => {
-        removeRepeatingRow(`repeating_gearlist_${id}`);
-      });
-    })
 
-    getSectionIDs('repeating_gearcheck', (idArray) => {
-      _.forEach(idArray, (id) => removeRepeatingRow(`repeating_gearcheck_${id}`));
-    })
-  }
 
-  function clearBasicMoveList() {
-    getSectionIDs('repeating_basicmoves', (idArray) => {
-      _.forEach(idArray, (id) => {
-        removeRepeatingRow(`repeating_basicmoves_${id}`);
-      });
-    })
-  }
+// Build the rollValue for a move that contains no trait.
+function buildEmptyRollValue(prefix) {
+  return '&{template:move} '
+        +'{{charname=@{character_name}}}'
+        +'{{movename=@{' + prefix + 'name}}} '
+        +'{{success=@{' + prefix + 'success}}} '
+        +'{{partial=@{'+ prefix + 'partial}}} '
+        +'{{miss=@{'+ prefix + 'miss}}} '
+        +'{{doroll=@{' + prefix + 'doroll}}} '
+        +'{{details=@{' + prefix + 'details}}}';
+}
 
-  function clearMoveList() {
-    getSectionIDs('repeating_moves', (idArray) => {
-      _.forEach(idArray, (id) => {
-        removeRepeatingRow(`repeating_moves_${id}`);
-      });
-    })
-  }
+// Build the rollValue for a move with a single trait.
+function buildSingleRollValue(roll, prefix) {
+  
+  let rollValue = '';
+  rollValue += '?{Modifiers|'
+  _.forEach(rollModifiers, (mod, index) => {
+    const last = index === rollModifiers.length - 1;
+    const lastChar = last ? '}' : '|';
 
-  function setRollValue(traits, prefix) {
+    rollValue += mod.key
+    + ',&{template:move&#125 '
+    +'{{charname=@{character_name}&#125&#125'
+    +'{{movename=@{' + prefix + 'name}&#125&#125 '
+    +'{{details=@{' + prefix + 'details}&#125&#125'
+    +'{{trait='+ roll +'&#125&#125 '
+    +'{{result=[[ '+ mod.roll +' + @{' + roll.toLowerCase() + '}]]&#125&#125 '
+    +'{{success=@{' + prefix + 'success}&#125&#125 '
+    +'{{partial=@{'+ prefix + 'partial}&#125&#125 '
+    +'{{miss=@{'+ prefix + 'miss}&#125&#125 '
+    +'{{doroll=@{' + prefix + 'doroll}&#125 '
+    + lastChar;
+  });
 
-    if (traits && traits.length === 1) {
-      return buildSingleRollValue(traits[0], prefix);
-    } else if (traits && traits.length > 1) {
-      return buildRollValue(traits, prefix);
-    }
+  return rollValue;
+  
+}
 
+// Build the rollValue for a move that has multiple traits to choose from.
+function buildRollValue(rolls, prefix) {
+
+  if (!rolls.length) {
     return '';
-    
   }
 
+  let rollValue = '?{Choose a Trait|';
 
-  
-
-  // Build the rollValue for a move that contains no trait.
-  function buildEmptyRollValue(prefix) {
-    return '&{template:move} '
-          +'{{charname=@{character_name}}}'
-          +'{{movename=@{' + prefix + 'name}}} '
-          +'{{success=@{' + prefix + 'success}}} '
-          +'{{partial=@{'+ prefix + 'partial}}} '
-          +'{{miss=@{'+ prefix + 'miss}}} '
-          +'{{doroll=@{' + prefix + 'doroll}}} '
-          +'{{details=@{' + prefix + 'details}}}';
-  }
-
-  // Build the rollValue for a move with a single trait.
-  function buildSingleRollValue(roll, prefix) {
+  _.forEach(rolls, (roll, index) => {
+    const last = index === rolls.length - 1;
+    const lastChar = last ? '}' : '|';      
     
-    let rollValue = '';
-    rollValue += '?{Modifiers|'
-    _.forEach(rollModifiers, (mod, index) => {
-      const last = index === rollModifiers.length - 1;
-      const lastChar = last ? '}' : '|';
-
+    rollValue += '+' + roll + ', ?{Modifiers&#124'
+    
+    _.forEach(rollModifiers, (mod, modIndex) => {
+      const modLast = modIndex === rollModifiers.length - 1;
+      const modLastChar = modLast ? '&#125' : '&#124';
+      
       rollValue += mod.key
-      + ',&{template:move&#125 '
-      +'{{charname=@{character_name}&#125&#125'
-      +'{{movename=@{' + prefix + 'name}&#125&#125 '
-      +'{{details=@{' + prefix + 'details}&#125&#125'
-      +'{{trait='+ roll +'&#125&#125 '
-      +'{{result=[[ '+ mod.roll +' + @{' + roll.toLowerCase() + '}]]&#125&#125 '
-      +'{{success=@{' + prefix + 'success}&#125&#125 '
-      +'{{partial=@{'+ prefix + 'partial}&#125&#125 '
-      +'{{miss=@{'+ prefix + 'miss}&#125&#125 '
-      +'{{doroll=@{' + prefix + 'doroll}&#125 '
-      + lastChar;
+      +'&#44; &{template:move&amp;#125 '
+      +'{{details=@{' + prefix + 'details}&amp;#125&amp;#125'
+      +'{{charname=@{character_name}&amp;#125&amp;#125 '
+      +'{{miss=@{'+ prefix + 'miss}&amp;#125&amp;#125 '
+      +'{{movename=@{' + prefix + 'name}&amp;#125&amp;#125 '
+      +'{{trait='+ roll +'&amp;#125&amp;#125'
+      +'{{result=[[' + mod.roll  + ' + @{' + roll.toLowerCase() + '}]]&amp;#125&amp;#125 '
+      +'{{partial=@{'+ prefix + 'partial}&amp;#125&amp;#125 '
+      +'{{success=@{' + prefix + 'success}&amp;#125&amp;#125 '
+      +'{{doroll=@{' + prefix + 'doroll}&amp;#125 '
+      + modLastChar;
     });
 
-    return rollValue;
-    
-  }
+    rollValue += lastChar;
+  });
 
-  // Build the rollValue for a move that has multiple traits to choose from.
-  function buildRollValue(rolls, prefix) {
-
-    if (!rolls.length) {
-      return '';
-    }
-
-    let rollValue = '?{Choose a Trait|';
-
-    _.forEach(rolls, (roll, index) => {
-      const last = index === rolls.length - 1;
-      const lastChar = last ? '}' : '|';      
-      
-      rollValue += '+' + roll + ', ?{Modifiers&#124'
-      
-      _.forEach(rollModifiers, (mod, modIndex) => {
-        const modLast = modIndex === rollModifiers.length - 1;
-        const modLastChar = modLast ? '&#125' : '&#124';
-        
-        rollValue += mod.key
-        +'&#44; &{template:move&amp;#125 '
-        +'{{details=@{' + prefix + 'details}&amp;#125&amp;#125'
-        +'{{charname=@{character_name}&amp;#125&amp;#125 '
-        +'{{miss=@{'+ prefix + 'miss}&amp;#125&amp;#125 '
-        +'{{movename=@{' + prefix + 'name}&amp;#125&amp;#125 '
-        +'{{trait='+ roll +'&amp;#125&amp;#125'
-        +'{{result=[[' + mod.roll  + ' + @{' + roll.toLowerCase() + '}]]&amp;#125&amp;#125 '
-        +'{{partial=@{'+ prefix + 'partial}&amp;#125&amp;#125 '
-        +'{{success=@{' + prefix + 'success}&amp;#125&amp;#125 '
-        +'{{doroll=@{' + prefix + 'doroll}&amp;#125 '
-        + modLastChar;
-      });
-
-      rollValue += lastChar;
-    });
-
-    return rollValue;
-  }
-
+  return rollValue;
+}
 </script>
