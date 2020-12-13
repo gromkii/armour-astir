@@ -1,0 +1,81 @@
+<div class="character-moves section">
+    <h3 data-i18n="moves"></h3>
+    <div class="section-content">
+      <div class="character-moves-container">
+
+        <div class="move-list-container">
+          <h4 class="move-list-header" data-i18n="basic_moves"></h4>
+          <fieldset class="repeating_basicmoves">
+            <div class="move-main">
+
+              <input type="hidden" name="attr_move_doroll" value="1"/>
+              <input type="hidden" name="attr_move_rollvalue" value="" />
+              <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+              </button>
+
+              <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
+
+              <div class="move-expansion">
+                <input type="text" name="attr_move_name_base" />
+                <label data-i18n="move_name_base"></label>
+                
+                <input type="text" name="attr_move_trait" />
+                <label data-i18n="move_trait"></label>
+                
+                <input type="text" name="attr_move_success" />
+                <label data-i18n="move_success"></label>
+
+                <input type="text" name="attr_move_partial" />
+                <label data-i18n="move_partial"></label>
+
+                <input type="text" name="attr_move_miss">
+                <label data-i18n="move_miss"></label>
+
+                <textarea type="text" name="attr_move_details"></textarea>
+                <label data-i18n="move_details"></label> 
+
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="move-list-container">
+          <h4 class="move-list-header" data-i18n="playbook_moves"></h4>
+          <fieldset class="repeating_moves">
+            <div class="move-main">
+
+              <input type="hidden" name="attr_move_doroll" value="1" />
+              <input type="hidden" name="attr_move_rollvalue" value="" />
+              <input type="checkbox" name="attr_move_selected" class="move-selected" />
+              <button type="roll" name="roll_move_rollvalue" value="@{move_rollvalue}" class="move-button">
+                <span class="move-list-name" name="attr_move_name" value="@{move_name}"></span>
+              </button>
+              <input type="checkbox" name="attr_move_expanded" class="move-expandtoggle" />
+
+              <div class="move-expansion">
+                <input type="text" name="attr_move_name_base" />
+                <label data-i18n="move_name_base"></label>
+                
+                <input type="text" name="attr_move_trait" />
+                <label data-i18n="move_trait"></label>
+                
+                <input type="text" name="attr_move_success" />
+                <label data-i18n="move_success"></label>
+
+                <input type="text" name="attr_move_partial" />
+                <label data-i18n="move_partial"></label>
+
+                <input type="text" name="attr_move_miss">
+                <label data-i18n="move_miss"></label>
+
+                <textarea type="text" name="attr_move_details"></textarea>
+                <label data-i18n="move_details"></label> 
+
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
